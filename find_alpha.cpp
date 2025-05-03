@@ -17,9 +17,10 @@
  * @param filename The name of the binary file used to create the array.
  * @param M The size of available RAM (in MB).
  * @param X The size of the array in units of (M * 1024 * 1024).
+ * @param B Size of a block in memoery
  * @return The optimal arity (alpha) that minimizes I/O operations.
  */
-int findOptimalArity(int b, const char* filename, int M, int X) {
+int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
     // Initialize binary search bounds
     int left = 2, right = b;
     int optimalAlpha = left;
@@ -46,14 +47,14 @@ int findOptimalArity(int b, const char* filename, int M, int X) {
 
         // Perform mergesort with midMinusC
         size_t largo_archivo = static_cast<size_t>(X) * M * 1024 * 1024;
-        MergeSort mergesortMinusC(filename, midMinusC, largo_archivo, 0);
-        int IOs_mergeMinusC = mergesortMinusC.MergeSortN(M);
+        MergeSort mergesortMinusC(filename, midMinusC, largo_archivo, 0,B);
+        int IOs_mergeMinusC = mergesortMinusC.MergeSortN(M,B);
 
         // Perform mergesort with midPlusC
         // Uncomment the following line to use the duplicated file for consistency
         // MergeSort mergesortPlusC(duplicateFilename.c_str(), midPlusC, largo_archivo, 0);
-        MergeSort mergesortPlusC(filename, midPlusC, largo_archivo, 0);
-        int IOs_mergePlusC = mergesortPlusC.MergeSortN(M);
+        MergeSort mergesortPlusC(filename, midPlusC, largo_archivo, 0,B);
+        int IOs_mergePlusC = mergesortPlusC.MergeSortN(M,B);
 
         // Compare IOs and decide the direction of binary search
         // Logic can be adjusted

@@ -4,11 +4,12 @@
 #include <vector>
 #include <algorithm>
 
-MergeSort::MergeSort(const char* filename,int alfa,size_t largo,int inicio){
+MergeSort::MergeSort(const char* filename,int alfa,size_t largo,int inicio,size_t B){
     this->filename = filename;
     this->alfa = alfa;
     this->largo = largo;
     this->inicio = inicio;
+    this->B = B;
 }
 
 const char * MergeSort::getFileName() const{
@@ -26,7 +27,7 @@ int MergeSort::getInicio() const{
     return this->inicio;
 }
 
-int MergeSort::MergeSortN(int M) const{
+int MergeSort::MergeSortN(int M,size_t B) const{
     int IOs = 0;
     std::ifstream archivo(filename, std::ios::binary);
     if (!archivo.is_open()) {
@@ -39,12 +40,12 @@ int MergeSort::MergeSortN(int M) const{
             int start = i*this->alfa +1;
             size_t largo_nuevo = largo/this->alfa;
             //El de este sea raiz, y que los demás MergeSort sean sus hojas
-            MergeSort hijo(filename,this->alfa,largo_nuevo,start);
+            MergeSort hijo(filename,this->alfa,largo_nuevo,start,B);
             this->hijos[i] = hijo;
-            IOs+=hijo.MergeSortN(M);
+            IOs+=hijo.MergeSortN(M,B);
         }
         //Es un cuarto, ya que uso la un cuarto para cada arreglo, y un medio para ambos juntos
-        IOs+=unionHijos(M,archivo);
+        IOs+=unionHijos(M,B,archivo);
         archivo.close();
         return IOs;
     }
@@ -55,7 +56,7 @@ int MergeSort::MergeSortN(int M) const{
         std::vector<uint64_t> buffer(cantidad);                   // buffer para guardarlos
 
         //Leo la cosa
-        archivo.seekg(inicio * sizeof(uint64_t), std::ios::beg);   
+        archivo.seekg(inicio * sizeof(uint64_t), std::ios::beg);  
         archivo.read(reinterpret_cast<char*>(buffer.data()), cantidad * sizeof(uint64_t));
         std::sort(buffer.begin(),buffer.end());
         archivo.close();
@@ -74,11 +75,11 @@ int MergeSort::MergeSortN(int M) const{
     }
 }
 
-int MergeSort::unionHijos(int M,std::ifstream& archivo) const{
+int MergeSort::unionHijos(int M,size_t B,std::ifstream& archivo) const{
     int IOs = 0;
     //Debo unir los alfa hijos que son parte del MergeSort
     int tamaño_agregar = (M*1024*1024)/(this->alfa+1); //Tamaño que meto a memoria para mergear
-    int cantidad_num = tamaño_agregar/sizeof(uint64_t);
+    int cantidad_num = tamaño_agregar/sizeof(uint64_t); //Numeros a enviar por arreglo
     //Arreglo con los buffers que tienen los trozos de cada aridad del mergesort
     std::vector<uint64_t> buffer((this->alfa)*tamaño_agregar);
     //Arreglo con los punteros al inicio de sus arreglos 
@@ -90,10 +91,9 @@ int MergeSort::unionHijos(int M,std::ifstream& archivo) const{
         int inicio_actual = this->hijos[i].getInicio();
         inicios[i] = inicio_actual;
         archivo.seekg(inicios[i] * sizeof(uint64_t), std::ios::beg);
-        archivo.read(reinterpret_cast<char*>(buffer.data()),cantidad_num*sizeof(uint64_t));
+        //Sumo y escribo los IOs
+        IOs+=lectura_bloques(B,cantidad_num,buffer,archivo);
     }
-    //Sumo alfa IOs
-    IOs+=this->alfa;
     //Punteros para cada arreglo que se va a mergear
     std::vector<size_t> indices(this->alfa, 0);
     //Cantidad de trozos del arreglo subido por cada hijo
@@ -132,11 +132,9 @@ int MergeSort::unionHijos(int M,std::ifstream& archivo) const{
                             ultimo[i]= -1;
                         }
                     }
-                    //Leo el siguiente bloque y lo guardo en su posición en el buffer
+                    //Leo el siguiente trozo y lo guardo en su posición en el buffer
                     archivo.seekg(pos_nueva*sizeof(uint64_t));
-                    archivo.read(reinterpret_cast<char*>(&buffer[i*tamaño_agregar]),cantidad_a_llevar*sizeof(uint64_t));
-                    //Sumo un IO por leer
-                    IOs+=1;
+                    IOs+= lectura_bloques(B,cantidad_a_llevar,buffer,archivo,i*cantidad_num);
                     indice_numero = i*cantidad_num + indices[i];
                 }
                 uint64_t valor = buffer[indice_numero];
@@ -159,9 +157,7 @@ int MergeSort::unionHijos(int M,std::ifstream& archivo) const{
             }
             //Lo escribo en en disco
             archivoFuera.seekp(inicio * sizeof(uint64_t), std::ios::beg);
-            archivoFuera.write(reinterpret_cast<char*>(buffer_final.data()), buffer.size() * sizeof(uint64_t));
-            //Sumo un IO por escribir
-            IOs+=1;
+            IOs+=escritura_bloques(B,buffer_final.size(),buffer_final,archivoFuera);
             archivoFuera.close();
             break;
         }
@@ -178,9 +174,7 @@ int MergeSort::unionHijos(int M,std::ifstream& archivo) const{
             }
             //Lo escribo en en disco
             archivoFuera.seekp(pos_buffer_final * sizeof(uint64_t), std::ios::beg);
-            //Sumo un IO por escribir
-            IOs+=1;
-            archivoFuera.write(reinterpret_cast<char*>(buffer_final.data()), buffer.size() * sizeof(uint64_t));
+            IOs+= escritura_bloques(B,buffer_final.size(),buffer_final,archivoFuera);
             archivoFuera.close();
             //Cambio posicion de buffer para escribir en próximo bloque del disco (pos del numero, no bytes)
             pos_buffer_final += buffer.size();
@@ -192,4 +186,42 @@ int MergeSort::unionHijos(int M,std::ifstream& archivo) const{
 
     }
     return IOs;
+}
+
+int MergeSort::lectura_bloques(size_t B, int cantidad_lectura, std::vector<uint64_t> &buffer,std::ifstream &archivo,int pos=0) const{
+    int lecturas_necesarias = (cantidad_lectura*sizeof(uint64_t))/(B*1024);
+    if(!pos){
+        for(int i = 0; i<lecturas_necesarias;++i){
+            size_t cant_lectura_bloque = B*1024;
+            //Caso borde
+            if(i==lecturas_necesarias-1){
+                cant_lectura_bloque = cantidad_lectura*sizeof(uint64_t) - i*cant_lectura_bloque;
+            }
+            archivo.read(reinterpret_cast<char*>(buffer.data()), cant_lectura_bloque);
+        }
+    }
+    else{
+        for(int i = 0; i<lecturas_necesarias;++i){
+            size_t cant_lectura_bloque = B*1024;
+            //Caso borde
+            if(i==lecturas_necesarias-1){
+                cant_lectura_bloque = cantidad_lectura*sizeof(uint64_t) - i*cant_lectura_bloque;
+            }
+            archivo.read(reinterpret_cast<char*>(&buffer[pos+i]), cant_lectura_bloque);
+        }
+    }
+    return lecturas_necesarias;
+}
+
+int MergeSort::escritura_bloques(size_t B, int cantidad_escritura, std::vector<uint64_t> &buffer,std::ofstream &archivo) const{
+    int escrituras_necesarias = (cantidad_escritura*sizeof(uint64_t))/(B*1024);
+    for(int i = 0; i<escrituras_necesarias;++i){
+        size_t cant_escritura_bloque = B*1024;
+        //Caso borde
+        if(i==escrituras_necesarias-1){
+            cant_escritura_bloque = cantidad_escritura*sizeof(uint64_t) - i*cant_escritura_bloque;
+        }
+        archivo.write(reinterpret_cast<char*>(buffer.data()), cant_escritura_bloque);
+    }
+    return escrituras_necesarias;
 }

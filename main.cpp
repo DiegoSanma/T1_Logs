@@ -5,6 +5,7 @@
 
 int main(){
     int M = 50;
+    size_t B = 4096; //4096kb
     //Primero, inicializo la clase que crea el arreglo
     CrearArray creador("arreglo.bin",M,4);
     std::cout << "Hola desde Docker!" << std::endl;
@@ -15,8 +16,8 @@ int main(){
             //Primero creamos la secuencia de i * M numeros de 64 bits
             creador.crearArrayN();
             //Dsp tenemos que hacerle mergesort y quicksort, y guardar los resultados
-            MergeSort mergesort("arreglo.bin",2,largo_archivo,0);
-            int IOs_merge = mergesort.MergeSortN(M);
+            MergeSort mergesort("arreglo.bin",2,largo_archivo,0,B);
+            int IOs_merge = mergesort.MergeSortN(M,B);
             //Finalmente, borro lo que había en el archivo.bin y sigo con la próxima secuencia
         
         }
