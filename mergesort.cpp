@@ -77,7 +77,7 @@ int MergeSort::MergeSortN(int M) const{
 int MergeSort::unionHijos(int M,std::ifstream& archivo) const{
     int IOs = 0;
     //Debo unir los alfa hijos que son parte del MergeSort
-    int tamaño_agregar = (M*1024*2014)/(this->alfa+1); //Tamaño que meto a memoria para mergear
+    int tamaño_agregar = (M*1024*1024)/(this->alfa+1); //Tamaño que meto a memoria para mergear
     int cantidad_num = tamaño_agregar/sizeof(uint64_t);
     //Arreglo con los buffers que tienen los trozos de cada aridad del mergesort
     std::vector<uint64_t> buffer((this->alfa)*tamaño_agregar);
