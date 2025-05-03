@@ -12,6 +12,7 @@ int main(){
     std::cout << "Hola desde Docker!" << std::endl;
     //Ahora, debo sacar la aridad usando MergeSort
     int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,60,B);
+    std::cout << "alfa: " << alfa << std::endl;
     //Ahora usando ese alfa, debo realizar MergeSort y QuickSort
     //Lo comento pa q cuando lo corran solo veamos primero la aridad
     //for(int i=4;i<=60;i+=4){
@@ -26,7 +27,6 @@ int main(){
     //        //Finalmente, borro lo que había en el archivo.bin y sigo con la próxima secuencia
     //    
     //    }
-//
     //}
     //std::cout << "Hola desde Docker2!" << std::endl;
 

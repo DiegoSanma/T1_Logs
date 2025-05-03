@@ -10,6 +10,7 @@ MergeSort::MergeSort(const char* filename,int alfa,size_t largo,int inicio,size_
     this->largo = largo;
     this->inicio = inicio;
     this->B = B;
+    this->hijos.resize(alfa);
 }
 
 const char * MergeSort::getFileName() const{
@@ -27,16 +28,17 @@ int MergeSort::getInicio() const{
     return this->inicio;
 }
 
-int MergeSort::MergeSortN(int M,size_t B) const{
+int MergeSort::MergeSortN(int M,size_t B) {
     int IOs = 0;
     std::ifstream archivo(filename, std::ios::binary);
     if (!archivo.is_open()) {
         std::cerr << "No se pudo abrir el archivo binario." << std::endl;
         return 1;
     }
-
+    
     if(largo>M){
         for(int i = 0; i<this->alfa;++i){
+            std::cout << "iteracion: " << i << std::endl;
             int start = i*this->alfa +1;
             size_t largo_nuevo = largo/this->alfa;
             //El de este sea raiz, y que los demás MergeSort sean sus hojas
@@ -47,10 +49,12 @@ int MergeSort::MergeSortN(int M,size_t B) const{
         //Es un cuarto, ya que uso la un cuarto para cada arreglo, y un medio para ambos juntos
         IOs+=unionHijos(M,B,archivo);
         archivo.close();
+        std::cout << "El número de IOs para el MergeSort es: " << IOs << std::endl;
         return IOs;
     }
     else{
         //Lo ordeno aquí en "memoria princiapl"
+        std::cout << "Ordenando en memoria principal" << std::endl;
         int pos_final = inicio + largo;
         int cantidad = pos_final - inicio + 1;             // cuántos enteros quieres leer
         std::vector<uint64_t> buffer(cantidad);                   // buffer para guardarlos
@@ -58,6 +62,7 @@ int MergeSort::MergeSortN(int M,size_t B) const{
         //Leo la cosa
         archivo.seekg(inicio * sizeof(uint64_t), std::ios::beg);  
         archivo.read(reinterpret_cast<char*>(buffer.data()), cantidad * sizeof(uint64_t));
+        std::cout << "leyendo ..." << std::endl;
         std::sort(buffer.begin(),buffer.end());
         archivo.close();
         //Dsp de ordenar, lo reescribo en el archivo
@@ -77,6 +82,7 @@ int MergeSort::MergeSortN(int M,size_t B) const{
 
 int MergeSort::unionHijos(int M,size_t B,std::ifstream& archivo) const{
     int IOs = 0;
+    std::cout << "Unión de hijos" << std::endl;
     //Debo unir los alfa hijos que son parte del MergeSort
     int tamaño_agregar = (M*1024*1024)/(this->alfa+1); //Tamaño que meto a memoria para mergear
     int cantidad_num = tamaño_agregar/sizeof(uint64_t); //Numeros a enviar por arreglo

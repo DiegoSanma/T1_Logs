@@ -12,11 +12,13 @@ class MergeSort {
         int alfa;
         size_t largo;
         int inicio;
-        MergeSort * hijos;
+        std::vector<MergeSort> hijos;
         size_t B;
     
     public:
         MergeSort(const char* filename, int alfa, size_t largo,int inicio,size_t B);
+
+        MergeSort() = default;
 
         const char* getFileName() const;
 
@@ -26,7 +28,7 @@ class MergeSort {
 
         int getInicio() const;
     
-        int MergeSortN(int M, size_t B) const;
+        int MergeSortN(int M, size_t B);
 
         int lectura_bloques(size_t B,int cantidad_lectura,std::vector<uint64_t> &buffer,std::ifstream &archivo,int pos=0) const;
 
