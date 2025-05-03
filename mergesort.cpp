@@ -188,7 +188,7 @@ int MergeSort::unionHijos(int M,size_t B,std::ifstream& archivo) const{
     return IOs;
 }
 
-int MergeSort::lectura_bloques(size_t B, int cantidad_lectura, std::vector<uint64_t> &buffer,std::ifstream &archivo,int pos=0) const{
+int MergeSort::lectura_bloques(size_t B, int cantidad_lectura, std::vector<uint64_t> &buffer,std::ifstream &archivo,int pos) const{
     int lecturas_necesarias = (cantidad_lectura*sizeof(uint64_t))/(B*1024);
     if(!pos){
         for(int i = 0; i<lecturas_necesarias;++i){

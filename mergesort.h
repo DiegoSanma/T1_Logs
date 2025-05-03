@@ -1,6 +1,10 @@
 #ifndef MergeSort_H
 #define MergeSort_H
 
+#include <cstddef>   // for size_t
+#include <vector>    // for std::vector
+#include <fstream>   // for std::ifstream, std::ofstream
+#include <cstdint>   // if you're using uint64_t
 
 class MergeSort {
     private:
