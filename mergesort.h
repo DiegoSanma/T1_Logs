@@ -32,7 +32,7 @@ class MergeSort {
 
         int lectura_bloques(size_t B,int cantidad_lectura,std::vector<uint64_t> &buffer,std::ifstream &archivo,int pos=0) const;
 
-        int escritura_bloques(size_t B,int cantidad_lectura,std::vector<uint64_t> &buffer,std::ofstream &archivo) const;
+        int escritura_bloques(size_t B,int cantidad_lectura,std::vector<uint64_t> &buffer,std::fstream &archivo) const;
 
         int unionHijos(int M, size_t B, std::ifstream& archivo) const;
     };

@@ -43,9 +43,11 @@ int CrearArray::crearArrayN() const{
         //Para todas las iteraciones X*M 
         int cant_numeros = 0;
         const size_t bits64 = (bytes_ram*X)/sizeof(uint64_t);
-        std::mt19937_64 rng(42); // Fixed seed
-        std::uniform_int_distribution<uint64_t> dist;
-        for(size_t i=0;i<bits64;++i){
+        for(size_t i=0;i<bits64;i++){
+            std::random_device rd;
+            std::mt19937_64 rng(rd());  // Semilla distinta cada vez
+            // Distribución en todo el rango de uint64_t
+            std::uniform_int_distribution<uint64_t> dist;
             uint64_t numero = dist(rng);
             archivo.write(reinterpret_cast<const char*>(&numero),sizeof(uint64_t));
         }

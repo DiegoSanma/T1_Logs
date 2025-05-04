@@ -1,5 +1,6 @@
 #include "mergesort.h"
 #include "crear_array.h"
+#include "find_alpha.h"
 #include <limits>
 #include <iostream>
 
@@ -47,12 +48,14 @@ int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
 
         // Perform mergesort with midMinusC
         size_t largo_archivo = static_cast<size_t>(X) * M * 1024 * 1024;
+        std::cout << "Haciendo Mergesort con: " << midMinusC << std::endl;
         MergeSort mergesortMinusC(filename, midMinusC, largo_archivo, 0,B);
         int IOs_mergeMinusC = mergesortMinusC.MergeSortN(M,B);
 
         // Perform mergesort with midPlusC
         // Uncomment the following line to use the duplicated file for consistency
         // MergeSort mergesortPlusC(duplicateFilename.c_str(), midPlusC, largo_archivo, 0);
+        std::cout << "Haciendo Mergesort con: " << midPlusC << std::endl;
         MergeSort mergesortPlusC(filename, midPlusC, largo_archivo, 0,B);
         int IOs_mergePlusC = mergesortPlusC.MergeSortN(M,B);
 
