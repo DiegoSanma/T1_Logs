@@ -35,6 +35,7 @@ int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
         int midPlusC = std::min(right, mid + c);
 
         // Create the array using the provided filename and parameters
+        std:: cout << "Creando el arreglo ..." << std::endl;
         CrearArray creador(filename, M, X);
         creador.crearArrayN();
 

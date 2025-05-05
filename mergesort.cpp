@@ -56,7 +56,7 @@ int MergeSort::MergeSortN(int M,size_t B) {
     }
     else{
         //Lo ordeno aquí en "memoria princiapl"
-        std::cout << "Ordenando en memoria principal" << std::endl;
+        // std::cout << "Ordenando en memoria principal" << std::endl;
         int pos_final = this->inicio + largo/sizeof(uint64_t);
         int cantidad = pos_final - this->inicio + 1;             // cuántos enteros quieres leer
         std::vector<uint64_t> buffer(cantidad);                   // buffer para guardarlos
