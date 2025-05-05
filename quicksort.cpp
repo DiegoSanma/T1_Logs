@@ -6,6 +6,7 @@
 #include <queue>
 #include <tuple>
 #include <string>
+#include <cstdio>
 
 QuickSort::QuickSort(const char* filename,int alfa,size_t largo,int inicio,size_t B){
     this->filename = filename;
@@ -195,6 +196,9 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& in) const{
             win[i].buf.clear();
         }
         archivo_i.close();
+        //Borro el archivo temporal que tenía los bloques
+        std::string arch_temporal_nombre = "bloques" + std::to_string(i) + ".bin";
+        std::remove(arch_temporal_nombre.c_str());
     }
     archivo_final.close();
     /****6 LLamo recursivamente quicksort para todos los subarreglos */
