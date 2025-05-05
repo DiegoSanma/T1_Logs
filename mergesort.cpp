@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
+#include <tuple>
 
 MergeSort::MergeSort(const char* filename,int alfa,size_t largo,int inicio,size_t B){
     this->filename = filename;
@@ -11,6 +13,7 @@ MergeSort::MergeSort(const char* filename,int alfa,size_t largo,int inicio,size_
     this->inicio = inicio;
     this->B = B;
     this->hijos.resize(alfa);
+    this->pos_merge_ = this->inicio;
 }
 
 const char * MergeSort::getFileName() const{
@@ -78,126 +81,95 @@ int MergeSort::MergeSortN(int M,size_t B) {
     }
 }
 
-int MergeSort::unionHijos(int M,size_t B,std::ifstream& archivo) const{
+/*****************************************************************
+ *  unionHijos  —  Fusiona los α hijos de este nodo               *
+ *  Param:                                                        *
+ *     M  ·  Memoria principal disponible en MB (solo para cálcs) *
+ *     B  ·  Tamaño de bloque en KB                               *
+ *     in ·  flujo ya abierto en modo lectura (ifstream)          *
+ *  Devuelve: # de I/Os hechos solo en esta fusión                *
+ *****************************************************************/
+int MergeSort::unionHijos(int /*M*/, size_t B, std::ifstream& in) const
+{
+    using Word = uint64_t;
+    const size_t NUMS_PER_BLK = (B * 1024) / sizeof(Word);   // # elementos en B KB
+
+    /********** 1·Estructura auxiliar por hijo ************************/
+    struct Window {
+        std::vector<Word> buf;   // un bloque en RAM
+        size_t len  = 0;         // cuántos números válidos hay en buf
+        size_t idx  = 0;         // posición del “próximo” dentro de buf
+        size_t next = 0;         // pos. absoluta del siguiente número a leer
+        size_t end  = 0;         // pos. (excl.) donde termina el hijo
+    };
+    std::vector<Window> win(alfa);
+
+    /********** 2·Función lambda: leer un bloque **********************/
+    auto load_block = [&](int id) -> bool {
+        Window &w = win[id];
+        if (w.next >= w.end) return false;            // nada más que leer
+        size_t left  = w.end - w.next;                // cuántos faltan
+        w.len  = std::min(NUMS_PER_BLK, left);
+        w.buf.resize(w.len);
+
+        in.seekg(w.next * sizeof(Word), std::ios::beg);
+        in.read(reinterpret_cast<char*>(w.buf.data()), w.len * sizeof(Word));
+
+        w.idx  = 0;            // reiniciar cursor interno
+        w.next += w.len;       // avanzar posición absoluta
+        return true;           // se leyó algo
+    };
+
+    /********** 3·Inicializar heap con el 1er bloque de cada hijo *****/
+    using Tuple = std::tuple<Word,int>;               // valor, idHijo
+    std::priority_queue<
+        Tuple, std::vector<Tuple>, std::greater<Tuple>> heap;
+
     int IOs = 0;
-    std::cout << "Unión de hijos" << std::endl;
-    //Debo unir los alfa hijos que son parte del MergeSort
-    int tamaño_agregar = (M*1024*1024)/(this->alfa+1); //Tamaño que meto a memoria para mergear
-    int cantidad_num = tamaño_agregar/sizeof(uint64_t); //Numeros a enviar por arreglo
-    std::cout << "Envio esta cantidad de numeros x cada aridad: " << cantidad_num << std::endl;
-    //Arreglo con los buffers que tienen los trozos de cada aridad del mergesort
-    std::vector<std::vector<uint64_t>> buffer(this->alfa, std::vector<uint64_t>(cantidad_num));
-    //Arreglo con los punteros al inicio de sus arreglos 
-    std::vector<uint64_t> inicios(this->alfa+1);
-    //Buffer donde se escribe el resultado merged (tamaño M/(this->alfa +1))
-    std::vector<uint64_t> buffer_final;
-    //Leo cada trozo y lo guardo en buffer
-    for(int i=0;i<this->alfa;i++){
-        int inicio_actual = this->hijos[i].getInicio();
-        inicios[i] = inicio_actual;
-        archivo.seekg(inicios[i] * sizeof(uint64_t), std::ios::beg);
-        std::cout << "Leyendo el bloque: " << i << std::endl;
-        IOs+=lectura_bloques(B,cantidad_num,buffer[i],archivo);
+    for (int i = 0; i < alfa; ++i) {
+        win[i].next = hijos[i].getInicio();           // inicio absoluto
+        win[i].end  = win[i].next +                   // fin exclusivo
+                      hijos[i].getLargo()/sizeof(Word);
+        if (load_block(i)) {      // ← 1 I/O por hijo si tiene datos
+            heap.emplace(win[i].buf[0], i);
+            ++IOs;
+        }
     }
-    std::cout << "Ya lei todos los primeros bloques "<< std::endl;
-    //Punteros para cada arreglo que se va a mergear
-    std::vector<size_t> indices(this->alfa+1, 0);
-    //Cantidad de trozos del arreglo subido por cada hijo
-    std::vector<int> trozos_subidos(this->alfa+1,0);
-    //Posición donde debo escribir cada buffer final en disco
-    int pos_buffer_final = 0;
-    //Vector que guarda si ya mande todos los valores de un arreglo
-    //cant_num -> no es el ultimo, x -> esta leyendo el ultimo bloque con x numeros, -1 -> los leyó todos
-    std::vector<int> ultimo(this->alfa+1,cantidad_num-1);
-    std::vector<int> revision_final(this->alfa+1,0);
-    while (true) {
-        uint64_t min_val = UINT64_MAX;
-        size_t min_idx = -1;
-        int indice_arreglo_menor = -1;
-        // Saco el minimo de cada uno y reviso el menor
-        for (size_t i = 0; i < this->alfa; i++) {
-            //Solo si aún quedan elementos por revisar en este arreglo
-            if(revision_final[i]!=-1){
-                int indice_numero = indices[i];
-                //Debo revisar si me pase, para agregar el otro trozo de ese arreglo
-                if(indice_numero>ultimo[i]){
-                    //Reviso si ya estaba en el último bloque
-                    if(revision_final[i]==1){
-                        revision_final[i] = -1;
-                    }
-                    else{
-                        //Si no, debo subir el siguiente trozo a memoria
-                        std::cout << "Me pase en el bloque: " << i << std::endl;                   
-                        trozos_subidos[i]++;
-                        indices[i] = 0;
-                        int pos_nueva = (inicios[i]+ultimo[i]*trozos_subidos[i]);
-                        int cantidad_a_llevar = ultimo[i];
-                        //Si ya estoy en el último bloque del arreglo a subir
-                        if(pos_nueva+(ultimo[i])>=this->hijos[i].getInicio()+(this->hijos[i].getLargo()/sizeof(uint64_t))){
-                            std::cout << "Estoy en el último bloque de: " << i << std::endl;
-                            //Debo llevar a memoria un bloque más pequeño, evitar repetir numeros
-                            cantidad_a_llevar = this->hijos[i].getInicio()+(this->hijos[i].getLargo()/sizeof(uint64_t))-pos_nueva;
-                            //Aviso que estoy/ya revise el último bloque
-                            revision_final[i] = 1;
-                        }
-                        if(revision_final[i]==1){
-                            ultimo[i]= cantidad_a_llevar;
-                        }
-                        //Leo el siguiente trozo y lo guardo en su posición en el buffer
-                        archivo.seekg(pos_nueva*sizeof(uint64_t));
-                        IOs+= lectura_bloques(B,cantidad_a_llevar,buffer[i],archivo);
-                        indice_numero = indices[i];
-                    }
-                }
-                uint64_t valor = buffer[i][indice_numero];
-                //Si este es el menor, lo dejo y guardo tmb de que arreglo salió
-                if(valor<min_val){
-                    min_val = valor;
-                    min_idx = indice_numero;
-                    indice_arreglo_menor = i;
-                }
+
+    /********** 4·Buffer de salida de EXACTO un bloque ***************/
+    std::vector<Word> out;
+    out.reserve(NUMS_PER_BLK);
+
+    auto flush_out = [&] {        // escribe out en disco
+        std::fstream outF(filename,
+                          std::ios::in | std::ios::out | std::ios::binary);
+        outF.seekp(pos_merge_ * sizeof(Word), std::ios::beg);
+        outF.write(reinterpret_cast<char*>(out.data()),
+                   out.size() * sizeof(Word));
+        ++IOs;                    // 1 I/O por bloque escrito
+        pos_merge_ += out.size(); // avanzar cursor global
+        out.clear();
+    };
+
+    /********** 5·Merge k‑way ***************************************/
+    while (!heap.empty()) {
+        auto [val, id] = heap.top(); heap.pop();
+        out.push_back(val);
+
+        Window &w = win[id];
+        ++w.idx;                                // avanzar en su buffer
+        if (w.idx == w.len) {                   // ¿se agotó?
+            if (load_block(id)) {               // recarga
+                heap.emplace(w.buf[0], id);
+                ++IOs;                          // cuenta la lectura
             }
+        } else {
+            heap.emplace(w.buf[w.idx], id);     // aún queda en RAM
         }
 
-        // Si no hay más elementos, terminamos (todos quedaron con revision_final[i]=-1)
-        if (min_idx == -1) {
-            //Escribo lo que quedo en el buffer final en disco
-            std::fstream archivoFuera(filename, std::ios::in | std::ios::out |std::ios::binary);
-            if (!archivoFuera.is_open()) {
-                std::cerr << "No se pudo abrir el archivo." << std::endl;
-                std::exit(1);
-            }
-            //Lo escribo en en disco
-            archivoFuera.seekp(inicio * sizeof(uint64_t), std::ios::beg);
-            IOs+=escritura_bloques(B,buffer_final.size(),buffer_final,archivoFuera);
-            archivoFuera.close();
-            break;
-        }
-
-        // Insertamos el valor mínimo en el resultado
-        buffer_final.push_back(min_val);
-
-        //Si se nos llenó el buffer_final, hay que escribirlo en disco para vaciarlo
-        if(buffer_final.size()>=tamaño_agregar/sizeof(uint64_t)){             
-            std::fstream archivoFuera(filename, std::ios::in | std::ios::out |std::ios::binary);
-            if (!archivoFuera.is_open()) {
-                std::cerr << "No se pudo abrir el archivo." << std::endl;
-                std::exit(1);
-            }
-            std::cout << "LLene el buffer final" << std::endl;
-            //Lo escribo en en disco
-            archivoFuera.seekp(pos_buffer_final * sizeof(uint64_t), std::ios::beg);
-            IOs+= escritura_bloques(B,buffer_final.size(),buffer_final,archivoFuera);
-            archivoFuera.close();
-            //Cambio posicion de buffer para escribir en próximo bloque del disco (pos del numero, no bytes)
-            pos_buffer_final += buffer.size();
-            //Limpio el buffer para reutilizarlo
-            buffer_final.clear();
-        }
-        //Modifico el indice del arreglo del que agregue
-        indices[indice_arreglo_menor]++;
-
+        if (out.size() == NUMS_PER_BLK) flush_out();
     }
+    if (!out.empty()) flush_out();              // resto final
     return IOs;
 }
 

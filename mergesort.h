@@ -14,6 +14,7 @@ class MergeSort {
         int inicio;
         std::vector<MergeSort> hijos;
         size_t B;
+        mutable size_t pos_merge_;
     
     public:
         MergeSort(const char* filename, int alfa, size_t largo,int inicio,size_t B);
