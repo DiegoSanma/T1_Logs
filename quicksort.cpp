@@ -42,7 +42,8 @@ int QuickSort::QuickSortN(int M,size_t B) {
     }
     //Si aún no puedo mandar todo a memoria, voy separando el quicksort
     if(largo>M*1024*1024){
-        qsHijos(M, B, archivo);
+        std::cout << "Separo en hijos" << std::endl;
+        IOs+=qsHijos(M, B, archivo);
         archivo.close();
         std::cout << "El número de IOs para el QuickSort es: " << IOs << std::endl;
         return IOs;
@@ -50,6 +51,7 @@ int QuickSort::QuickSortN(int M,size_t B) {
     else{
         //Lo ordeno aquí en "memoria princiapl (no necesario hacerlo como quicksort)"
         // std::cout << "Ordenando en memoria principal" << std::endl;
+        std::cout << "Ordeno en memoria" << std::endl;
         int pos_final = this->inicio + largo/sizeof(uint64_t);
         int cantidad = pos_final - this->inicio + 1;             // cuántos enteros quieres leer
         std::vector<uint64_t> buffer(cantidad);                   // buffer para guardarlos
@@ -122,52 +124,56 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& in) const{
         win[id].buf.clear();
     };
     /*****************4 Elijo un bloque al azar para sacar los pivotes y ordenarlos **********/
-    std::vector<Word> pivotes_elegidos;
+    std::vector<Word> pivotes_elegidos(this->alfa-1);
     //win[0] guarda los bloques que se van leyendo para asignarlos al subarreglo correcto
     win[0].next = inicio;
     win[0].end = largo/sizeof(uint64_t);
     if(load_block(0)){
         for(int i = 0;i<this->alfa-1;i++){
+            std::cout << "Sacando un pivote aleatorio" << std::endl;
             pivotes_elegidos[i] = win[0].buf[i];
         }
         std::sort(pivotes_elegidos.begin(),pivotes_elegidos.end());
         win[0].idx+=this->alfa-1;
         IOs++;
     };
+    std::cout << "Elegi pivotes bien" << std::endl;
 
     /*********5 Particiono recursivamente los alfa arreglos según los pivotes */
     //Parto con el bloque q ya envie (para no repetir los pivotes que ya elegi)
     Window &w = win[0];
     while(w.idx<w.len){
         Word valor = w.buf[w.idx];
-        for(int i=0;i<this->alfa-1;i++){
-            if(valor<pivotes_elegidos[i]){
+        for(int i=1;i<this->alfa;i++){
+            if(valor<pivotes_elegidos[i-1]){
                 //Guardo el numero en el buffer donde va según el pivote
-                win[i+1].buf.push_back(valor);
+                win[i].buf.push_back(valor);
                 break;
             }
         }
         w.idx++;  //Avanzo en esta ventana
     }
+    std::cout << "Compare primeros elemtentos" << std::endl;
     //Subo el siguiente bloque a win[0]
     load_block(0);
     while(true){
         Word valor = w.buf[w.idx];
-        int subarreglo = -1;
-        for(int i=0;i<this->alfa-1;i++){
-            if(valor<pivotes_elegidos[i]){
+        //Asumo que ira en el subarreglo de más a la derecha (mayor a todos los pivotes)
+        int subarreglo = this->alfa;
+        for(int i=1;i<this->alfa;i++){
+            if(valor<pivotes_elegidos[i-1]){
                 //Guardo el numero en el buffer donde va según el pivote
-                win[i+1].buf.push_back(valor);
-                subarreglo = i+1;
+                win[i].buf.push_back(valor);
+                subarreglo = i;
                 break;
             }
         }
         Window &w_usada = win[subarreglo];
-        w_usada.idx++; //Avanzo en este subarreglo
         w.idx++;  //Avanzo en los bloques de numeros
 
         //Si ya se lleno el RAM este subarreglo, debo escribirlo en disco
         if(w_usada.buf.size()>=NUMS_PER_BLK){
+            std::cout << "LLene el subarreglo:" << subarreglo << std::endl;
             flush_out(subarreglo);
         }
         if(w.idx==w.len){
@@ -177,18 +183,20 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& in) const{
             }
         }
     }
+    std::cout << "Se acabo lo que podía leer" << std::endl;
     for(int i =0;i<this->alfa;i++){
         flush_out(i+1);
     }
 
     /*****6 Concateno los bloques que escribi en los archivos separados */
     std::ofstream archivo_final(filename, std::ios::binary);
-    for(int i = 0; i<this->alfa+1;i++){
+    std::cout << "Concateno" << std::endl;
+    for(int i = 1; i<this->alfa+1;i++){
         //Leo los bloques que están en el archivo temporal de cada subarreglo
         std::ifstream archivo_i("bloques" + std::to_string(i) + ".bin", std::ios::binary );
         //Guardo la posición inicial del subarreglo
         win[i].ini = pos_qs_;
-        for(int j = 0;j<win[i+1].cant;i++){
+        for(int j = 0;j<win[i].cant;j++){
             archivo_i.read(reinterpret_cast<char*>(win[i].buf.data()), NUMS_PER_BLK * sizeof(Word));
             archivo_final.seekp(pos_qs_*sizeof(Word));
             archivo_final.write(reinterpret_cast<char*>(win[i].buf.data()), win[i].buf.size() * sizeof(Word));
@@ -202,10 +210,11 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& in) const{
     }
     archivo_final.close();
     /****6 LLamo recursivamente quicksort para todos los subarreglos */
-    for(int i=0;i<this->alfa;i++){
+    std::cout << "Llamo recursivamente qs" << std::endl;
+    for(int i=1;i<this->alfa+1;i++){
         //El inicio es donde termina el anterior+1
         size_t inicio_subarreglo = win[i].ini;
-        QuickSort hijo(filename,alfa,win[i+1].len,inicio_subarreglo,B);
+        QuickSort hijo(filename,alfa,win[i].len,inicio_subarreglo,B);
         IOs+=hijo.QuickSortN(M,B);
     }
     return IOs;
