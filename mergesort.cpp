@@ -42,7 +42,7 @@ int MergeSort::MergeSortN(int M,size_t B) {
     if(largo>M*1024*1024){
         for(int i = 0; i<this->alfa;++i){
             size_t largo_nuevo = largo/this->alfa;
-            int start = i*(largo_nuevo/sizeof(uint64_t)) ;
+            int start = i*(largo_nuevo/sizeof(uint64_t));
             //El de este sea raiz, y que los demás MergeSort sean sus hojas
             MergeSort hijo(filename,this->alfa,largo_nuevo,start,B);
             this->hijos[i] = hijo;
