@@ -83,93 +83,110 @@ int MergeSort::MergeSortN(int M,size_t B) {
 
 /*****************************************************************
  *  unionHijos  —  Fusiona los α hijos de este nodo               *
- *  Param:                                                        *
- *     M  ·  Memoria principal disponible en MB (solo para cálcs) *
- *     B  ·  Tamaño de bloque en KB                               *
- *     in ·  flujo ya abierto en modo lectura (ifstream)          *
- *  Devuelve: # de I/Os hechos solo en esta fusión                *
+ *                                                               *
+ *  Cambios clave                                                *
+ *  ──────────────────────────────────────────────────────────── *
+ *  [FIX‑RAM]  Cada hijo ahora usa ≈ M/(α+1) bytes de ventana     *
+ *             en lugar de 1 bloque (4 KiB).                     *
+ *  [FIX‑IO]   Contador de IOs basado en bloques físicos leídos   *
+ *             o escritos (ceil(nWords / wordsPerBlock)).        *
+ *  Parametros                                                    *
+ *     M  ·  Memoria principal disponible en MB                  *
+ *     B  ·  Tamaño de bloque de disco en KB                     *
+ *     in ·  ifstream ya abierto (pos ≈ inicio del nodo)          *
  *****************************************************************/
-int MergeSort::unionHijos(int /*M*/, size_t B, std::ifstream& in) const
+int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
 {
     using Word = uint64_t;
-    const size_t NUMS_PER_BLK = (B * 1024) / sizeof(Word);   // # elementos en B KB
 
-    /********** 1·Estructura auxiliar por hijo ************************/
-    struct Window {
-        std::vector<Word> buf;   // un bloque en RAM
-        size_t len  = 0;         // cuántos números válidos hay en buf
-        size_t idx  = 0;         // posición del “próximo” dentro de buf
-        size_t next = 0;         // pos. absoluta del siguiente número a leer
-        size_t end  = 0;         // pos. (excl.) donde termina el hijo
-    };
-    std::vector<Window> win(alfa);
+    /*─────────── 0 · Constantes de bloque y RAM disponible ─────────*/
+    const size_t WORDS_PER_BLK = (B * 1024) / sizeof(Word);      // 4 KiB→512 W
+    const size_t WORDS_RAM     = (size_t)M * 1024 * 1024 / sizeof(Word);
+    const size_t WORDS_PER_WIN = WORDS_RAM / (alfa + 1);         // [FIX‑RAM]
 
-    /********** 2·Función lambda: leer un bloque **********************/
-    auto load_block = [&](int id) -> bool {
-        Window &w = win[id];
-        if (w.next >= w.end) return false;            // nada más que leer
-        size_t left  = w.end - w.next;                // cuántos faltan
-        w.len  = std::min(NUMS_PER_BLK, left);
-        w.buf.resize(w.len);
-
-        in.seekg(w.next * sizeof(Word), std::ios::beg);
-        in.read(reinterpret_cast<char*>(w.buf.data()), w.len * sizeof(Word));
-
-        w.idx  = 0;            // reiniciar cursor interno
-        w.next += w.len;       // avanzar posición absoluta
-        return true;           // se leyó algo
+    auto blocks = [&](size_t n) {                // [FIX‑IO] helper
+        return (n + WORDS_PER_BLK - 1) / WORDS_PER_BLK;
     };
 
-    /********** 3·Inicializar heap con el 1er bloque de cada hijo *****/
-    using Tuple = std::tuple<Word,int>;               // valor, idHijo
-    std::priority_queue<
-        Tuple, std::vector<Tuple>, std::greater<Tuple>> heap;
+    /********** 1 · Estructura “ventana” *****************************/
+    struct Win {
+        std::vector<Word> buf;      // capacidad fija = WORDS_PER_WIN
+        size_t len=0, idx=0;        // len: # válidos, idx: cursor
+        size_t next=0, end=0;       // rango absoluto pendiente
+    };
+    std::vector<Win> win(alfa);
+    for (auto& w : win) w.buf.resize(WORDS_PER_WIN);             // [FIX‑RAM]
+
+    /********** 2 · Carga de bloques (puede leer >1 bloque) **********/
+    auto load = [&](int id) -> int {          // devuelve # IOs
+        Win& w = win[id];
+        if (w.next >= w.end) return 0;        // no queda nada
+        size_t left = w.end - w.next;
+        w.len = std::min(WORDS_PER_WIN, left);
+
+        /* leer en tandas de WORDS_PER_BLK hasta llenar ventana */
+        size_t got = 0, ios = 0;
+        while (got < w.len) {
+            size_t now = std::min(WORDS_PER_BLK, w.len - got);
+            in.seekg((w.next + got) * sizeof(Word), std::ios::beg);
+            in.read(reinterpret_cast<char*>(w.buf.data() + got),
+                    now * sizeof(Word));
+            got += now;  ++ios;
+        }
+        w.idx = 0;
+        w.next += w.len;
+        return ios;                         // [FIX‑IO]
+    };
+
+    /********** 3 · Heap inicial                                     */
+    using Tup = std::tuple<Word,int>;       // valor, idHijo
+    std::priority_queue<Tup,std::vector<Tup>,std::greater<Tup>> heap;
 
     int IOs = 0;
-    for (int i = 0; i < alfa; ++i) {
-        win[i].next = hijos[i].getInicio();           // inicio absoluto
-        win[i].end  = win[i].next +                   // fin exclusivo
-                      hijos[i].getLargo()/sizeof(Word);
-        if (load_block(i)) {      // ← 1 I/O por hijo si tiene datos
-            heap.emplace(win[i].buf[0], i);
-            ++IOs;
-        }
+    for (int i=0;i<alfa;++i) {
+        win[i].next = hijos[i].getInicio();
+        win[i].end  = win[i].next + hijos[i].getLargo()/sizeof(Word);
+        IOs += load(i);                                     // [FIX‑IO]
+        if (win[i].len) heap.emplace(win[i].buf[0], i);
     }
 
-    /********** 4·Buffer de salida de EXACTO un bloque ***************/
+    /********** 4 · Buffer de salida del mismo tamaño que una ventana*/
     std::vector<Word> out;
-    out.reserve(NUMS_PER_BLK);
+    out.reserve(WORDS_PER_WIN);                              // [FIX‑RAM]
 
-    auto flush_out = [&] {        // escribe out en disco
-        std::fstream outF(filename,
-                          std::ios::in | std::ios::out | std::ios::binary);
-        outF.seekp(pos_merge_ * sizeof(Word), std::ios::beg);
-        outF.write(reinterpret_cast<char*>(out.data()),
-                   out.size() * sizeof(Word));
-        ++IOs;                    // 1 I/O por bloque escrito
-        pos_merge_ += out.size(); // avanzar cursor global
+    std::fstream outF(filename,
+                      std::ios::in|std::ios::out|std::ios::binary); // 1 fd
+    auto flush = [&] {                     // escribe y cuenta IOs
+        size_t written = 0;
+        while (written < out.size()) {
+            size_t now = std::min(WORDS_PER_BLK, out.size() - written);
+            outF.seekp((pos_merge_ + written) * sizeof(Word),
+                       std::ios::beg);
+            outF.write(reinterpret_cast<char*>(out.data()+written),
+                        now * sizeof(Word));
+            written += now;
+            ++IOs;                                         // [FIX‑IO]
+        }
+        pos_merge_ += out.size();
         out.clear();
     };
 
-    /********** 5·Merge k‑way ***************************************/
+    /********** 5 · Merge k‑way **************************************/
     while (!heap.empty()) {
-        auto [val, id] = heap.top(); heap.pop();
-        out.push_back(val);
+        auto [v,id] = heap.top(); heap.pop();
+        out.push_back(v);
 
-        Window &w = win[id];
-        ++w.idx;                                // avanzar en su buffer
-        if (w.idx == w.len) {                   // ¿se agotó?
-            if (load_block(id)) {               // recarga
-                heap.emplace(w.buf[0], id);
-                ++IOs;                          // cuenta la lectura
-            }
+        Win& w = win[id];
+        if (++w.idx == w.len) {                 // ventana agotada
+            IOs += load(id);                    // recarga (puede ser 0)
+            if (w.len) heap.emplace(w.buf[0], id);
         } else {
-            heap.emplace(w.buf[w.idx], id);     // aún queda en RAM
+            heap.emplace(w.buf[w.idx], id);
         }
 
-        if (out.size() == NUMS_PER_BLK) flush_out();
+        if (out.size() == WORDS_PER_WIN) flush();
     }
-    if (!out.empty()) flush_out();              // resto final
+    if (!out.empty()) flush();
     return IOs;
 }
 
