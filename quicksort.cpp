@@ -200,6 +200,7 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& in) const{
             archivo_i.read(reinterpret_cast<char*>(win[i].buf.data()), NUMS_PER_BLK * sizeof(Word));
             archivo_final.seekp(pos_qs_*sizeof(Word));
             archivo_final.write(reinterpret_cast<char*>(win[i].buf.data()), win[i].buf.size() * sizeof(Word));
+            IOs+=2;
             pos_qs_+=win[i].buf.size();
             win[i].buf.clear();
         }
