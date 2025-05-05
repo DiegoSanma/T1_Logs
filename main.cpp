@@ -11,7 +11,7 @@ int main(){
     //CrearArray creador("arreglo.bin",M,60);
     std::cout << "Hola desde Docker!" << std::endl;
     //Ahora, debo sacar la aridad usando MergeSort
-    int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,4,B);
+    int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,60,B);
     std::cout << "alfa: " << alfa << std::endl;
     //Ahora usando ese alfa, debo realizar MergeSort y QuickSort
     //Lo comento pa q cuando lo corran solo veamos primero la aridad
