@@ -16,9 +16,11 @@ static void delete_temp_files()
 int main(){
     int M = 50;
     size_t B = 4096; //4096kb
+
     //Primero, inicializo la clase que crea el arreglo
     const char * filename = "arreglo.bin";
     CrearArray creador(filename,M,4);
+
     std::cout << "Hola desde Docker!" << std::endl;
     //Ahora, debo sacar la aridad usando MergeSort
     /*---------------------------------------------------------------
@@ -39,11 +41,12 @@ int main(){
     int maxArity = std::min(maxByMemory, maxByBlock);
     // /* also cap at 64  */
     // if (maxArity > 64) maxArity = 64;              // [FIX‑ARITY] limit
-
+    
+    std::cout << "b: " << maxArity << std::endl;
+    
     /*---------------------------------------------------------------
      *  Now call the optimiser inside the safe interval [2, maxArity]
      *-------------------------------------------------------------*/
-    std::cout << "b: " << maxArity << std::endl;
     std::signal(SIGINT,  [](int){ delete_temp_files(); std::exit(130); });
     std::signal(SIGTERM, [](int){ delete_temp_files(); std::exit(143); });
     int alfa = findOptimalArity(maxArity,
