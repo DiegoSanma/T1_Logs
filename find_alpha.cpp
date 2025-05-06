@@ -24,8 +24,10 @@
 int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
     // Initialize binary search bounds
     int left = 2, right = b;
-    int optimalAlpha = left;
+    //int optimalAlpha = left;
     int minIOs = std::numeric_limits<int>::max();
+    int i=0;
+    MergeSort best;
 
     // Binary search for the optimal arity
     while (left <= right) {
@@ -33,49 +35,80 @@ int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
         int c = std::max(1, (right - left) / 4); // Adjust c relative to the range
         int midMinusC = std::max(left, mid - c);
         int midPlusC = std::min(right, mid + c);
-
+        //Defino los IOs que voy a calcular
+        int IOs_mergeMinusC;
+        int IOs_mergePlusC;
+        //Defino los Mergesort que voy a hacer
+        MergeSort mergesortMinusC;
+        MergeSort mergesortPlusC;
         // Create the array using the provided filename and parameters
         std:: cout << "Creando el arreglo ..." << std::endl;
         CrearArray creador(filename, M, X);
         creador.crearArrayN();
-
-        // Uncomment the following lines to duplicate the .bin file for consistency
-        // std::string duplicateFilename = std::string(filename) + "_copy";
-        // std::ifstream src(filename, std::ios::binary);
-        // std::ofstream dst(duplicateFilename, std::ios::binary);
-        // dst << src.rdbuf();
-        // src.close();
-        // dst.close();
-
-        // Perform mergesort with midMinusC
         size_t largo_archivo = static_cast<size_t>(X) * M * 1024 * 1024;
-        std::cout << "Haciendo Mergesort con: " << midMinusC << std::endl;
-        MergeSort mergesortMinusC(filename, midMinusC, largo_archivo, 0,B);
-        int IOs_mergeMinusC = mergesortMinusC.MergeSortN(M,B);
-
-        // Perform mergesort with midPlusC
-        // Uncomment the following line to use the duplicated file for consistency
-        // MergeSort mergesortPlusC(duplicateFilename.c_str(), midPlusC, largo_archivo, 0);
-        std::cout << "Haciendo Mergesort con: " << midPlusC << std::endl;
-        MergeSort mergesortPlusC(filename, midPlusC, largo_archivo, 0,B);
-        int IOs_mergePlusC = mergesortPlusC.MergeSortN(M,B);
-
+            
+        //Reviso cual
+        if(i){
+            if(midMinusC==best.getAlfa()){
+                IOs_mergeMinusC = minIOs;
+                MergeSort mergesortMinusC = best;
+                std::cout << "Haciendo Mergesort con: " << midPlusC << std::endl;
+                MergeSort mergesortPlusC(filename, midPlusC, largo_archivo, 0,B);
+                int IOs_mergePlusC = mergesortPlusC.MergeSortN(M,B);
+                std::cout << "El número de IOs para este MergeSort es: " << IOs_mergePlusC << std::endl;
+            }
+            else{
+                IOs_mergePlusC = minIOs;
+                MergeSort mergesortPlusC = best;
+                std::cout << "Haciendo Mergesort con: " << midMinusC << " para compararlo con " << best.getAlfa() << std::endl;
+                MergeSort mergesortMinusC(filename, midMinusC, largo_archivo, 0,B);
+                int IOs_mergeMinusC = mergesortMinusC.MergeSortN(M,B);
+                std::cout << "El número de IOs para este MergeSort es: " << IOs_mergeMinusC << std::endl;
+            }
+        } else {
+            // Uncomment the following lines to duplicate the .bin file for consistency
+            // std::string duplicateFilename = std::string(filename) + "_copy";
+            // std::ifstream src(filename, std::ios::binary);
+            // std::ofstream dst(duplicateFilename, std::ios::binary);
+            // dst << src.rdbuf();
+            // src.close();
+            // dst.close();
+            
+            // Perform mergesort with midMinusC
+            std::cout << "Haciendo Mergesort con: " << midMinusC << std::endl;
+            MergeSort mergesortMinusC(filename, midMinusC, largo_archivo, 0,B);
+            int IOs_mergeMinusC = mergesortMinusC.MergeSortN(M,B);
+            std::cout << "El número de IOs para este MergeSort es: " << IOs_mergeMinusC << std::endl;
+            
+            // Perform mergesort with midPlusC
+            // Uncomment the following line to use the duplicated file for consistency
+            // MergeSort mergesortPlusC(duplicateFilename.c_str(), midPlusC, largo_archivo, 0);
+            std::cout << "Haciendo Mergesort con: " << midPlusC << std::endl;
+            MergeSort mergesortPlusC(filename, midPlusC, largo_archivo, 0,B);
+            int IOs_mergePlusC = mergesortPlusC.MergeSortN(M,B);
+            std::cout << "El número de IOs para este MergeSort es: " << IOs_mergePlusC << std::endl;
+        }
+        
         // Compare IOs and decide the direction of binary search
         // Logic can be adjusted
         if (IOs_mergeMinusC < IOs_mergePlusC) {
             if (IOs_mergeMinusC < minIOs) {
-            minIOs = IOs_mergeMinusC;
-            optimalAlpha = midMinusC;
+                minIOs = IOs_mergeMinusC;
+                //optimalAlpha = midMinusC;
+                best = mergesortMinusC;
+                i++;
             }
             right = mid - 1; // Move to the lower half
         } else {
             if (IOs_mergePlusC < minIOs) {
-            minIOs = IOs_mergePlusC;
-            optimalAlpha = midPlusC;
+                minIOs = IOs_mergePlusC;
+                //optimalAlpha = midPlusC;
+                best = mergesortPlusC;
+                i++;
             }
             left = mid + 1; // Move to the upper half
         }
     }
 
-    return optimalAlpha;
+    return best.getAlfa();
 }

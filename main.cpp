@@ -24,6 +24,8 @@ int main(){
     // }
     int Xtest = 4;
 
+    int X_aridad = 60;
+
     //Primero, inicializo la clase que crea el arreglo
     const char * filename = "arreglo.bin";
     CrearArray creador(filename,M,4);
@@ -59,15 +61,15 @@ int main(){
     int alfa = findOptimalArity(maxArity,
                                 "arreglos_aridad.bin",
                                 M,
-                                Xtest,     // X (array size factor)
+                                X_aridad,     // X (array size factor)
                                 B);        // block size KB
     std::cout << "alfa: " << alfa << std::endl;
-    creador.crearArrayN();
-    //int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,60,B);
-    QuickSort quicksort(filename,alfa,M*Xtest*1024*1024,0,B);
-    std::cout << "Empiezo quicksort..." << std::endl;
-    int IOs = quicksort.QuickSortN(M,B);
-    std::cout << "Usaron esta cantidad de IOs:" << IOs << std::endl;
+    //creador.crearArrayN();
+    ////int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,60,B);
+    //QuickSort quicksort(filename,alfa,M*Xtest*1024*1024,0,B);
+    //std::cout << "Empiezo quicksort..." << std::endl;
+    //int IOs = quicksort.QuickSortN(M,B);
+    //std::cout << "Usaron esta cantidad de IOs:" << IOs << std::endl;
 
     //std::cout << "alfa: " << alfa << std::endl;
     //Ahora usando ese alfa, debo realizar MergeSort y QuickSort

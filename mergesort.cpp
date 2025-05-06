@@ -51,7 +51,6 @@ int MergeSort::MergeSortN(int M,size_t B) {
         //Es un cuarto, ya que uso la un cuarto para cada arreglo, y un medio para ambos juntos
         IOs+=unionHijos(M,B,archivo);
         archivo.close();
-        std::cout << "El número de IOs para el MergeSort es: " << IOs << std::endl;
         return IOs;
     }
     else{
