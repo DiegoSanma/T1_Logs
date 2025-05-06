@@ -39,8 +39,8 @@ int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
         int IOs_mergeMinusC;
         int IOs_mergePlusC;
         //Defino los Mergesort que voy a hacer
-        MergeSort mergesortMinusC;
-        MergeSort mergesortPlusC;
+        MergeSort* mergesortMinusC;
+        MergeSort* mergesortPlusC;
         // Create the array using the provided filename and parameters
         std:: cout << "Creando el arreglo ..." << std::endl;
         CrearArray creador(filename, M, X);
@@ -95,7 +95,7 @@ int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
             if (IOs_mergeMinusC < minIOs) {
                 minIOs = IOs_mergeMinusC;
                 //optimalAlpha = midMinusC;
-                best = mergesortMinusC;
+                best = *mergesortMinusC;
                 i++;
             }
             right = mid - 1; // Move to the lower half
@@ -103,7 +103,7 @@ int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
             if (IOs_mergePlusC < minIOs) {
                 minIOs = IOs_mergePlusC;
                 //optimalAlpha = midPlusC;
-                best = mergesortPlusC;
+                best = *mergesortPlusC;
                 i++;
             }
             left = mid + 1; // Move to the upper half
