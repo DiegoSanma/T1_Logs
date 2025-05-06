@@ -79,55 +79,74 @@ int QuickSort::QuickSortN(int M,size_t B) {
 /*****************************************************************
  *  qsHijos  —  External quick‑sort partitioning phase            *
  *                                                               *
+ *  Purpose                                                     *
+ *  ──────────────────────────────────────────────────────────── *
+ *   Partition current range into α buckets using α‑1 pivots.   *
+ *   Use limited RAM with one input buffer and α output buffers.*
+ *   Write each bucket to temp file and recursively sort.       *
+ *                                                               *
  *  RAM model                                                    *
  *  ──────────────────────────────────────────────────────────── *
  *   • 1  source window  (WORD_PER_BLK)                          *
  *   • α  destination windows (each WORDS_PER_WIN)               *
  *     WORDS_PER_WIN = max(WORDS_PER_BLK, M/(α+1)/8)             *
  *   Total ≤ M bytes.                                            *
+ *                                                               *
+ *  Params:                                                      *
+ *     M  ·  Main memory in MB                                   *
+ *     B  ·  Block size in KB                                    *
+ *     src·  Input stream open on binary file                    *
+ *                                                               *
+ *  Sections:                                                    *
+ *   0 · Constants and RAM layout                                *
+ *   1 · Destination window (buffer) setup                       *
+ *   2 · Pivot sampling                                          *
+ *   3 · Partitioning loop                                       *
+ *   4 · Merge buckets into final output                         *
+ *   5 · Recursive quicksort on each bucket                      *
  *****************************************************************/
 int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
 {
     using Word = uint64_t;
 
-    /* 0 · Derived sizes ----------------------------------------------------*/
+    /* 0 · Constants and RAM layout --------------------------------------- */
     const size_t WORDS_PER_BLK = (B * 1024) / sizeof(Word);
     const size_t WORDS_RAM     = size_t(M) * 1024 * 1024 / sizeof(Word);
-    const size_t WORDS_PER_WIN = std::max(WORDS_PER_BLK,
-                                          WORDS_RAM / (alfa + 1));
+    const size_t WORDS_PER_WIN = std::max(WORDS_PER_BLK, WORDS_RAM / (alfa + 1));
 
-    auto physBlocks = [&](size_t n)
-        { return (n + WORDS_PER_BLK - 1) / WORDS_PER_BLK; };
-
-    /* 1 · Windows ----------------------------------------------------------*/
-    struct WinDst {
-        std::vector<Word> buf;          // capacity WORDS_PER_WIN
-        size_t written = 0;             // numbers already flushed
-        std::ofstream tmp;              // temp file handle
+    auto physBlocks = [&](size_t n) {
+        return (n + WORDS_PER_BLK - 1) / WORDS_PER_BLK;
     };
-    std::vector<WinDst> bucket(alfa);               // dst windows
+
+    /* 1 · Destination windows (one per bucket) --------------------------- */
+    struct WinDst {
+        std::vector<Word> buf;          // Fixed-capacity RAM window
+        size_t written = 0;             // How many numbers already flushed
+        std::ofstream tmp;              // Temp file to write bucket data
+    };
+    std::vector<WinDst> bucket(alfa);
     for (int i = 0; i < alfa; ++i) {
         bucket[i].buf.reserve(WORDS_PER_WIN);
         bucket[i].tmp.open("bucket-" + std::to_string(i) + ".bin",
                            std::ios::binary | std::ios::trunc);
     }
 
-    std::vector<Word> windowSrc(WORDS_PER_BLK);     // src window
+    std::vector<Word> windowSrc(WORDS_PER_BLK);  // Input buffer (block-sized)
 
-    /* 2 · Choose α‑1 pivots  (simplest: first block, evenly spaced) --------*/
+    /* 2 · Choose α−1 pivots from the first block ------------------------ */
     src.seekg(inicio * sizeof(Word), std::ios::beg);
     src.read(reinterpret_cast<char*>(windowSrc.data()),
              WORDS_PER_BLK * sizeof(Word));
     std::vector<Word> piv(alfa - 1);
     for (int i = 0; i < alfa - 1; ++i)
-        piv[i] = windowSrc[i];          // could sample better
+        piv[i] = windowSrc[i];
     std::sort(piv.begin(), piv.end());
 
-    size_t nextRead = inicio;           // absolute cursor in file
+    size_t nextRead = inicio;
     size_t endAbs   = inicio + largo / sizeof(Word);
-    int IOs = 1;                        // first read above
+    int IOs = 1;  // already read 1 block for pivot
 
-    /* 3 · Partition loop ---------------------------------------------------*/
+    /* 3 · Partitioning loop: read parent blocks, assign to bucket ------- */
     auto flushBucket = [&](int id) {
         auto& w = bucket[id];
         w.tmp.write(reinterpret_cast<char*>(w.buf.data()),
@@ -138,19 +157,17 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
     };
 
     while (nextRead < endAbs) {
-        /* load one physical block from parent run */
         size_t left = endAbs - nextRead;
         size_t nRead = std::min(WORDS_PER_BLK, left);
         src.seekg(nextRead * sizeof(Word), std::ios::beg);
         src.read(reinterpret_cast<char*>(windowSrc.data()),
                  nRead * sizeof(Word));
-        IOs++;                          // one physical read
+        IOs++;
         nextRead += nRead;
 
-        /* distribute into buckets */
         for (size_t i = 0; i < nRead; ++i) {
             Word v = windowSrc[i];
-            int id = alfa - 1;          // default bucket: greatest
+            int id = alfa - 1;  // default: goes to last bucket
             for (int p = 0; p < alfa - 1; ++p)
                 if (v < piv[p]) { id = p; break; }
 
@@ -160,11 +177,10 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
         }
     }
 
-    /* flush remaining partial buffers */
     for (int i = 0; i < alfa; ++i)
         if (!bucket[i].buf.empty()) flushBucket(i);
 
-    /* 4 · Concatenate all bucket files back into parent file ---------------*/
+    /* 4 · Concatenate temp buckets into main file ------------------------ */
     std::fstream dst(filename,
                      std::ios::in | std::ios::out | std::ios::binary);
     size_t dstPos = inicio;
@@ -180,18 +196,18 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
             dst.seekp(dstPos * sizeof(Word), std::ios::beg);
             dst.write(reinterpret_cast<char*>(windowSrc.data()),
                       n * sizeof(Word));
-            IOs += 2;                   // read temp + write parent
+            IOs += 2;
             dstPos += n;  left -= n;
         }
         tmp.close();
         std::remove(("bucket-" + std::to_string(i) + ".bin").c_str());
     }
 
-    /* 5 · Recursive quick‑sort calls --------------------------------------*/
+    /* 5 · Recursive quicksort on each bucket ----------------------------- */
     size_t childStart = inicio;
     for (int i = 0; i < alfa; ++i) {
         size_t childLen = bucket[i].written * sizeof(Word);
-        if (childLen == 0) continue;    // empty bucket
+        if (childLen == 0) continue;
         QuickSort child(filename, alfa, childLen, childStart, B);
         IOs += child.QuickSortN(M, B);
         childStart += bucket[i].written;
