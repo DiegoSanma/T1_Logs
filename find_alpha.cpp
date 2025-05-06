@@ -52,7 +52,6 @@ int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
         std::cout << "Haciendo Mergesort con: " << midMinusC << std::endl;
         MergeSort mergesortMinusC(filename, midMinusC, largo_archivo, 0,B);
         int IOs_mergeMinusC = mergesortMinusC.MergeSortN(M,B);
-        std::cout << "El número de IOs para el MergeSort es: " << IOs_mergeMinusC << std::endl;
 
         // Perform mergesort with midPlusC
         // Uncomment the following line to use the duplicated file for consistency
@@ -60,7 +59,6 @@ int findOptimalArity(int b, const char* filename, int M, int X,size_t B) {
         std::cout << "Haciendo Mergesort con: " << midPlusC << std::endl;
         MergeSort mergesortPlusC(filename, midPlusC, largo_archivo, 0,B);
         int IOs_mergePlusC = mergesortPlusC.MergeSortN(M,B);
-        std::cout << "El número de IOs para el MergeSort es: " << IOs_mergePlusC << std::endl;
 
         // Compare IOs and decide the direction of binary search
         // Logic can be adjusted

@@ -123,7 +123,7 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
     /********** 2 · Carga de bloques (puede leer >1 bloque) **********/
     auto load = [&](int id) -> int {          // devuelve # IOs
         Win& w = win[id];
-        if (w.next >= w.end) return 0;        // no queda nada
+        if (w.next >= w.end) {w.len = 0; return 0;}        // no queda nada
         size_t left = w.end - w.next;
         w.len = std::min(WORDS_PER_WIN, left);
 

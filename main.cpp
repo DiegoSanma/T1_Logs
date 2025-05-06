@@ -19,10 +19,10 @@ int main(){
     // create an array of ints from 4 to 60 by 4
     int *arreglo = new int[15];
     // for (int i = 0; i < 15; ++i) {
-    for (int i = 0; i < 15; ++i) {
-        arreglo[i] = 4 + i * 4;
-    }
-    int Xtest = 12;
+    // for (int i = 0; i < 15; ++i) {
+    //     arreglo[i] = 4 + i * 4;
+    // }
+    int Xtest = 4;
 
     //Primero, inicializo la clase que crea el arreglo
     const char * filename = "arreglo.bin";
