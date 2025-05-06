@@ -45,6 +45,13 @@ static void fill_slice(uint64_t* ptr, uint64_t len)
  *───────────────────────────────────────────────────────────────*/
 int CrearArray::crearArrayN() const
 {
+    // Intentar eliminar el archivo si ya existe
+    if (std::remove(filename) == 0) {
+        std::cout << "Archivo existente eliminado: " << filename << std::endl;
+    } else {
+        std::cerr << "No se pudo eliminar el archivo (puede que no exista): " << filename << std::endl;
+    }
+    
     const uint64_t bytes_ram  = static_cast<uint64_t>(M) * 1024 * 1024;
     const uint64_t total_nums = (bytes_ram * static_cast<uint64_t>(X))
                                 / sizeof(uint64_t);

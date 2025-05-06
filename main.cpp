@@ -2,9 +2,11 @@
 #include "mergesort.h"
 #include "find_alpha.h"
 #include "quicksort.h"
+#include "data_structs.h"
 #include <iostream>
 #include <csignal>
 #include <cstdio>
+#include <chrono>
 
 static const char* FILE_ALPHA   = "arreglos_aridad.bin";
 
@@ -64,30 +66,48 @@ int main(){
                                 X_aridad,     // X (array size factor)
                                 B);        // block size KB
     std::cout << "alfa: " << alfa << std::endl;
-    //creador.crearArrayN();
-    ////int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,60,B);
-    //QuickSort quicksort(filename,alfa,M*Xtest*1024*1024,0,B);
-    //std::cout << "Empiezo quicksort..." << std::endl;
-    //int IOs = quicksort.QuickSortN(M,B);
-    //std::cout << "Usaron esta cantidad de IOs:" << IOs << std::endl;
+    creador.crearArrayN();
+    //int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,60,B);
+    QuickSort quicksort(filename,alfa,M*Xtest*1024*1024,0,B);
+    std::cout << "Empiezo quicksort..." << std::endl;
+    int IOs = quicksort.QuickSortN(M,B);
+    std::cout << "Usaron esta cantidad de IOs:" << IOs << std::endl;
 
-    //std::cout << "alfa: " << alfa << std::endl;
-    //Ahora usando ese alfa, debo realizar MergeSort y QuickSort
-    //Lo comento pa q cuando lo corran solo veamos primero la aridad
-    //for(int i=4;i<=60;i+=4){
-    //    creador.setX(i);
-    //    for(int j=0;j<5;++j){
-    //        size_t largo_archivo = M*i*1024*1024;
-    //        //Primero creamos la secuencia de i * M numeros de 64 bits
-    //        creador.crearArrayN();
-    //        //Dsp tenemos que hacerle mergesort y quicksort, y guardar los resultados
-    //        MergeSort mergesort("arreglo.bin",alfa,largo_archivo,0,B);
-    //        int IOs_merge = mergesort.MergeSortN(M,B);
-    //        //Finalmente, borro lo que había en el archivo.bin y sigo con la próxima secuencia
-    //    
-    //    }
-    //}
-    //std::cout << "Hola desde Docker2!" << std::endl;
+    // std::cout << "alfa: " << alfa << std::endl;
+    // Ahora usando ese alfa, debo realizar MergeSort y QuickSort
+    // Lo comento pa q cuando lo corran solo veamos primero la aridad
+
+    // creo una lista que guarde los resultados de cada sort
+    std::vector<MergeSortData> results_ms;
+    std::vector<QuickSortData> results_qs;
+
+    for(int i=4;i<=60;i+=4){
+       creador.setX(i);
+       for(int j=0;j<5;++j){
+           size_t largo_archivo = M*i*1024*1024;
+           //Primero creamos la secuencia de i * M numeros de 64 bits
+           creador.crearArrayN();
+           //Dsp tenemos que hacerle mergesort y quicksort, y guardar los resultados
+           MergeSort mergesort("arreglo.bin",alfa,largo_archivo,0,B);
+           auto inicio_ms = std::chrono::high_resolution_clock::now();
+           int IOs_merge = mergesort.MergeSortN(M,B);
+           auto fin_ms = std::chrono::high_resolution_clock::now();
+           std::chrono::duration<double> duracion_ms = fin_ms - inicio_ms;
+           // agrego esta data a resultados y luego ese resultado a la lista
+           MergeSortData res{largo_archivo, duracion_ms.count(), IOs_merge, alfa};
+           results_ms.push_back(res);
+
+           QuickSort quicksort("arreglo.bin",alfa,largo_archivo,0,B);
+           auto inicio_qs = std::chrono::high_resolution_clock::now();
+           int IOs_quick = quicksort.QuickSortN(M,B);
+           auto fin_qs = std::chrono::high_resolution_clock::now();
+           std::chrono::duration<double> duracion_qs = fin_qs - inicio_qs;
+           // agrego esta data a resultados y luego ese resultado a la lista
+           QuickSortData res_qs{largo_archivo, duracion_qs.count(), IOs_quick, alfa};
+           results_qs.push_back(res_qs);
+       }
+    }
+    std::cout << "Hola desde Docker2!" << std::endl;
 
     delete_temp_files();
 
