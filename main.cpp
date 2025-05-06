@@ -16,6 +16,13 @@ static void delete_temp_files()
 int main(){
     int M = 50;
     size_t B = 4096; //4096kb
+    // create an array of ints from 4 to 60 by 4
+    int *arreglo = new int[15];
+    // for (int i = 0; i < 15; ++i) {
+    for (int i = 0; i < 15; ++i) {
+        arreglo[i] = 4 + i * 4;
+    }
+    int Xtest = 12;
 
     //Primero, inicializo la clase que crea el arreglo
     const char * filename = "arreglo.bin";
@@ -43,7 +50,7 @@ int main(){
     // if (maxArity > 64) maxArity = 64;              // [FIX‑ARITY] limit
     
     std::cout << "b: " << maxArity << std::endl;
-    
+
     /*---------------------------------------------------------------
      *  Now call the optimiser inside the safe interval [2, maxArity]
      *-------------------------------------------------------------*/
@@ -52,12 +59,12 @@ int main(){
     int alfa = findOptimalArity(maxArity,
                                 "arreglos_aridad.bin",
                                 M,
-                                1,        // X (array size factor)
+                                Xtest,     // X (array size factor)
                                 B);        // block size KB
     std::cout << "alfa: " << alfa << std::endl;
     creador.crearArrayN();
     //int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,60,B);
-    QuickSort quicksort(filename,70,M*4*1024*1024,0,B);
+    QuickSort quicksort(filename,alfa,M*Xtest*1024*1024,0,B);
     std::cout << "Empiezo quicksort..." << std::endl;
     int IOs = quicksort.QuickSortN(M,B);
     std::cout << "Usaron esta cantidad de IOs:" << IOs << std::endl;

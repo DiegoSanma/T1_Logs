@@ -45,13 +45,13 @@ int QuickSort::QuickSortN(int M,size_t B) {
         std::cout << "Separo en hijos" << std::endl;
         IOs+=qsHijos(M, B, archivo);
         archivo.close();
-        std::cout << "El número de IOs para el QuickSort es: " << IOs << std::endl;
+        // std::cout << "El número de IOs para el QuickSort es: " << IOs << std::endl;
         return IOs;
     }
     else{
         //Lo ordeno aquí en "memoria princiapl (no necesario hacerlo como quicksort)"
         // std::cout << "Ordenando en memoria principal" << std::endl;
-        std::cout << "Ordeno en memoria" << std::endl;
+        // std::cout << "Ordeno en memoria" << std::endl;
         int pos_final = this->inicio + largo/sizeof(uint64_t);
         int cantidad = pos_final - this->inicio + 1;             // cuántos enteros quieres leer
         std::vector<uint64_t> buffer(cantidad);                   // buffer para guardarlos
