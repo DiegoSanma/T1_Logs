@@ -76,147 +76,125 @@ int QuickSort::QuickSortN(int M,size_t B) {
     }
 }
 
-int QuickSort::qsHijos(int M, size_t B, std::ifstream& in) const{
+/*****************************************************************
+ *  qsHijos  —  External quick‑sort partitioning phase            *
+ *                                                               *
+ *  RAM model                                                    *
+ *  ──────────────────────────────────────────────────────────── *
+ *   • 1  source window  (WORD_PER_BLK)                          *
+ *   • α  destination windows (each WORDS_PER_WIN)               *
+ *     WORDS_PER_WIN = max(WORDS_PER_BLK, M/(α+1)/8)             *
+ *   Total ≤ M bytes.                                            *
+ *****************************************************************/
+int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
+{
     using Word = uint64_t;
-    const size_t NUMS_PER_BLK = (B * 1024) / sizeof(Word);   // # elementos en B KB
 
-    /********** 1·Estructura auxiliar por hijo ************************/
-    struct Window {
-        std::vector<Word> buf;   // un bloque en RAM
-        size_t len  = 0;         // cuántos números válidos hay en buf
-        size_t idx  = 0;         // posición del “próximo” dentro de buf
-        size_t next = 0;         // pos. absoluta del siguiente número a leer
-        size_t end  = 0;         // pos. (excl.) donde termina el hijo
-        size_t cant = 0;         // cantidad de bloque subidos en este subarreglo
-        size_t ini = 0;          // pos global donde inicia el subarreglo en el arreglo A
+    /* 0 · Derived sizes ----------------------------------------------------*/
+    const size_t WORDS_PER_BLK = (B * 1024) / sizeof(Word);
+    const size_t WORDS_RAM     = size_t(M) * 1024 * 1024 / sizeof(Word);
+    const size_t WORDS_PER_WIN = std::max(WORDS_PER_BLK,
+                                          WORDS_RAM / (alfa + 1));
+
+    auto physBlocks = [&](size_t n)
+        { return (n + WORDS_PER_BLK - 1) / WORDS_PER_BLK; };
+
+    /* 1 · Windows ----------------------------------------------------------*/
+    struct WinDst {
+        std::vector<Word> buf;          // capacity WORDS_PER_WIN
+        size_t written = 0;             // numbers already flushed
+        std::ofstream tmp;              // temp file handle
     };
-    /*****OJO ******/
-    //La estructura Window se usa distinto según los indices del vector win
-    //Para win[0] -> buffer que trae a memoria los numeros del arreglo
-    //Para el resto -> buffer que almacena los valores que van a ir en cada subarreglo 
-    std::vector<Window> win(alfa+1);
-    /********** 2·Función lambda: leer un bloque **********************/
-    auto load_block = [&](int id) -> bool {
-        Window &w = win[id];
-        if (w.next >= w.end) return false;            // nada más que leer
-        size_t left  = w.end - w.next;                // cuántos faltan
-        w.len  = std::min(NUMS_PER_BLK, left);
-        w.buf.resize(w.len);
-
-        in.seekg(w.next * sizeof(Word), std::ios::beg);
-        in.read(reinterpret_cast<char*>(w.buf.data()), w.len * sizeof(Word));
-
-        w.idx  = 0;            // reiniciar cursor interno
-        w.next += w.len;       // avanzar posición absoluta
-        return true;           // se leyó algo
-    };
-    int IOs = 0;
-    /*********3 Función que escribe la ventana[i] en la fila i disco */
-    auto flush_out = [&](int id) {        // escribe win[i] en disco
-        std::ofstream outF("bloques" + std::to_string(id) + ".bin", std::ios::binary | std::ios::app);
-        outF.seekp(win[id].next * sizeof(Word), std::ios::beg);
-        outF.write(reinterpret_cast<char*>(win[id].buf.data()),
-                   win[id].buf.size() * sizeof(Word));
-        ++IOs;                    // 1 I/O por bloque escrito
-        pos_qs_ += win[id].buf.size(); // avanzar su cursor global
-        win[id].len += win[id].buf.size();
-        win[id].cant++;
-        win[id].buf.clear();
-    };
-    /*****************4 Elijo un bloque al azar para sacar los pivotes y ordenarlos **********/
-    std::vector<Word> pivotes_elegidos(this->alfa-1);
-    //win[0] guarda los bloques que se van leyendo para asignarlos al subarreglo correcto
-    win[0].next = inicio;
-    win[0].end = largo/sizeof(uint64_t);
-    if(load_block(0)){
-        for(int i = 0;i<this->alfa-1;i++){
-            std::cout << "Sacando un pivote aleatorio" << std::endl;
-            pivotes_elegidos[i] = win[0].buf[i];
-        }
-        std::sort(pivotes_elegidos.begin(),pivotes_elegidos.end());
-        win[0].idx+=this->alfa-1;
-        IOs++;
-    };
-    std::cout << "Elegi pivotes bien" << std::endl;
-
-    /*********5 Particiono recursivamente los alfa arreglos según los pivotes */
-    //Parto con el bloque q ya envie (para no repetir los pivotes que ya elegi)
-    Window &w = win[0];
-    while(w.idx<w.len){
-        Word valor = w.buf[w.idx];
-        for(int i=1;i<this->alfa;i++){
-            if(valor<pivotes_elegidos[i-1]){
-                //Guardo el numero en el buffer donde va según el pivote
-                win[i].buf.push_back(valor);
-                break;
-            }
-        }
-        w.idx++;  //Avanzo en esta ventana
-    }
-    std::cout << "Compare primeros elemtentos" << std::endl;
-    //Subo el siguiente bloque a win[0]
-    load_block(0);
-    while(true){
-        Word valor = w.buf[w.idx];
-        //Asumo que ira en el subarreglo de más a la derecha (mayor a todos los pivotes)
-        int subarreglo = this->alfa;
-        for(int i=1;i<this->alfa;i++){
-            if(valor<pivotes_elegidos[i-1]){
-                //Guardo el numero en el buffer donde va según el pivote
-                win[i].buf.push_back(valor);
-                subarreglo = i;
-                break;
-            }
-        }
-        Window &w_usada = win[subarreglo];
-        w.idx++;  //Avanzo en los bloques de numeros
-
-        //Si ya se lleno el RAM este subarreglo, debo escribirlo en disco
-        if(w_usada.buf.size()>=NUMS_PER_BLK){
-            std::cout << "LLene el subarreglo:" << subarreglo << std::endl;
-            flush_out(subarreglo);
-        }
-        if(w.idx==w.len){
-            //Se acabaron los números por revisar
-            if(!load_block(0)){
-                break;
-            }
-        }
-    }
-    std::cout << "Se acabo lo que podía leer" << std::endl;
-    for(int i =0;i<this->alfa;i++){
-        flush_out(i+1);
+    std::vector<WinDst> bucket(alfa);               // dst windows
+    for (int i = 0; i < alfa; ++i) {
+        bucket[i].buf.reserve(WORDS_PER_WIN);
+        bucket[i].tmp.open("bucket-" + std::to_string(i) + ".bin",
+                           std::ios::binary | std::ios::trunc);
     }
 
-    /*****6 Concateno los bloques que escribi en los archivos separados */
-    std::ofstream archivo_final(filename, std::ios::binary);
-    std::cout << "Concateno" << std::endl;
-    for(int i = 1; i<this->alfa+1;i++){
-        //Leo los bloques que están en el archivo temporal de cada subarreglo
-        std::ifstream archivo_i("bloques" + std::to_string(i) + ".bin", std::ios::binary );
-        //Guardo la posición inicial del subarreglo
-        win[i].ini = pos_qs_;
-        for(int j = 0;j<win[i].cant;j++){
-            archivo_i.read(reinterpret_cast<char*>(win[i].buf.data()), NUMS_PER_BLK * sizeof(Word));
-            archivo_final.seekp(pos_qs_*sizeof(Word));
-            archivo_final.write(reinterpret_cast<char*>(win[i].buf.data()), win[i].buf.size() * sizeof(Word));
-            IOs+=2;
-            pos_qs_+=win[i].buf.size();
-            win[i].buf.clear();
+    std::vector<Word> windowSrc(WORDS_PER_BLK);     // src window
+
+    /* 2 · Choose α‑1 pivots  (simplest: first block, evenly spaced) --------*/
+    src.seekg(inicio * sizeof(Word), std::ios::beg);
+    src.read(reinterpret_cast<char*>(windowSrc.data()),
+             WORDS_PER_BLK * sizeof(Word));
+    std::vector<Word> piv(alfa - 1);
+    for (int i = 0; i < alfa - 1; ++i)
+        piv[i] = windowSrc[i];          // could sample better
+    std::sort(piv.begin(), piv.end());
+
+    size_t nextRead = inicio;           // absolute cursor in file
+    size_t endAbs   = inicio + largo / sizeof(Word);
+    int IOs = 1;                        // first read above
+
+    /* 3 · Partition loop ---------------------------------------------------*/
+    auto flushBucket = [&](int id) {
+        auto& w = bucket[id];
+        w.tmp.write(reinterpret_cast<char*>(w.buf.data()),
+                    w.buf.size() * sizeof(Word));
+        IOs += physBlocks(w.buf.size());
+        w.written += w.buf.size();
+        w.buf.clear();
+    };
+
+    while (nextRead < endAbs) {
+        /* load one physical block from parent run */
+        size_t left = endAbs - nextRead;
+        size_t nRead = std::min(WORDS_PER_BLK, left);
+        src.seekg(nextRead * sizeof(Word), std::ios::beg);
+        src.read(reinterpret_cast<char*>(windowSrc.data()),
+                 nRead * sizeof(Word));
+        IOs++;                          // one physical read
+        nextRead += nRead;
+
+        /* distribute into buckets */
+        for (size_t i = 0; i < nRead; ++i) {
+            Word v = windowSrc[i];
+            int id = alfa - 1;          // default bucket: greatest
+            for (int p = 0; p < alfa - 1; ++p)
+                if (v < piv[p]) { id = p; break; }
+
+            auto& w = bucket[id];
+            w.buf.push_back(v);
+            if (w.buf.size() == WORDS_PER_WIN) flushBucket(id);
         }
-        archivo_i.close();
-        //Borro el archivo temporal que tenía los bloques
-        std::string arch_temporal_nombre = "bloques" + std::to_string(i) + ".bin";
-        std::remove(arch_temporal_nombre.c_str());
     }
-    archivo_final.close();
-    /****6 LLamo recursivamente quicksort para todos los subarreglos */
-    std::cout << "Llamo recursivamente qs" << std::endl;
-    for(int i=1;i<this->alfa+1;i++){
-        //El inicio es donde termina el anterior+1
-        size_t inicio_subarreglo = win[i].ini;
-        QuickSort hijo(filename,alfa,win[i].len,inicio_subarreglo,B);
-        IOs+=hijo.QuickSortN(M,B);
+
+    /* flush remaining partial buffers */
+    for (int i = 0; i < alfa; ++i)
+        if (!bucket[i].buf.empty()) flushBucket(i);
+
+    /* 4 · Concatenate all bucket files back into parent file ---------------*/
+    std::fstream dst(filename,
+                     std::ios::in | std::ios::out | std::ios::binary);
+    size_t dstPos = inicio;
+    for (int i = 0; i < alfa; ++i) {
+        bucket[i].tmp.close();
+        std::ifstream tmp("bucket-" + std::to_string(i) + ".bin",
+                          std::ios::binary);
+        size_t left = bucket[i].written;
+        while (left) {
+            size_t n = std::min(WORDS_PER_BLK, left);
+            tmp.read(reinterpret_cast<char*>(windowSrc.data()),
+                     n * sizeof(Word));
+            dst.seekp(dstPos * sizeof(Word), std::ios::beg);
+            dst.write(reinterpret_cast<char*>(windowSrc.data()),
+                      n * sizeof(Word));
+            IOs += 2;                   // read temp + write parent
+            dstPos += n;  left -= n;
+        }
+        tmp.close();
+        std::remove(("bucket-" + std::to_string(i) + ".bin").c_str());
+    }
+
+    /* 5 · Recursive quick‑sort calls --------------------------------------*/
+    size_t childStart = inicio;
+    for (int i = 0; i < alfa; ++i) {
+        size_t childLen = bucket[i].written * sizeof(Word);
+        if (childLen == 0) continue;    // empty bucket
+        QuickSort child(filename, alfa, childLen, childStart, B);
+        IOs += child.QuickSortN(M, B);
+        childStart += bucket[i].written;
     }
     return IOs;
 }
