@@ -1,6 +1,7 @@
 #include "crear_array.h"
 #include "mergesort.h"
 #include "find_alpha.h"
+#include "quicksort.h"
 #include <iostream>
 #include <csignal>
 #include <cstdio>
@@ -16,7 +17,8 @@ int main(){
     int M = 50;
     size_t B = 4096; //4096kb
     //Primero, inicializo la clase que crea el arreglo
-    //CrearArray creador("arreglo.bin",M,60);
+    const char * filename = "arreglo.bin";
+    CrearArray creador(filename,M,4);
     std::cout << "Hola desde Docker!" << std::endl;
     //Ahora, debo sacar la aridad usando MergeSort
     /*---------------------------------------------------------------
@@ -50,6 +52,14 @@ int main(){
                                 1,        // X (array size factor)
                                 B);        // block size KB
     std::cout << "alfa: " << alfa << std::endl;
+    creador.crearArrayN();
+    //int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,60,B);
+    QuickSort quicksort(filename,70,M*4*1024*1024,0,B);
+    std::cout << "Empiezo quicksort..." << std::endl;
+    int IOs = quicksort.QuickSortN(M,B);
+    std::cout << "Usaron esta cantidad de IOs:" << IOs << std::endl;
+
+    //std::cout << "alfa: " << alfa << std::endl;
     //Ahora usando ese alfa, debo realizar MergeSort y QuickSort
     //Lo comento pa q cuando lo corran solo veamos primero la aridad
     //for(int i=4;i<=60;i+=4){
