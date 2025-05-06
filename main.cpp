@@ -13,11 +13,27 @@ static void delete_temp_files()
     std::remove(FILE_ALPHA);
 }
 
+int findMaxArity(int M, int B) {
+    constexpr int MIN_ARITY = 2;                 // assignment lower bound
+    constexpr size_t WORD     = sizeof(uint64_t);  // element size in bytes
+
+    /* 1· Memory‑capacity bound  ⌊ M/B ⌋ – 1 */
+    int maxByMemory = (M * 1024 / B) - 1;          // M in MB, B in KB
+    if (maxByMemory < MIN_ARITY)  maxByMemory = MIN_ARITY;
+
+    /* 2· Pivot‑block bound      ⌊ blockBytes / elementSize ⌋ */
+    int maxByBlock  = (B * 1024) / WORD;           // elements in one disk block
+    if (maxByBlock  < MIN_ARITY)  maxByBlock  = MIN_ARITY;
+
+    /* 3· Final upper limit = stricter of the two */
+    return std::min(maxByMemory, maxByBlock);
+}
+
 int main(){
-    int M = 50;
+    int    M = 50;
     size_t B = 4096; //4096kb
     // create an array of ints from 4 to 60 by 4
-    int *arreglo = new int[15];
+    // int *arreglo = new int[15];
     // for (int i = 0; i < 15; ++i) {
     // for (int i = 0; i < 15; ++i) {
     //     arreglo[i] = 4 + i * 4;
@@ -30,26 +46,9 @@ int main(){
 
     std::cout << "Hola desde Docker!" << std::endl;
     //Ahora, debo sacar la aridad usando MergeSort
-    /*---------------------------------------------------------------
-     *  Compute safe search limits for α
-     *-------------------------------------------------------------*/
-    constexpr int   MIN_ARITY = 2;                 // assignment lower bound
-    constexpr size_t WORD     = sizeof(uint64_t);  // element size in bytes
 
-    /* 1· Memory‑capacity bound  ⌊ M/B ⌋ – 1 */
-    int maxByMemory = (M * 1024 / B) - 1;          // M in MB, B in KB
-    if (maxByMemory < MIN_ARITY)  maxByMemory = MIN_ARITY;
-
-    /* 2· Pivot‑block bound      ⌊ blockBytes / elementSize ⌋ */
-    int maxByBlock  = (B * 1024) / WORD;           // elements in one disk block
-    if (maxByBlock  < MIN_ARITY)  maxByBlock  = MIN_ARITY;
-
-    /* 3· Final upper limit = stricter of the two */
-    int maxArity = std::min(maxByMemory, maxByBlock);
-    // /* also cap at 64  */
-    // if (maxArity > 64) maxArity = 64;              // [FIX‑ARITY] limit
-    
-    std::cout << "b: " << maxArity << std::endl;
+    int maxArity = findMaxArity(M,B); // 2 <= maxArity
+    std::cout << "maxArity: " << maxArity << std::endl;
 
     /*---------------------------------------------------------------
      *  Now call the optimiser inside the safe interval [2, maxArity]
