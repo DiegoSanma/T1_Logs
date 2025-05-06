@@ -1,0 +1,108 @@
+Hola desde Docker!
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 1026
+El número de IOs para el MergeSort es: 3828
+Haciendo Mergesort con: 3072
+El número de IOs para el MergeSort es: 9966
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 514
+El número de IOs para el MergeSort es: 2806
+Haciendo Mergesort con: 1536
+El número de IOs para el MergeSort es: 5358
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 258
+El número de IOs para el MergeSort es: 2040
+Haciendo Mergesort con: 768
+El número de IOs para el MergeSort es: 3054
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 130
+El número de IOs para el MergeSort es: 1790
+Haciendo Mergesort con: 384
+El número de IOs para el MergeSort es: 2286
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 66
+El número de IOs para el MergeSort es: 1674
+Haciendo Mergesort con: 192
+El número de IOs para el MergeSort es: 1902
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 34
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 125
+El número de IOs para el MergeSort es: 5782
+Haciendo Mergesort con: 96
+El número de IOs para el MergeSort es: 1710
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 82
+El número de IOs para el MergeSort es: 1734
+Haciendo Mergesort con: 112
+El número de IOs para el MergeSort es: 1758
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 74
+El número de IOs para el MergeSort es: 1712
+Haciendo Mergesort con: 88
+El número de IOs para el MergeSort es: 1718
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 70
+El número de IOs para el MergeSort es: 1660
+Haciendo Mergesort con: 76
+El número de IOs para el MergeSort es: 1662
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 68
+El número de IOs para el MergeSort es: 1702
+Haciendo Mergesort con: 70
+El número de IOs para el MergeSort es: 1660
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 70
+El número de IOs para el MergeSort es: 1660
+Haciendo Mergesort con: 72
+El número de IOs para el MergeSort es: 1686
+Creando el arreglo ...
+El número es: 1
+Haciendo Mergesort con: 70
+El número de IOs para el MergeSort es: 1660
+Haciendo Mergesort con: 70
+El número de IOs para el MergeSort es: 1660
+alfa: 70
