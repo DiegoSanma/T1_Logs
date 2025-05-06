@@ -20,6 +20,8 @@
 #define RunQuick 1 // 0: no, 1: sí
 #define RunAll 0 // 0: no, 1: sí
 
+int nlogs = 0; // número de logs generados
+
 static const char* FILE_ALPHA   = "arreglos_aridad.bin";
 
 static void delete_temp_files()
@@ -71,6 +73,14 @@ int main() {
 
 
         auto start = std::chrono::system_clock::now();
+        std::time_t start_time = std::chrono::system_clock::to_time_t(start);
+        logFile << "Optimal Arity=" << 0 // Placeholder for initial log
+                << ", M=" << M
+                << ", X=" << Xtest
+                << ", B=" << B
+                << ", tiempo=" << std::put_time(std::localtime(&start_time), "%F %T")
+                << ", startOfLog=" << nlogs
+                << std::endl;
 
         alfa = findOptimalArity(maxArity,
                                 "arreglos_aridad.bin",
@@ -86,6 +96,7 @@ int main() {
                     << ", B=" << B
                     << ", maxArity=" << maxArity
                     << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
+                    << ", endOfLog=" << nlogs++
                     << std::endl;
     } else {
         std::cout << "Aridad default: " << Default << std::endl;
@@ -109,15 +120,24 @@ int main() {
                 MergeSort mergesort("arreglo.bin", alfa, largo_archivo, 0, B);
                 // Concat time to 'merge.log' before and after MergeSort
                 auto start = std::chrono::system_clock::now();
+                std::time_t start_time = std::chrono::system_clock::to_time_t(start);
+                logFile << "MergeSort: Xi=" << Xi
+                        << ", M=" << M
+                        << ", B=" << B
+                        << ", IOs=" << 0 // Placeholder for initial log
+                        << ", tiempo=" << std::put_time(std::localtime(&start_time), "%F %T")
+                        << ", startOfLog=" << nlogs
+                        << std::endl;
                 int IOs_merge = mergesort.MergeSortN(M, B);
                 auto end = std::chrono::system_clock::now();
                 std::time_t end_time = std::chrono::system_clock::to_time_t(end);
                 logFile << "MergeSort: Xi=" << Xi
-                << ", M=" << M
-                << ", B=" << B
-                << ", IOs=" << IOs_merge
-                << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
-                << std::endl;
+                        << ", M=" << M
+                        << ", B=" << B
+                        << ", IOs=" << IOs_merge
+                        << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
+                        << ", endOfLog=" << nlogs++
+                        << std::endl;
                 // Imprimo la cantidad de IOs
                 std::cout << "Usaron esta cantidad de IOs en MergeSort: " << IOs_merge << std::endl;
                 // Finalmente, borro lo que había en el archivo.bin y sigo con la próxima secuencia
@@ -141,6 +161,14 @@ int main() {
                 QuickSort quicksort("arreglo.bin", alfa, largo_archivo, 0, B);
                 // Concat time to 'merge.log' before and after MergeSort
                 auto start = std::chrono::system_clock::now();
+                std::time_t start_time = std::chrono::system_clock::to_time_t(start);
+                logFile << "QuickSort: Xi=" << Xi
+                        << ", M=" << M
+                        << ", B=" << B
+                        << ", IOs=" << 0 // Placeholder for initial log
+                        << ", tiempo=" << std::put_time(std::localtime(&start_time), "%F %T")
+                        << ", startOfLog=" << nlogs
+                        << std::endl;
                 int IOs_quick = quicksort.QuickSortN(M, B);
                 auto end = std::chrono::system_clock::now();
                 std::time_t end_time = std::chrono::system_clock::to_time_t(end);
@@ -149,6 +177,7 @@ int main() {
                         << ", B=" << B
                         << ", IOs=" << IOs_quick
                         << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
+                        << ", endOfLog=" << nlogs++
                         << std::endl;
                 // Imprimo la cantidad de IOs
                 std::cout << "Usaron esta cantidad de IOs en QuickSort: " << IOs_quick << std::endl;
