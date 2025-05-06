@@ -8,3 +8,6 @@ docker run -d --rm --name my-app-container my-app
 echo "Container is running in background. Press ENTER to stop it..."
 read
 docker stop my-app-container
+
+# wsl chmod +x ./all.sh                                                                                                                                   ─╯
+# wsl ./all.sh
