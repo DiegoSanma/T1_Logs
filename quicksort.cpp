@@ -72,7 +72,7 @@ int QuickSort::QuickSortN(int M,size_t B) {
         archivoFuera.write(reinterpret_cast<char*>(buffer.data()), cantidad * sizeof(uint64_t));
         archivoFuera.close();
         //Sumo dos IOs, uno por leer y otro por escribir el bloque de tamaño <=M
-        return 2;
+        return buffer.size()/(B/sizeof(uint64_t));
     }
 }
 
