@@ -48,16 +48,17 @@ int findOptimalArity(int b, const char* filename, int M, int X, size_t B) {
         int midMinusC = std::max(left, mid - c);
         int midPlusC = std::min(right, mid + c);
 
-        int IOsMinusC = (arityIOMap.count(midMinusC) > 0)
-                        ? arityIOMap[midMinusC]
-                        : runMergeSort(filename, midMinusC, fileSize, M, B);
+        std::cout << "Evaluando aridad: " << midMinusC << " y " << midPlusC << std::endl;
 
-        // Store it if not already there
-        arityIOMap.emplace(midMinusC, IOsMinusC);
-
-        int IOsPlusC = (arityIOMap.count(midPlusC) > 0)
-                       ? arityIOMap[midPlusC]
-                       : runMergeSort(filename, midPlusC, fileSize, M, B);
+        if (!arityIOMap.count(midMinusC))
+            arityIOMap[midMinusC] = runMergeSort(filename, midMinusC, fileSize, M, B);
+        int IOsMinusC = arityIOMap[midMinusC];
+        std::cout << "El número de IOs para el MergeSort es: " << IOsMinusC << std::endl;
+        
+        if (!arityIOMap.count(midPlusC))
+            arityIOMap[midPlusC] = runMergeSort(filename, midPlusC, fileSize, M, B);
+        int IOsPlusC = arityIOMap[midPlusC];
+        std::cout << "El número de IOs para el MergeSort es: " << IOsPlusC << std::endl;
 
         arityIOMap.emplace(midPlusC, IOsPlusC);
 

@@ -76,6 +76,7 @@
         "xloctime": "cpp",
         "xmemory": "cpp",
         "xtr1common": "cpp",
-        "csignal": "cpp"
+        "csignal": "cpp",
+        "iomanip": "cpp"
     }
 }

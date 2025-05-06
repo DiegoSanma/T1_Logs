@@ -42,7 +42,7 @@ int QuickSort::QuickSortN(int M,size_t B) {
     }
     //Si aún no puedo mandar todo a memoria, voy separando el quicksort
     if(largo>M*1024*1024){
-        std::cout << "Separo en hijos" << std::endl;
+        // std::cout << "Separo en hijos" << std::endl;
         IOs+=qsHijos(M, B, archivo);
         archivo.close();
         // std::cout << "El número de IOs para el QuickSort es: " << IOs << std::endl;

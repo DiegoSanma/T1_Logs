@@ -15,7 +15,7 @@
 #define Xtest   60
 #define Default 2
 
-#define ContRun 0 // 0: no, 1: sí
+#define ContRun 1 // 0: no, 1: sí
 
 static const char* FILE_ALPHA   = "arreglos_aridad.bin";
 
@@ -56,11 +56,11 @@ int main() {
         return 1;
     }
 
-    bool findAplpha;
-    std::cout << "¿Quieres encontrar la aridad? (X=" << Xtest << ") [1: sí, 0: no]: ";
-    std::cin >> findAplpha;
+    // bool findAplpha;
+    // std::cout << "¿Quieres encontrar la aridad? (X=" << Xtest << ") [1: sí, 0: no]: ";
+    // std::cin >> findAplpha;
     int alfa;
-    if (findAplpha == 1) {
+    if (ContRun) {
         std::cout << "Encontrando la aridad..." << std::endl;
 
         int maxArity = findMaxArity(); // 2 <= maxArity
@@ -92,10 +92,7 @@ int main() {
     std::cout << "Optimal arity: " << alfa << std::endl;
     
     // Realizar pruebas con MergeSort
-    bool runMergeSort;
-    std::cout << "¿Quieres hacer MergeSort? [1: sí, 0: no]: ";
-    std::cin >> runMergeSort;
-    if (runMergeSort || ContRun) {
+    if (ContRun) {
         std::cout << "Ejecutando MergeSort..." << std::endl;
         for (int Xi = 0; Xi <= 60; Xi+=4) {
             for (int j = 0; j < 5; ++j) {
@@ -126,11 +123,8 @@ int main() {
         }
     }
     
-    // Ahora, usando el alfa, realizamos QuickSort de la misma forma que mergesort
-    bool runQuickSort;
-    std::cout << "¿Quieres hacer QuickSort? [1: sí, 0: no]: ";
-    std::cin >> runQuickSort;
-    if (runQuickSort || ContRun) {
+    // Ahora, usando el alfa, realizamos QuickSort
+    if (ContRun) {
         std::cout << "Ejecutando QuickSort..." << std::endl;
         for (int Xi = 0; Xi <= 60; Xi+=4) {
             for (int j = 0; j < 5; ++j) {
