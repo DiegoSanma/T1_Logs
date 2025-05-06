@@ -13,9 +13,12 @@
 #define M       50
 #define B       4096 //4096kb
 #define Xtest   60
-#define Default 2
+#define Default 8
 
-#define ContRun 1 // 0: no, 1: sí
+#define RunAlpha 1 // 0: no, 1: sí
+#define RunMerge 1 // 0: no, 1: sí
+#define RunQuick 1 // 0: no, 1: sí
+#define RunAll 0 // 0: no, 1: sí
 
 static const char* FILE_ALPHA   = "arreglos_aridad.bin";
 
@@ -60,7 +63,7 @@ int main() {
     // std::cout << "¿Quieres encontrar la aridad? (X=" << Xtest << ") [1: sí, 0: no]: ";
     // std::cin >> findAplpha;
     int alfa;
-    if (ContRun) {
+    if (RunAlpha || RunAll) {
         std::cout << "Encontrando la aridad..." << std::endl;
 
         int maxArity = findMaxArity(); // 2 <= maxArity
@@ -92,9 +95,9 @@ int main() {
     std::cout << "Optimal arity: " << alfa << std::endl;
     
     // Realizar pruebas con MergeSort
-    if (ContRun) {
+    if (RunMerge || RunAll) {
         std::cout << "Ejecutando MergeSort..." << std::endl;
-        for (int Xi = 0; Xi <= 60; Xi+=4) {
+        for (int Xi = 4; Xi <= 60; Xi+=4) {
             for (int j = 0; j < 5; ++j) {
                 // Seteo el tamaño del arreglo
                 creador.setX(Xi);
@@ -124,9 +127,9 @@ int main() {
     }
     
     // Ahora, usando el alfa, realizamos QuickSort
-    if (ContRun) {
+    if (RunQuick || RunAll) {
         std::cout << "Ejecutando QuickSort..." << std::endl;
-        for (int Xi = 0; Xi <= 60; Xi+=4) {
+        for (int Xi = 4; Xi <= 60; Xi+=4) {
             for (int j = 0; j < 5; ++j) {
                 // Seteo el tamaño del arreglo
                 creador.setX(Xi);
