@@ -15,7 +15,7 @@
 #define Xtest   60
 #define Default 8
 
-#define RunAlpha 1 // 0: no, 1: sí
+#define RunAlpha 0 // 0: no, 1: sí
 #define RunMerge 1 // 0: no, 1: sí
 #define RunQuick 1 // 0: no, 1: sí
 #define RunAll 0 // 0: no, 1: sí
