@@ -98,11 +98,14 @@ int MergeSort::MergeSortN(int M,size_t B) {
 int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
 {
     using Word = uint64_t;
-
+    
+    std::cout << "Unión de hijos" << std::endl;
+    
     /*─────────── 0 · Constantes de bloque y RAM disponible ─────────*/
     const size_t WORDS_PER_BLK = (B * 1024) / sizeof(Word);      // 4 KiB→512 W
     const size_t WORDS_RAM     = (size_t)M * 1024 * 1024 / sizeof(Word);
-    const size_t WORDS_PER_WIN = WORDS_RAM / (alfa + 1);         // [FIX‑RAM]
+    size_t WORDS_PER_WIN = WORDS_RAM / (alfa + 1);         // [FIX‑RAM]
+    WORDS_PER_WIN = std::max(WORDS_PER_WIN, WORDS_PER_BLK);   // ← FIX
 
     auto blocks = [&](size_t n) {                // [FIX‑IO] helper
         return (n + WORDS_PER_BLK - 1) / WORDS_PER_BLK;
@@ -177,10 +180,11 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
         out.push_back(v);
 
         Win& w = win[id];
-        if (++w.idx == w.len) {                 // ventana agotada
+        if (w.idx + 1 == w.len) {                 // ventana agotada
             IOs += load(id);                    // recarga (puede ser 0)
             if (w.len) heap.emplace(w.buf[0], id);
         } else {
+            ++w.idx;
             heap.emplace(w.buf[w.idx], id);
         }
 

@@ -2,7 +2,15 @@
 #include "mergesort.h"
 #include "find_alpha.h"
 #include <iostream>
+#include <csignal>
+#include <cstdio>
 
+static const char* FILE_ALPHA   = "arreglos_aridad.bin";
+
+static void delete_temp_files()
+{
+    std::remove(FILE_ALPHA);
+}
 
 int main(){
     int M = 50;
@@ -11,7 +19,36 @@ int main(){
     //CrearArray creador("arreglo.bin",M,60);
     std::cout << "Hola desde Docker!" << std::endl;
     //Ahora, debo sacar la aridad usando MergeSort
-    int alfa = findOptimalArity(B,"arreglos_aridad.bin",M,60,B);
+    /*---------------------------------------------------------------
+     *  Compute safe search limits for α
+     *-------------------------------------------------------------*/
+    constexpr int   MIN_ARITY = 2;                 // assignment lower bound
+    constexpr size_t WORD     = sizeof(uint64_t);  // element size in bytes
+
+    /* 1· Memory‑capacity bound  ⌊ M/B ⌋ – 1 */
+    int maxByMemory = (M * 1024 / B) - 1;          // M in MB, B in KB
+    if (maxByMemory < MIN_ARITY)  maxByMemory = MIN_ARITY;
+
+    /* 2· Pivot‑block bound      ⌊ blockBytes / elementSize ⌋ */
+    int maxByBlock  = (B * 1024) / WORD;           // elements in one disk block
+    if (maxByBlock  < MIN_ARITY)  maxByBlock  = MIN_ARITY;
+
+    /* 3· Final upper limit = stricter of the two */
+    int maxArity = std::min(maxByMemory, maxByBlock);
+    // /* also cap at 64  */
+    // if (maxArity > 64) maxArity = 64;              // [FIX‑ARITY] limit
+
+    /*---------------------------------------------------------------
+     *  Now call the optimiser inside the safe interval [2, maxArity]
+     *-------------------------------------------------------------*/
+    std::cout << "b: " << maxArity << std::endl;
+    std::signal(SIGINT,  [](int){ delete_temp_files(); std::exit(130); });
+    std::signal(SIGTERM, [](int){ delete_temp_files(); std::exit(143); });
+    int alfa = findOptimalArity(maxArity,
+                                "arreglos_aridad.bin",
+                                M,
+                                1,        // X (array size factor)
+                                B);        // block size KB
     std::cout << "alfa: " << alfa << std::endl;
     //Ahora usando ese alfa, debo realizar MergeSort y QuickSort
     //Lo comento pa q cuando lo corran solo veamos primero la aridad
@@ -29,6 +66,8 @@ int main(){
     //    }
     //}
     //std::cout << "Hola desde Docker2!" << std::endl;
+
+    delete_temp_files();
 
     return 0;
 }
