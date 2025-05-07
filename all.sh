@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo "Starting the script..."
 # Build the Docker image
 docker build -t my-app .
 
