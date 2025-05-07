@@ -16,7 +16,7 @@
 #define Default 8
 
 #define RunAlpha 0 // 0: no, 1: sí
-#define RunMerge 1 // 0: no, 1: sí
+#define RunMerge 0 // 0: no, 1: sí
 #define RunQuick 1 // 0: no, 1: sí
 #define RunAll 0 // 0: no, 1: sí
 
@@ -98,6 +98,8 @@ int main() {
                     << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
                     << ", endOfLog=" << nlogs++
                     << std::endl;
+        
+        std::remove("arreglo.bin");
     } else {
         std::cout << "Aridad default: " << Default << std::endl;
         alfa = Default;
@@ -141,7 +143,7 @@ int main() {
                 // Imprimo la cantidad de IOs
                 std::cout << "Usaron esta cantidad de IOs en MergeSort: " << IOs_merge << std::endl;
                 // Finalmente, borro lo que había en el archivo.bin y sigo con la próxima secuencia
-                std::remove("arreglo.bin"); // Uncomment if you want to delete the file after each run
+                // std::remove("arreglo.bin"); // Uncomment if you want to delete the file after each run
             }
         }
     }
@@ -182,7 +184,7 @@ int main() {
                 // Imprimo la cantidad de IOs
                 std::cout << "Usaron esta cantidad de IOs en QuickSort: " << IOs_quick << std::endl;
                 // Finalmente, borro lo que había en el archivo.bin y sigo con la próxima secuencia
-                std::remove("arreglo.bin"); // Uncomment if you want to delete the file after each run
+                // std::remove("arreglo.bin"); // Uncomment if you want to delete the file after each run
             }
         }
     }

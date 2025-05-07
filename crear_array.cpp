@@ -45,6 +45,12 @@ static void fill_slice(uint64_t* ptr, uint64_t len)
  *───────────────────────────────────────────────────────────────*/
 int CrearArray::crearArrayN() const
 {
+
+    if (!prepareFile()) {
+        std::cerr << "Fallo al preparar el archivo.\n";
+        return 1;
+    }
+    
     const uint64_t bytes_ram  = static_cast<uint64_t>(M) * 1024 * 1024;
     const uint64_t total_nums = (bytes_ram * static_cast<uint64_t>(X))
                                 / sizeof(uint64_t);
@@ -123,3 +129,32 @@ int CrearArray::crearArrayN() const
     return 0;
 #endif
 } 
+
+bool CrearArray::prepareFile() const {
+#if defined(_WIN32) || defined(CREARARRAY_FORCE_STREAM)
+    std::ifstream infile(filename, std::ios::binary);
+    bool exists = infile.good();
+    infile.close();
+
+    std::ofstream out(filename,
+                        std::ios::binary |
+                        std::ios::trunc |
+                        std::ios::out);
+    if (!out) {
+        std::cerr << "No se pudo preparar " << filename << '\n';
+        return false;
+    }
+    out.close();
+    return true;
+
+#else
+    int flags = O_RDWR | O_CREAT;
+    if (access(filename, F_OK) == 0)
+        flags |= O_TRUNC;  // Si existe, trúncalo
+    int fd = ::open(filename, flags, 0666);
+    if (fd < 0) { perror("open"); return false; }
+    close(fd);
+    return true;
+#endif
+}
+    

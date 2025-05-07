@@ -19,6 +19,9 @@ public:
     void setX(int x);
 
     int crearArrayN() const;
+
+    bool prepareFile() const;
+
 };
 
 #endif
