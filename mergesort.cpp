@@ -38,7 +38,6 @@ int MergeSort::MergeSortN(int M,size_t B) {
         std::cerr << "No se pudo abrir el archivo binario." << std::endl;
         return 1;
     }
-    std::cout << "Hago MergSort para un archivo de largo: " << largo << std::endl;
     if(largo>M*1024*1024){
         for(int i = 0; i<this->alfa;++i){
             size_t largo_nuevo = largo/this->alfa;
@@ -179,8 +178,7 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
         out.push_back(v); //LO agrego a mi buffer de salida
 
         Win& w = win[id];
-        if (w.idx + 1 == w.len) {                 // ventana agotada
-            std::cout << "Se me acabo la ventana " << id << std::endl; 
+        if (w.idx + 1 == w.len) {                 // ventana agotada 
             IOs += load(id);                    // recarga (puede ser 0)
             if (w.len) heap.emplace(w.buf[0], id);
         } else {

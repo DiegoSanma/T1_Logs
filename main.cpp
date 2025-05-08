@@ -118,7 +118,6 @@ int main() {
                 creador.setX(Xi);
                 // Calculo el tamaño del archivo en bytes
                 size_t largo_archivo = static_cast<size_t>(M) * static_cast<size_t>(Xi) * 1024 * 1024;
-                std::cout << "El largo del archivo supuestamente debería ser: " << largo_archivo << std::endl;
                 // Creamos la secuencia de Xi * M numeros de 64 bits
                 creador.crearArrayN();
                 // Mergesort y guardar los resultados
