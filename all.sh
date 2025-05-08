@@ -13,7 +13,7 @@ docker run -d \
   -v "$(pwd)/buckets:/app/buckets:rw" \
   -e BUCKET_DIR=/app/buckets \
   -e DATA_DIR=/app/data \
-  my-app
+  my-app > log_file.txt 2>&1
 
 # Define a cleanup function to copy the log and stop the container
 cleanup() {
