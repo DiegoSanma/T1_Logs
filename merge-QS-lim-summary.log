@@ -1,0 +1,8 @@
+QuickSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-08 05:55:05, startOfLog=0
+QuickSort: Xi=8, M=50, B=4096, IOs=455, tiempo=2025-05-08 05:55:23, endOfLog=0
+QuickSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-08 05:56:35, startOfLog=1
+QuickSort: Xi=16, M=50, B=4096, IOs=902, tiempo=2025-05-08 05:57:21, endOfLog=1
+QuickSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-08 05:59:09, startOfLog=2
+QuickSort: Xi=24, M=50, B=4096, IOs=1342, tiempo=2025-05-08 06:00:39, endOfLog=2
+QuickSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-08 06:03:06, startOfLog=3
+QuickSort: Xi=32, M=50, B=4096, IOs=1787, tiempo=2025-05-08 06:04:56, endOfLog=3
