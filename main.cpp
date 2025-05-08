@@ -2,9 +2,11 @@
 #include "mergesort.h"
 #include "find_alpha.h"
 #include "quicksort.h"
+#include "data_structs.h"
 #include <iostream>
 #include <csignal>
 #include <cstdio>
+#include <chrono>
 
 #include <chrono>
 #include <ctime>
@@ -93,7 +95,7 @@ int main() {
         alfa = findOptimalArity(maxArity,
                                 "arreglos_aridad.bin",
                                 M,
-                                Xtest,     // X (array size factor)
+                                X_aridad,     // X (array size factor)
                                 B);        // block size KB
 
         auto end = std::chrono::system_clock::now();
@@ -138,6 +140,13 @@ int main() {
                         << ", tiempo=" << std::put_time(std::localtime(&start_time), "%F %T")
                         << ", startOfLog=" << nlogs
                         << std::endl;
+                std::cout << "MergeSort: Xi=" << Xi
+                << ", M=" << M
+                << ", B=" << B
+                << ", IOs=" << 0 // Placeholder for initial log
+                << ", tiempo=" << std::put_time(std::localtime(&start_time), "%F %T")
+                << ", startOfLog=" << nlogs
+                << std::endl;
                 int IOs_merge = mergesort.MergeSortN(M, B);
                 auto end = std::chrono::system_clock::now();
                 std::time_t end_time = std::chrono::system_clock::to_time_t(end);
@@ -148,6 +157,13 @@ int main() {
                         << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
                         << ", endOfLog=" << nlogs++
                         << std::endl;
+                std::cout << "MergeSort: Xi=" << Xi
+                << ", M=" << M
+                << ", B=" << B
+                << ", IOs=" << IOs_merge
+                << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
+                << ", endOfLog=" << nlogs++
+                << std::endl;        
                 // Imprimo la cantidad de IOs
                 std::cout << "Usaron esta cantidad de IOs en MergeSort: " << IOs_merge << std::endl;
                 // Finalmente, borro lo que había en el archivo.bin y sigo con la próxima secuencia
@@ -179,6 +195,13 @@ int main() {
                         << ", tiempo=" << std::put_time(std::localtime(&start_time), "%F %T")
                         << ", startOfLog=" << nlogs
                         << std::endl;
+                std::cout << "QuickSort: Xi=" << Xi
+                        << ", M=" << M
+                        << ", B=" << B
+                        << ", IOs=" << 0
+                        << ", tiempo=" << std::put_time(std::localtime(&start_time), "%F %T")
+                        << ", endOfLog=" << nlogs++
+                        << std::endl;
                 int IOs_quick = quicksort.QuickSortN(M, B);
                 auto end = std::chrono::system_clock::now();
                 std::time_t end_time = std::chrono::system_clock::to_time_t(end);
@@ -189,6 +212,13 @@ int main() {
                         << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
                         << ", endOfLog=" << nlogs++
                         << std::endl;
+                std::cout << "QuickSort: Xi=" << Xi
+                        << ", M=" << M
+                        << ", B=" << B
+                        << ", IOs=" << IOs_quick
+                        << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
+                        << ", endOfLog=" << nlogs++
+                        << std::endl;        
                 // Imprimo la cantidad de IOs
                 std::cout << "Usaron esta cantidad de IOs en QuickSort: " << IOs_quick << std::endl;
                 // Finalmente, borro lo que había en el archivo.bin y sigo con la próxima secuencia

@@ -136,6 +136,7 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
     std::vector<WinDst> bucket(alfa);
 
     for (int i = 0; i < alfa; ++i) {
+        //Sets buffer length and creates temporary file in disk
         bucket[i].buf.reserve(WORDS_PER_WIN);
         // bucket[i].tmp.open("bucket-" + std::to_string(i) + ".bin",
         //                    std::ios::binary | std::ios::trunc);

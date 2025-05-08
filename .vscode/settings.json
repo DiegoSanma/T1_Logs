@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.dbclient-js": "javascript",
         "*.rmd": "markdown",
         "iostream": "cpp",
         "ostream": "cpp",
@@ -54,7 +55,6 @@
         "set": "cpp",
         "*.sqlbook": "sql",
         "*.ndjson": "jsonl",
-        "*.dbclient-js": "javascript",
         "xstring": "cpp",
         "xutility": "cpp",
         "bit": "cpp",
@@ -78,6 +78,11 @@
         "xtr1common": "cpp",
         "csignal": "cpp",
         "iomanip": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "queue": "cpp",
+        "stop_token": "cpp",
+        "xhash": "cpp"
     }
 }
