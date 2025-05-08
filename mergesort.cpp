@@ -38,11 +38,11 @@ int MergeSort::MergeSortN(int M,size_t B) {
         std::cerr << "No se pudo abrir el archivo binario." << std::endl;
         return 1;
     }
-    
+    std::cout << "Hago MergSort para un archivo de largo: " << largo << std::endl;
     if(largo>M*1024*1024){
         for(int i = 0; i<this->alfa;++i){
             size_t largo_nuevo = largo/this->alfa;
-            int start = i*(largo_nuevo/sizeof(uint64_t));
+            int start = inicio + i*(largo_nuevo/sizeof(uint64_t));
             //El de este sea raiz, y que los demás MergeSort sean sus hojas
             MergeSort hijo(filename,this->alfa,largo_nuevo,start,B);
             this->hijos[i] = hijo;
@@ -58,7 +58,7 @@ int MergeSort::MergeSortN(int M,size_t B) {
         //Lo ordeno aquí en "memoria princiapl"
         // std::cout << "Ordenando en memoria principal" << std::endl;
         int pos_final = this->inicio + largo/sizeof(uint64_t);
-        int cantidad = pos_final - this->inicio + 1;             // cuántos enteros quieres leer
+        int cantidad = pos_final - this->inicio;             // cuántos enteros quieres leer
         std::vector<uint64_t> buffer(cantidad);                   // buffer para guardarlos
 
         //Leo la cosa
@@ -99,7 +99,7 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
 {
     using Word = uint64_t;
     
-    // std::cout << "Unión de hijos" << std::endl;
+     std::cout << "Unión de hijos" << std::endl;
     
     /*─────────── 0 · Constantes de bloque y RAM disponible ─────────*/
     const size_t WORDS_PER_BLK = (B * 1024) / sizeof(Word);      // 4 KiB→512 W
@@ -126,7 +126,6 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
         if (w.next >= w.end) {w.len = 0; return 0;}        // no queda nada
         size_t left = w.end - w.next;
         w.len = std::min(WORDS_PER_WIN, left);
-
         /* leer en tandas de WORDS_PER_BLK hasta llenar ventana */
         size_t got = 0, ios = 0;
         while (got < w.len) {
@@ -176,11 +175,12 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
 
     /********** 5 · Merge k‑way **************************************/
     while (!heap.empty()) {
-        auto [v,id] = heap.top(); heap.pop();
-        out.push_back(v);
+        auto [v,id] = heap.top(); heap.pop();  //Obtengo el mínimo de los hijos
+        out.push_back(v); //LO agrego a mi buffer de salida
 
         Win& w = win[id];
         if (w.idx + 1 == w.len) {                 // ventana agotada
+            std::cout << "Se me acabo la ventana " << id << std::endl; 
             IOs += load(id);                    // recarga (puede ser 0)
             if (w.len) heap.emplace(w.buf[0], id);
         } else {
@@ -192,30 +192,4 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
     }
     if (!out.empty()) flush();
     return IOs;
-}
-
-int MergeSort::lectura_bloques(size_t B, int cantidad_lectura, std::vector<uint64_t> &buffer,std::ifstream &archivo,int pos) const{
-    int lecturas_necesarias = (cantidad_lectura*sizeof(uint64_t))/(B*1024);
-        for(int i = 0; i<lecturas_necesarias;i++){
-            size_t cant_lectura_bloque = B*1024;
-            //Caso borde
-            if(i==lecturas_necesarias-1){
-                cant_lectura_bloque = cantidad_lectura*sizeof(uint64_t) - i*cant_lectura_bloque;
-            }
-            archivo.read(reinterpret_cast<char*>(buffer.data()), cant_lectura_bloque);
-        }
-    return lecturas_necesarias;
-}
-
-int MergeSort::escritura_bloques(size_t B, int cantidad_escritura, std::vector<uint64_t> &buffer,std::fstream &archivo) const{
-    int escrituras_necesarias = (cantidad_escritura*sizeof(uint64_t))/(B*1024);
-    for(int i = 0; i<escrituras_necesarias;i++){
-        size_t cant_escritura_bloque = B*1024;
-        //Caso borde
-        //if(i==escrituras_necesarias-1){
-        //    cant_escritura_bloque = cantidad_escritura*sizeof(uint64_t) - i*cant_escritura_bloque;
-        //}
-        archivo.write(reinterpret_cast<char*>(buffer.data()), cant_escritura_bloque);
-    }
-    return escrituras_necesarias;
 }

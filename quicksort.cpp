@@ -53,7 +53,7 @@ int QuickSort::QuickSortN(int M,size_t B) {
         // std::cout << "Ordenando en memoria principal" << std::endl;
         // std::cout << "Ordeno en memoria" << std::endl;
         int pos_final = this->inicio + largo/sizeof(uint64_t);
-        int cantidad = pos_final - this->inicio + 1;             // cuántos enteros quieres leer
+        int cantidad = pos_final - this->inicio;             // cuántos enteros quieres leer
         std::vector<uint64_t> buffer(cantidad);                   // buffer para guardarlos
 
         //Leo la cosa
@@ -72,11 +72,7 @@ int QuickSort::QuickSortN(int M,size_t B) {
         archivoFuera.write(reinterpret_cast<char*>(buffer.data()), cantidad * sizeof(uint64_t));
         archivoFuera.close();
         //Sumo dos IOs, uno por leer y otro por escribir el bloque de tamaño <=M
-<<<<<<< HEAD
-        return buffer.size()/(B/sizeof(uint64_t));
-=======
         return 2 * buffer.size()*sizeof(uint64_t) / (B*1024);
->>>>>>> origin/P-final
     }
 }
 
@@ -130,6 +126,7 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
     };
     std::vector<WinDst> bucket(alfa);
     for (int i = 0; i < alfa; ++i) {
+        //Sets buffer length and creates temporary file in disk
         bucket[i].buf.reserve(WORDS_PER_WIN);
         bucket[i].tmp.open("bucket-" + std::to_string(i) + ".bin",
                            std::ios::binary | std::ios::trunc);
