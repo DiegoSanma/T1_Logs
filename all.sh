@@ -9,6 +9,7 @@ mkdir -p "$(pwd)/data"
 mkdir -p "$(pwd)/buckets"
 docker run -d \
   --name my-app-container \
+  -m 50m \
   -v "$(pwd)/data:/app/data:rw" \
   -v "$(pwd)/buckets:/app/buckets:rw" \
   -e BUCKET_DIR=/app/buckets \

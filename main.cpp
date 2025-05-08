@@ -95,7 +95,7 @@ int main() {
         alfa = findOptimalArity(maxArity,
                                 "arreglos_aridad.bin",
                                 M,
-                                X_aridad,     // X (array size factor)
+                                Xtest,     // X (array size factor)
                                 B);        // block size KB
 
         auto end = std::chrono::system_clock::now();
