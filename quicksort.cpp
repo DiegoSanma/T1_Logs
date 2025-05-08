@@ -194,13 +194,13 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
 
     /* 4.5 · Teardown buffers & files before recursion -------------------- */
     std::vector<size_t> bucketSizes(alfa);
-    for (int i = 0; i < alfa; ++i) {
-        bucketSizes[i] = bucket[i].written * sizeof(Word);
-        bucket[i].buf.clear();
-        bucket[i].buf.shrink_to_fit();
-        bucket[i].tmp.close();
-    }
-    bucket.clear();
+    // for (int i = 0; i < alfa; ++i) {
+    //     bucketSizes[i] = bucket[i].written * sizeof(Word);
+    //     bucket[i].buf.clear();
+    //     bucket[i].buf.shrink_to_fit();
+    //     bucket[i].tmp.close();
+    // }
+    // bucket.clear();
 
     /* 5 · Recursive quicksort on each bucket ----------------------------- */
     size_t childStart = inicio;

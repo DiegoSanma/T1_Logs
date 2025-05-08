@@ -175,8 +175,8 @@ int main() {
     // Ahora, usando el alfa, realizamos QuickSort
     if (RunQuick || RunAll) {
         std::cout << "Ejecutando QuickSort..." << std::endl;
-        for (size_t Xi = 4; Xi <= 60; Xi+=4) {
-            for (int j = 0; j < 5; ++j) {
+        for (size_t Xi = 8; Xi <= 60; Xi+=8) {
+            for (int j = 0; j < 1; ++j) {
                 // Seteo el tamaño del arreglo
                 creador.setX(Xi);
                 // Calculo el tamaño del archivo en bytes

@@ -9,7 +9,6 @@ mkdir -p "$(pwd)/data"
 mkdir -p "$(pwd)/buckets"
 docker run -d \
   --name my-app-container \
-  -m 50m \
   -v "$(pwd)/data:/app/data:rw" \
   -v "$(pwd)/buckets:/app/buckets:rw" \
   -e BUCKET_DIR=/app/buckets \
@@ -39,7 +38,7 @@ docker cp my-app-container:/app/merge.log ./merge-onexit-$timestamp.log 2>/dev/n
 echo "Container has exited."
 
 docker stop my-app-container 2>/dev/null
-# docker rm my-app-container 2>/dev/null
+docker rm my-app-container 2>/dev/null
 
 # wsl chmod +x ./all.sh
 # wsl ./all.sh
