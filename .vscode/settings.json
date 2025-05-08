@@ -77,6 +77,7 @@
         "xmemory": "cpp",
         "xtr1common": "cpp",
         "csignal": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "codecvt": "cpp"
     }
 }

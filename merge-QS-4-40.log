@@ -93,8 +93,3 @@ QuickSort: Xi=40, M=50, B=4096, IOs=7802, tiempo=2025-05-07 20:27:33, endOfLog=4
 QuickSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-07 20:27:42, startOfLog=46
 QuickSort: Xi=40, M=50, B=4096, IOs=7031, tiempo=2025-05-07 20:38:06, endOfLog=46
 QuickSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-07 20:38:13, startOfLog=47
-QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-07 21:21:33, startOfLog=0
-QuickSort: Xi=4, M=50, B=4096, IOs=329, tiempo=2025-05-07 21:21:41, endOfLog=0
-QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-07 21:21:41, startOfLog=1
-QuickSort: Xi=4, M=50, B=4096, IOs=331, tiempo=2025-05-07 21:21:49, endOfLog=1
-QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-07 21:21:49, startOfLog=2

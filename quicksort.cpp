@@ -8,6 +8,11 @@
 #include <string>
 #include <cstdio>
 
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 QuickSort::QuickSort(const char* filename,int alfa,size_t largo,int inicio,size_t B){
     this->filename = filename;
     this->alfa = alfa;
@@ -52,8 +57,7 @@ int QuickSort::QuickSortN(int M,size_t B) {
         //Lo ordeno aquí en "memoria princiapl (no necesario hacerlo como quicksort)"
         // std::cout << "Ordenando en memoria principal" << std::endl;
         // std::cout << "Ordeno en memoria" << std::endl;
-        int pos_final = this->inicio + largo/sizeof(uint64_t);
-        int cantidad = pos_final - this->inicio + 1;             // cuántos enteros quieres leer
+        int cantidad = largo/sizeof(uint64_t);                    // cuántos enteros quieres leer
         std::vector<uint64_t> buffer(cantidad);                   // buffer para guardarlos
 
         //Leo la cosa
@@ -107,6 +111,9 @@ int QuickSort::QuickSortN(int M,size_t B) {
  *****************************************************************/
 int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
 {
+    const char* envDir = std::getenv("BUCKET_DIR");
+    std::string baseDir = envDir ? envDir : "";
+
     using Word = uint64_t;
 
     /* 0 · Constants and RAM layout --------------------------------------- */
@@ -120,15 +127,28 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
 
     /* 1 · Destination windows (one per bucket) --------------------------- */
     struct WinDst {
-        std::vector<Word> buf;          // Fixed-capacity RAM window
-        size_t written = 0;             // How many numbers already flushed
-        std::ofstream tmp;              // Temp file to write bucket data
+        std::vector<Word> buf;     // Fixed-capacity RAM window
+        size_t        written = 0; // How many numbers already flushed
+        std::fstream  tmp;         // Temp file to write bucket data // old ofstream
+        std::string   name;        // Path to the bucket file
     };
+
     std::vector<WinDst> bucket(alfa);
+
     for (int i = 0; i < alfa; ++i) {
         bucket[i].buf.reserve(WORDS_PER_WIN);
-        bucket[i].tmp.open("bucket-" + std::to_string(i) + ".bin",
-                           std::ios::binary | std::ios::trunc);
+        // bucket[i].tmp.open("bucket-" + std::to_string(i) + ".bin",
+        //                    std::ios::binary | std::ios::trunc);
+        bucket[i].name = baseDir + "/bucket-" + std::to_string(i) + ".bin";
+        // open read/write, create if missing
+        bucket[i].tmp.open(bucket[i].name,
+            std::ios::in | std::ios::out | std::ios::binary);
+        if (!bucket[i].tmp.is_open()) {
+            // file didn't exist → create trunc’d
+            bucket[i].tmp.open(bucket[i].name,
+                std::ios::in | std::ios::out |
+                std::ios::binary | std::ios::trunc);
+        }
     }
 
     std::vector<Word> windowSrc(WORDS_PER_BLK);  // Input buffer (block-sized)
@@ -145,6 +165,21 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
     size_t nextRead = inicio;
     size_t endAbs   = inicio + largo / sizeof(Word);
     int IOs = 1;  // already read 1 block for pivot
+
+    // Helper: truncate a bucket file in-place
+    auto resetBucket = [&](WinDst &w) {
+        w.tmp.flush();
+
+        if (truncate(w.name.c_str(), 0) != 0)
+            perror("truncate");
+        w.tmp.clear();
+        w.tmp.seekp(0, std::ios::beg);
+        w.written = 0;
+    };
+
+    // Reset all buckets before partitioning
+    for (int i = 0; i < alfa; ++i)
+        resetBucket(bucket[i]);
 
     /* 3 · Partitioning loop: read parent blocks, assign to bucket ------- */
     auto flushBucket = [&](int id) {
@@ -181,26 +216,47 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
         if (!bucket[i].buf.empty()) flushBucket(i);
 
     /* 4 · Concatenate temp buckets into main file ------------------------ */
+    if (truncate(filename, 0) != 0)
+        perror("truncate main array file");
     std::fstream dst(filename,
                      std::ios::in | std::ios::out | std::ios::binary);
     size_t dstPos = inicio;
+    // for (int i = 0; i < alfa; ++i) {
+    //     bucket[i].tmp.close();
+    //     std::ifstream tmp("bucket-" + std::to_string(i) + ".bin",
+    //                       std::ios::binary);
+    //     size_t left = bucket[i].written;
+    //     while (left) {
+    //         size_t n = std::min(WORDS_PER_BLK, left);
+    //         tmp.read(reinterpret_cast<char*>(windowSrc.data()),
+    //                  n * sizeof(Word));
+    //         dst.seekp(dstPos * sizeof(Word), std::ios::beg);
+    //         dst.write(reinterpret_cast<char*>(windowSrc.data()),
+    //                   n * sizeof(Word));
+    //         IOs += 2;
+    //         dstPos += n;  left -= n;
+    //     }
+    //     tmp.close();
+    //     std::remove(("bucket-" + std::to_string(i) + ".bin").c_str());
+    // }
+    std::vector<Word> readBuf(WORDS_PER_BLK);
+
     for (int i = 0; i < alfa; ++i) {
-        bucket[i].tmp.close();
-        std::ifstream tmp("bucket-" + std::to_string(i) + ".bin",
-                          std::ios::binary);
+        auto &tmp = bucket[i].tmp;
+        tmp.seekg(0, std::ios::beg);
         size_t left = bucket[i].written;
         while (left) {
             size_t n = std::min(WORDS_PER_BLK, left);
-            tmp.read(reinterpret_cast<char*>(windowSrc.data()),
-                     n * sizeof(Word));
+            tmp.read(reinterpret_cast<char*>(readBuf.data()),
+                    n * sizeof(Word));
             dst.seekp(dstPos * sizeof(Word), std::ios::beg);
-            dst.write(reinterpret_cast<char*>(windowSrc.data()),
-                      n * sizeof(Word));
-            IOs += 2;
-            dstPos += n;  left -= n;
+            dst.write(reinterpret_cast<char*>(readBuf.data()),
+                    n * sizeof(Word));
+            IOs += 2;  // one read + one write
+            dstPos += n;
+            left  -= n;
         }
-        tmp.close();
-        std::remove(("bucket-" + std::to_string(i) + ".bin").c_str());
+        // ← no close() or remove() here
     }
 
     /* 5 · Recursive quicksort on each bucket ----------------------------- */

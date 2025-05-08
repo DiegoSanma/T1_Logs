@@ -20,6 +20,8 @@
 #define RunQuick 1 // 0: no, 1: sí
 #define RunAll 0 // 0: no, 1: sí
 
+#define ARRAYNAME "arreglo.bin" // nombre del archivo binario
+
 int nlogs = 0; // número de logs generados
 
 static const char* FILE_ALPHA   = "arreglos_aridad.bin";
@@ -52,8 +54,14 @@ int main() {
     std::signal(SIGTERM, [](int){ delete_temp_files(); std::exit(143); });
     
     // Primero, inicializo la clase que crea el arreglo
-    const char * filename = "arreglo.bin";
-    CrearArray creador(filename,M,Xtest);
+    // const char * filename = "arreglo.bin";
+    // CrearArray creador(filename,M,Xtest);
+    // const char * filename = "arreglo.bin";
+    const char* envData = std::getenv("DATA_DIR");
+    std::string baseData = envData ? envData : "";
+    std::string fnameStr = baseData + "/" + ARRAYNAME;
+    const char * fname = fnameStr.c_str();
+    CrearArray creador(fname,M,Xtest);
 
     std::ofstream logFile("merge.log", std::ios::app); // append mode
     if (!logFile) {
@@ -99,7 +107,7 @@ int main() {
                     << ", endOfLog=" << nlogs++
                     << std::endl;
         
-        std::remove("arreglo.bin");
+        std::remove("arreglos_aridad.bin");
     } else {
         std::cout << "Aridad default: " << Default << std::endl;
         alfa = Default;
@@ -119,7 +127,7 @@ int main() {
                 // Creamos la secuencia de Xi * M numeros de 64 bits
                 creador.crearArrayN();
                 // Mergesort y guardar los resultados
-                MergeSort mergesort("arreglo.bin", alfa, largo_archivo, 0, B);
+                MergeSort mergesort(fname, alfa, largo_archivo, 0, B);
                 // Concat time to 'merge.log' before and after MergeSort
                 auto start = std::chrono::system_clock::now();
                 std::time_t start_time = std::chrono::system_clock::to_time_t(start);
@@ -160,7 +168,7 @@ int main() {
                 // Creamos la secuencia de Xi * M numeros de 64 bits
                 creador.crearArrayN();
                 // QuickSort y guardar los resultados
-                QuickSort quicksort("arreglo.bin", alfa, largo_archivo, 0, B);
+                QuickSort quicksort(fname, alfa, largo_archivo, 0, B);
                 // Concat time to 'merge.log' before and after MergeSort
                 auto start = std::chrono::system_clock::now();
                 std::time_t start_time = std::chrono::system_clock::to_time_t(start);

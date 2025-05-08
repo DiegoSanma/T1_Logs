@@ -1,0 +1,5 @@
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-08 00:24:57, startOfLog=0
+QuickSort: Xi=4, M=50, B=4096, IOs=422, tiempo=2025-05-08 00:25:34, endOfLog=0
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-08 00:25:34, startOfLog=1
+QuickSort: Xi=4, M=50, B=4096, IOs=432, tiempo=2025-05-08 00:25:43, endOfLog=1
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-08 00:25:43, startOfLog=2

@@ -4,7 +4,16 @@ echo "Starting the script..."
 docker build -t my-app .
 
 # Run the container in detached mode with a known name
-docker run -d --name my-app-container my-app
+# docker run -d --name my-app-container my-app
+mkdir -p "$(pwd)/data"
+mkdir -p "$(pwd)/buckets"
+docker run -d \
+  --name my-app-container \
+  -v "$(pwd)/data:/app/data:rw" \
+  -v "$(pwd)/buckets:/app/buckets:rw" \
+  -e BUCKET_DIR=/app/buckets \
+  -e DATA_DIR=/app/data \
+  my-app
 
 # Define a cleanup function to copy the log and stop the container
 cleanup() {
