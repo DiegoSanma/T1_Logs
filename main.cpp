@@ -118,12 +118,12 @@ int main() {
     // Realizar pruebas con MergeSort
     if (RunMerge || RunAll) {
         std::cout << "Ejecutando MergeSort..." << std::endl;
-        for (int Xi = 4; Xi <= 60; Xi+=4) {
+        for (size_t Xi = 4; Xi <= 60; Xi+=4) {
             for (int j = 0; j < 5; ++j) {
                 // Seteo el tamaño del arreglo
                 creador.setX(Xi);
                 // Calculo el tamaño del archivo en bytes
-                size_t largo_archivo = M * Xi * 1024 * 1024;
+                size_t largo_archivo = static_cast<size_t>(M) * Xi * 1024 * 1024;
                 // Creamos la secuencia de Xi * M numeros de 64 bits
                 creador.crearArrayN();
                 // Mergesort y guardar los resultados
@@ -159,12 +159,12 @@ int main() {
     // Ahora, usando el alfa, realizamos QuickSort
     if (RunQuick || RunAll) {
         std::cout << "Ejecutando QuickSort..." << std::endl;
-        for (int Xi = 4; Xi <= 60; Xi+=4) {
+        for (size_t Xi = 4; Xi <= 60; Xi+=4) {
             for (int j = 0; j < 5; ++j) {
                 // Seteo el tamaño del arreglo
                 creador.setX(Xi);
                 // Calculo el tamaño del archivo en bytes
-                size_t largo_archivo = M * Xi * 1024 * 1024;
+                size_t largo_archivo = static_cast<size_t>(M) * Xi * 1024 * 1024;
                 // Creamos la secuencia de Xi * M numeros de 64 bits
                 creador.crearArrayN();
                 // QuickSort y guardar los resultados
