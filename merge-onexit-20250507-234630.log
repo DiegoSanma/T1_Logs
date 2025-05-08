@@ -1,0 +1,11 @@
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-08 03:42:35, startOfLog=0
+QuickSort: Xi=4, M=50, B=4096, IOs=429, tiempo=2025-05-08 03:42:50, endOfLog=1
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-08 03:43:00, startOfLog=3
+QuickSort: Xi=4, M=50, B=4096, IOs=398, tiempo=2025-05-08 03:43:23, endOfLog=4
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-08 03:43:33, startOfLog=6
+QuickSort: Xi=4, M=50, B=4096, IOs=452, tiempo=2025-05-08 03:43:55, endOfLog=7
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-08 03:44:05, startOfLog=9
+QuickSort: Xi=4, M=50, B=4096, IOs=330, tiempo=2025-05-08 03:44:18, endOfLog=10
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-08 03:44:28, startOfLog=12
+QuickSort: Xi=4, M=50, B=4096, IOs=402, tiempo=2025-05-08 03:44:51, endOfLog=13
+QuickSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-08 03:45:10, startOfLog=15
