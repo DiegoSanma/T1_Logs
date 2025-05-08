@@ -36,8 +36,10 @@ docker wait my-app-container
 timestamp=$(date +%Y%m%d-%H%M%S)
 docker cp my-app-container:/app/merge.log ./merge-onexit-$timestamp.log 2>/dev/null || echo "merge.log not found."
 
+echo "Container has exited."
+
 docker stop my-app-container 2>/dev/null
-docker rm my-app-container 2>/dev/null
+# docker rm my-app-container 2>/dev/null
 
 # wsl chmod +x ./all.sh
 # wsl ./all.sh
