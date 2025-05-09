@@ -17,7 +17,7 @@
 #define Xtest   60
 #define Default 8
 
-#define RunAlpha 0 // 0: no, 1: sí
+#define RunAlpha 1 // 0: no, 1: sí
 #define RunMerge 1 // 0: no, 1: sí
 #define RunQuick 1 // 0: no, 1: sí
 #define RunAll 0 // 0: no, 1: sí
@@ -86,10 +86,10 @@ int main() {
                 << ", startOfLog=" << nlogs
                 << std::endl;
 
-        alfa = findOptimalArity(maxArity,
+        alfa = findOptimalArity(200,
                                 "arreglos_aridad.bin",
                                 M,
-                                X_aridad,     // X (array size factor)
+                                60,     // X (array size factor)
                                 B);        // block size KB
 
         auto end = std::chrono::system_clock::now();
@@ -112,7 +112,7 @@ int main() {
     // Realizar pruebas con MergeSort
     if (RunMerge || RunAll) {
         std::cout << "Ejecutando MergeSort..." << std::endl;
-        for (int Xi = 44; Xi <= 60; Xi+=4) {
+        for (int Xi = 52; Xi <= 60; Xi+=4) {
             for (int j = 0; j < 5; ++j) {
                 // Seteo el tamaño del arreglo
                 creador.setX(Xi);

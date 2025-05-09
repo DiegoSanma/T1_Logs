@@ -30,7 +30,7 @@ int runMergeSort(const std::string& filename, int arity, size_t fileSize, int M,
  * @return The optimal arity (alpha) that minimizes I/O operations.
  */
 int findOptimalArity(int b, const char* filename, int M, int X, size_t B) {
-    int left = 2, right = b;
+    int left = 100, right = b;
     std::vector<int> IOs_por_aridad(b+1,0);
     //int optimalAlpha = left;
     int minIOs = std::numeric_limits<int>::max();
@@ -44,11 +44,10 @@ int findOptimalArity(int b, const char* filename, int M, int X, size_t B) {
 
     size_t fileSize = static_cast<size_t>(X) * M * 1024 * 1024;
 
-    while (left <= right) {
-        int c = std::max(1, (right - left) / 4);
-        int mid = left + (right - left) / 2;
-        int midMinusC = std::max(left, mid - c);
-        int midPlusC = std::min(right, mid + c);
+    while (left < right) {
+        int midMinusC = left;
+        int midPlusC = right;
+        int mid = (right+left)/2;
 
         std::cout << "Evaluando aridad: " << midMinusC << " y " << midPlusC << std::endl;
 
@@ -69,13 +68,13 @@ int findOptimalArity(int b, const char* filename, int M, int X, size_t B) {
                 minIOs = IOsMinusC;
                 optimalAlpha = midMinusC;
             }
-            right = mid - 1;
+            right = mid;
         } else {
             if (IOsPlusC < minIOs) {
                 minIOs = IOsPlusC;
                 optimalAlpha = midPlusC;
             }
-            left = mid + 1;
+            left = mid;
         }
         std::cout << "El mejor es " << optimalAlpha << std::endl;
     }

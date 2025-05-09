@@ -155,7 +155,7 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
     std::vector<Word> out;
     out.reserve(WORDS_PER_WIN);                              // [FIX‑RAM]
 
-    std::fstream outF(filename,
+    std::fstream outF("arch_temporal.bin",
                       std::ios::in|std::ios::out|std::ios::binary); // 1 fd
     auto flush = [&] {                     // escribe y cuenta IOs
         size_t written = 0;
@@ -189,5 +189,26 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
         if (out.size() == WORDS_PER_WIN) flush();
     }
     if (!out.empty()) flush();
+    /**********6 · Add the temporary file to the disk*/
+
+    int copied = 0;
+    int cantidad = largo/sizeof(uint64_t);
+    std::fstream outOficial(filename,
+                      std::ios::in|std::ios::out|std::ios::binary);
+    while(copied<cantidad){
+        size_t now = std::min(WORDS_PER_BLK,static_cast<size_t>(cantidad-copied));
+        outF.seekg((inicio+copied)*sizeof(Word),std::ios::beg);
+        outF.read(reinterpret_cast<char*>(out.data()+copied),
+                        now * sizeof(Word));
+        outOficial.seekp((inicio+copied)*sizeof(Word),std::ios::beg);
+        outOficial.write(reinterpret_cast<char*>(out.data()+copied),
+                        now * sizeof(Word));
+        copied+=now;
+        IOs+=2;                
+        
+    }
+    outF.close();
+    outOficial.close();
+    std::remove("arch_temporal.bin");
     return IOs;
 }
