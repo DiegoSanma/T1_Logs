@@ -15,7 +15,7 @@
 #define M       50
 #define B       4096 //4096kb
 #define Xtest   60
-#define Default 8
+#define Default 384
 
 #define RunAlpha 0 // 0: no, 1: sí
 #define RunMerge 1 // 0: no, 1: sí
@@ -112,7 +112,7 @@ int main() {
     // Realizar pruebas con MergeSort
     if (RunMerge || RunAll) {
         std::cout << "Ejecutando MergeSort..." << std::endl;
-        for (int Xi = 44; Xi <= 60; Xi+=4) {
+        for (int Xi = 4; Xi <= 60; Xi+=4) {
             for (int j = 0; j < 5; ++j) {
                 // Seteo el tamaño del arreglo
                 creador.setX(Xi);

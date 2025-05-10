@@ -4,197 +4,62 @@ Optimal arity: 8
 Ejecutando MergeSort...
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-08 00:50:21, startOfLog=0
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=52, M=50, B=4096, IOs=5049, tiempo=2025-05-08 00:55:01, endOfLog=1
 Usaron esta cantidad de IOs en MergeSort: 5049
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-08 00:55:03, startOfLog=2
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=52, M=50, B=4096, IOs=5049, tiempo=2025-05-08 00:58:40, endOfLog=3
 Usaron esta cantidad de IOs en MergeSort: 5049
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-08 00:58:41, startOfLog=4
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=52, M=50, B=4096, IOs=5049, tiempo=2025-05-08 01:02:18, endOfLog=5
 Usaron esta cantidad de IOs en MergeSort: 5049
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:02:19, startOfLog=6
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=52, M=50, B=4096, IOs=5049, tiempo=2025-05-08 01:05:57, endOfLog=7
 Usaron esta cantidad de IOs en MergeSort: 5049
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:05:58, startOfLog=8
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=52, M=50, B=4096, IOs=5049, tiempo=2025-05-08 01:09:36, endOfLog=9
 Usaron esta cantidad de IOs en MergeSort: 5049
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:09:37, startOfLog=10
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=56, M=50, B=4096, IOs=5409, tiempo=2025-05-08 01:13:31, endOfLog=11
 Usaron esta cantidad de IOs en MergeSort: 5409
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:13:32, startOfLog=12
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=56, M=50, B=4096, IOs=5409, tiempo=2025-05-08 01:17:26, endOfLog=13
 Usaron esta cantidad de IOs en MergeSort: 5409
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:17:28, startOfLog=14
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=56, M=50, B=4096, IOs=5409, tiempo=2025-05-08 01:21:22, endOfLog=15
 Usaron esta cantidad de IOs en MergeSort: 5409
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:21:23, startOfLog=16
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=56, M=50, B=4096, IOs=5409, tiempo=2025-05-08 01:25:17, endOfLog=17
 Usaron esta cantidad de IOs en MergeSort: 5409
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:25:19, startOfLog=18
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=56, M=50, B=4096, IOs=5409, tiempo=2025-05-08 01:29:12, endOfLog=19
 Usaron esta cantidad de IOs en MergeSort: 5409
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:29:14, startOfLog=20
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=60, M=50, B=4096, IOs=5801, tiempo=2025-05-08 01:33:23, endOfLog=21
 Usaron esta cantidad de IOs en MergeSort: 5801
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:33:25, startOfLog=22
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=60, M=50, B=4096, IOs=5801, tiempo=2025-05-08 01:37:36, endOfLog=23
 Usaron esta cantidad de IOs en MergeSort: 5801
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:37:38, startOfLog=24
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=60, M=50, B=4096, IOs=5801, tiempo=2025-05-08 01:41:49, endOfLog=25
 Usaron esta cantidad de IOs en MergeSort: 5801
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:41:51, startOfLog=26
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=60, M=50, B=4096, IOs=5801, tiempo=2025-05-08 01:46:02, endOfLog=27
 Usaron esta cantidad de IOs en MergeSort: 5801
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-08 01:46:04, startOfLog=28
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
-Unión de hijos
 MergeSort: Xi=60, M=50, B=4096, IOs=5801, tiempo=2025-05-08 01:50:16, endOfLog=29
 Usaron esta cantidad de IOs en MergeSort: 5801
 Ejecutando QuickSort...
