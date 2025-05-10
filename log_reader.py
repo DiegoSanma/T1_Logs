@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 
 log = open("log.txt", "r")
 
@@ -48,29 +47,66 @@ def read_log(log_list):
             
 
 log_merge_data = read_log(log_mergesort)
-for i in range(len(log_merge_data)):
-    print(log_merge_data[i])
+# for i in range(len(log_merge_data)):
+#     print(log_merge_data[i])
 
 log_quick_data = read_log(log_quicksort)
-for i in range(len(log_quick_data)):
-    print(log_quick_data[i])
+# for i in range(len(log_quick_data)):
+#     print(log_quick_data[i])
 
-# graficar los resultados
+def colapse_data_in_mean(log_data):
+    new_log_data = []
+    new_data = []
+    last_xi = 0
+    for i in range(len(log_data)):
+        if log_data[i]["Xi"] == last_xi:
+            new_data.append(log_data[i])
+        else:
+            new_log_data.append(new_data)
+            new_data = []
+            new_data.append(log_data[i])
+            last_xi = log_data[i]["Xi"]
+    # for i in range(len(new_log_data)):
+    #     print(new_log_data[i])
+
+    new_log_data = new_log_data[1:] # remove the first element, which is empty
+    new_log_data.append(new_data) # add the last element
+
+
+    mean_data = []
+    for data in new_log_data:
+        sum = 0
+        for i in range(len(data)):
+            sum += int(data[i]["IOs"])
+        mean = sum / len(data)
+        mean_data.append({
+            "Xi" : data[0]["Xi"],
+            "IOs" : mean
+        })
+    return mean_data  
+
+# graficar el promedio de IOs por cada tamaño de arreglo
 def plot_data(log_data, sort_type):
     """
     Plots the data from the log file.
     """
+    # print(log_data)
     x = []
     y = []
-    for data in log_data:
-        x.append(int(data["Xi"]))
-        y.append(data["Tiempo"])
+    for i in range(len(log_data)):
+        x.append(int(log_data[i]["Xi"]))
+        y.append(int(log_data[i]["IOs"]))
     
-    plt.plot(x, y, label=sort_type)
+    plt.scatter(x, y, label=sort_type)
+    plt.grid()
     plt.xlabel("Tamaño del arreglo")
-    plt.ylabel("Tiempo (s)")
-    plt.title("Tiempo de ejecución de " + sort_type)
+    plt.ylabel("Número de IOs")
+    plt.title("Número de IOs por tamaño de arreglo")
     plt.legend()
     plt.show()
-plot_data(log_merge_data, "Mergesort")
-plot_data(log_quick_data, "Quicksort")
+
+# plot_data(log_merge_data, "Mergesort")
+# plot_data(log_quick_data, "Quicksort")
+
+plot_data(colapse_data_in_mean(log_merge_data), "Mergesort")
+plot_data(colapse_data_in_mean(log_quick_data), "Quicksort")
