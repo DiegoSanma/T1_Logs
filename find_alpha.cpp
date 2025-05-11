@@ -33,7 +33,7 @@ int runMergeSort(const std::string& filename, int arity, size_t fileSize, int M,
  * @return The optimal arity (alpha) that minimizes I/O operations.
  */
 int findOptimalArity(int b, const char* filename, int M, int X, size_t B) {
-    int left = 60, right = b;
+    int left = 2, right = b;
     std::vector<int> IOs_por_aridad(b+1,0);
     //int optimalAlpha = left;
     int minIOs = std::numeric_limits<int>::max();
