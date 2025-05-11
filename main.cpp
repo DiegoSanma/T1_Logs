@@ -12,10 +12,10 @@
 #include <ctime>
 #include <iomanip>
 
-#define M       50
+#define M       50  //50mb
 #define B       4096 //4096kb
-#define Xtest   60
-#define Default 8
+#define Xtest   60 //Tamaño de arreglo para cálculo de aridad
+#define Default 384 //Aridad óptima en caso de no correr código con find alpha
 
 #define RunAlpha 1 // 0: no, 1: sí
 #define RunMerge 1 // 0: no, 1: sí
@@ -29,22 +29,6 @@ static const char* FILE_ALPHA   = "arreglos_aridad.bin";
 static void delete_temp_files()
 {
     std::remove(FILE_ALPHA);
-}
-
-int findMaxArity() {
-    constexpr int    MIN_ARITY  = 2;                 // assignment lower bound
-    constexpr size_t WORD       = sizeof(uint64_t);  // element size in bytes
-
-    /* 1· Memory‑capacity bound  ⌊ M/B ⌋ – 1 */
-    int maxByMemory = (M * 1024 / B) - 1;          // M in MB, B in KB
-    if (maxByMemory < MIN_ARITY)  maxByMemory = MIN_ARITY;
-
-    /* 2· Pivot‑block bound      ⌊ blockBytes / elementSize ⌋ */
-    int maxByBlock  = (B * 1024) / WORD;           // elements in one disk block
-    if (maxByBlock  < MIN_ARITY)  maxByBlock  = MIN_ARITY;
-
-    /* 3· Final upper limit = stricter of the two */
-    return std::min(maxByMemory, maxByBlock);
 }
 
 int main() {
@@ -72,9 +56,6 @@ int main() {
     if (RunAlpha || RunAll) {
         std::cout << "Encontrando la aridad..." << std::endl;
 
-        int maxArity = findMaxArity(); // 2 <= maxArity
-        std::cout << "maxArity: " << maxArity << std::endl;
-
 
         auto start = std::chrono::system_clock::now();
         std::time_t start_time = std::chrono::system_clock::to_time_t(start);
@@ -86,10 +67,10 @@ int main() {
                 << ", startOfLog=" << nlogs
                 << std::endl;
 
-        alfa = findOptimalArity(200,
+        alfa = findOptimalArity(512,
                                 "arreglos_aridad.bin",
                                 M,
-                                60,     // X (array size factor)
+                                Xtest,     // X (array size factor)
                                 B);        // block size KB
 
         auto end = std::chrono::system_clock::now();
@@ -98,7 +79,7 @@ int main() {
                     << ", M=" << M
                     << ", X=" << Xtest
                     << ", B=" << B
-                    << ", maxArity=" << maxArity
+                    << ", maxArity=" << 512
                     << ", tiempo=" << std::put_time(std::localtime(&end_time), "%F %T")
                     << ", endOfLog=" << nlogs++
                     << std::endl;

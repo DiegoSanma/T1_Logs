@@ -76,7 +76,7 @@ int MergeSort::MergeSortN(int M,size_t B) {
         archivoFuera.write(reinterpret_cast<char*>(buffer.data()), cantidad * sizeof(uint64_t));
         archivoFuera.close();
         //Sumo dos IOs, uno por leer y otro por escribir el bloque de tamaño <=M
-        return 2 * buffer.size()*sizeof(uint64_t) / (B*1024);
+        return 2 * ((buffer.size()*sizeof(uint64_t)+(B/1024)-1) / (B*1024));
     }
 }
 

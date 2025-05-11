@@ -6,6 +6,9 @@
 #include <vector>
 #include <unordered_map>
 
+/** Function that simply runs MergeSort for a certain arity
+ * @return The IOs used to sort the array
+ */
 int runMergeSort(const std::string& filename, int arity, size_t fileSize, int M, size_t B) {
     std::cout << "Haciendo Mergesort con: " << arity << std::endl;
     MergeSort sorter(filename.c_str(), arity, fileSize, 0, B);
@@ -30,7 +33,7 @@ int runMergeSort(const std::string& filename, int arity, size_t fileSize, int M,
  * @return The optimal arity (alpha) that minimizes I/O operations.
  */
 int findOptimalArity(int b, const char* filename, int M, int X, size_t B) {
-    int left = 100, right = b;
+    int left = 60, right = b;
     std::vector<int> IOs_por_aridad(b+1,0);
     //int optimalAlpha = left;
     int minIOs = std::numeric_limits<int>::max();
