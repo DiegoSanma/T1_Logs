@@ -7,6 +7,7 @@
 #include <tuple>
 #include <string>
 #include <cstdio>
+#include <cmath>
 
 QuickSort::QuickSort(const char* filename,int alfa,size_t largo,int inicio,size_t B){
     this->filename = filename;
@@ -34,46 +35,49 @@ int QuickSort::getInicio() const{
 }
 
 int QuickSort::QuickSortN(int M,size_t B) {
-    int IOs = 0;
     std::ifstream archivo(filename, std::ios::binary);
+    //Si aún no puedo mandar todo a memoria, voy separando el quicksort
+    if(largo>M*1024*1024) return qsHijos(M, B, archivo);
+
     if (!archivo.is_open()) {
         std::cerr << "No se pudo abrir el archivo binario." << std::endl;
         return 1;
     }
-    //Si aún no puedo mandar todo a memoria, voy separando el quicksort
-    if(largo>M*1024*1024){
-        // std::cout << "Separo en hijos" << std::endl;
-        IOs+=qsHijos(M, B, archivo);
-        archivo.close();
-        // std::cout << "El número de IOs para el QuickSort es: " << IOs << std::endl;
-        return IOs;
+    //Lo ordeno aquí en "memoria princiapl (no necesario hacerlo como quicksort)"
+    int cantidad = largo/sizeof(uint64_t);             // cuántos enteros quieres leer
+    std::vector<uint64_t> buffer(cantidad);            // buffer para guardarlos
+    
+    //Leo la cosa
+    int IOs = 0;
+    archivo.seekg(inicio * sizeof(uint64_t), std::ios::beg);  
+    // archivo.read(reinterpret_cast<char*>(buffer.data()), cantidad * sizeof(uint64_t));
+    int sofar = 0;
+    while (sofar < cantidad) {
+        int toRead = std::min(static_cast<size_t>(cantidad - sofar), B * 1024 / sizeof(uint64_t));
+        archivo.read(reinterpret_cast<char*>(buffer.data() + sofar), toRead * sizeof(uint64_t));
+        sofar += toRead; IOs++;
     }
-    else{
-        //Lo ordeno aquí en "memoria princiapl (no necesario hacerlo como quicksort)"
-        // std::cout << "Ordenando en memoria principal" << std::endl;
-        // std::cout << "Ordeno en memoria" << std::endl;
-        int pos_final = this->inicio + largo/sizeof(uint64_t);
-        int cantidad = pos_final - this->inicio;             // cuántos enteros quieres leer
-        std::vector<uint64_t> buffer(cantidad);                   // buffer para guardarlos
-
-        //Leo la cosa
-        archivo.seekg(inicio * sizeof(uint64_t), std::ios::beg);  
-        archivo.read(reinterpret_cast<char*>(buffer.data()), cantidad * sizeof(uint64_t));
-        std::sort(buffer.begin(),buffer.end());
-        archivo.close();
-        //Dsp de ordenar, lo reescribo en el archivo
-        std::fstream archivoFuera(filename, std::ios::in | std::ios::out |std::ios::binary);
-        if (!archivoFuera.is_open()) {
-            std::cerr << "No se pudo abrir el archivo." << std::endl;
-            std::exit(1);
-        }
-        //Lo escribo en donde estaba antes los número desordenados
-        archivoFuera.seekp(inicio * sizeof(uint64_t), std::ios::beg);
-        archivoFuera.write(reinterpret_cast<char*>(buffer.data()), cantidad * sizeof(uint64_t));
-        archivoFuera.close();
-        //Sumo dos IOs, uno por leer y otro por escribir el bloque de tamaño <=M
-        return 2 * buffer.size()*sizeof(uint64_t) / (B*1024);
+    archivo.close();
+    std::sort(buffer.begin(),buffer.end());
+    //Dsp de ordenar, lo reescribo en el archivo
+    std::fstream archivoFuera(filename, std::ios::in | std::ios::out |std::ios::binary);
+    if (!archivoFuera.is_open()) {
+        std::cerr << "No se pudo abrir el archivo." << std::endl;
+        std::exit(1);
     }
+    //Lo escribo en donde estaba antes los número desordenados
+    archivoFuera.seekp(inicio * sizeof(uint64_t), std::ios::beg);
+    // archivoFuera.write(reinterpret_cast<char*>(buffer.data()), cantidad * sizeof(uint64_t));
+    int sofar2 = 0;
+    while (sofar2 < cantidad) {
+        int toWrite = std::min(static_cast<size_t>(cantidad - sofar2), B * 1024 / sizeof(uint64_t));
+        archivoFuera.write(reinterpret_cast<char*>(buffer.data() + sofar2), toWrite * sizeof(uint64_t));
+        sofar2 += toWrite;
+    }
+    archivoFuera.close();
+    return 2 * IOs; // 2 IOs por cada bloque leído y escrito
+    // return 2 * static_cast<int>(std::ceil(static_cast<double>(buffer.size() * sizeof(uint64_t)) / (B * 1024)));
+    // return 2 * (buffer.size() * sizeof(uint64_t) + (B * 1024 - 1)) / (B * 1024);
 }
 
 /*****************************************************************
@@ -119,6 +123,7 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
     };
 
     /* 1 · Destination windows (one per bucket) --------------------------- */
+    // OK
     struct WinDst {
         std::vector<Word> buf;          // Fixed-capacity RAM window
         size_t written = 0;             // How many numbers already flushed
@@ -135,6 +140,7 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
     std::vector<Word> windowSrc(WORDS_PER_BLK);  // Input buffer (block-sized)
 
     /* 2 · Choose α−1 pivots from the first block ------------------------ */
+    // OK
     src.seekg(inicio * sizeof(Word), std::ios::beg);
     src.read(reinterpret_cast<char*>(windowSrc.data()),
              WORDS_PER_BLK * sizeof(Word));
@@ -148,6 +154,7 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
     int IOs = 1;  // already read 1 block for pivot
 
     /* 3 · Partitioning loop: read parent blocks, assign to bucket ------- */
+    // OK
     auto flushBucket = [&](int id) {
         auto& w = bucket[id];
         w.tmp.write(reinterpret_cast<char*>(w.buf.data()),
@@ -182,6 +189,7 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
         if (!bucket[i].buf.empty()) flushBucket(i);
 
     /* 4 · Concatenate temp buckets into main file ------------------------ */
+    // OK
     std::fstream dst(filename,
                      std::ios::in | std::ios::out | std::ios::binary);
     size_t dstPos = inicio;
@@ -201,10 +209,11 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
             dstPos += n;  left -= n;
         }
         tmp.close();
-        std::remove(("bucket-" + std::to_string(i) + ".bin").c_str());
+        std::remove(("bucket-" + std::to_string(i) + ".bin").c_str()); // Remove?
     }
 
     /* 5 · Recursive quicksort on each bucket ----------------------------- */
+    // OK
     size_t childStart = inicio;
     for (int i = 0; i < alfa; ++i) {
         size_t childLen = bucket[i].written * sizeof(Word);
