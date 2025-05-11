@@ -93,7 +93,7 @@ int main() {
     // Realizar pruebas con MergeSort
     if (RunMerge || RunAll) {
         std::cout << "Ejecutando MergeSort..." << std::endl;
-        for (int Xi = 52; Xi <= 60; Xi+=4) {
+        for (int Xi = 4; Xi <= 60; Xi+=4) {
             for (int j = 0; j < 5; ++j) {
                 // Seteo el tamaño del arreglo
                 creador.setX(Xi);

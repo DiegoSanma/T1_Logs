@@ -1,0 +1,605 @@
+Hola desde Docker!
+Aridad default: 384
+Optimal arity: 384
+Ejecutando MergeSort...
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:15:06, startOfLog=0
+MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:15:24, endOfLog=1
+Usaron esta cantidad de IOs en MergeSort: 434
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:15:24, startOfLog=2
+MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:15:42, endOfLog=3
+Usaron esta cantidad de IOs en MergeSort: 434
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:15:42, startOfLog=4
+MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:16:00, endOfLog=5
+Usaron esta cantidad de IOs en MergeSort: 434
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:16:00, startOfLog=6
+MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:16:18, endOfLog=7
+Usaron esta cantidad de IOs en MergeSort: 434
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:16:18, startOfLog=8
+MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:16:36, endOfLog=9
+Usaron esta cantidad de IOs en MergeSort: 434
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:16:36, startOfLog=10
+MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:17:12, endOfLog=11
+Usaron esta cantidad de IOs en MergeSort: 484
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:17:12, startOfLog=12
+MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:17:47, endOfLog=13
+Usaron esta cantidad de IOs en MergeSort: 484
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:17:47, startOfLog=14
+MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:18:23, endOfLog=15
+Usaron esta cantidad de IOs en MergeSort: 484
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:18:23, startOfLog=16
+MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:18:58, endOfLog=17
+Usaron esta cantidad de IOs en MergeSort: 484
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:18:58, startOfLog=18
+MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:19:34, endOfLog=19
+Usaron esta cantidad de IOs en MergeSort: 484
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:19:34, startOfLog=20
+MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:20:27, endOfLog=21
+Usaron esta cantidad de IOs en MergeSort: 534
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:20:27, startOfLog=22
+MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:21:20, endOfLog=23
+Usaron esta cantidad de IOs en MergeSort: 534
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:21:20, startOfLog=24
+MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:22:14, endOfLog=25
+Usaron esta cantidad de IOs en MergeSort: 534
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:22:14, startOfLog=26
+MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:23:07, endOfLog=27
+Usaron esta cantidad de IOs en MergeSort: 534
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:23:07, startOfLog=28
+MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:24:00, endOfLog=29
+Usaron esta cantidad de IOs en MergeSort: 534
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:24:00, startOfLog=30
+MergeSort: Xi=16, M=50, B=4096, IOs=968, tiempo=2025-05-10 05:25:11, endOfLog=31
+Usaron esta cantidad de IOs en MergeSort: 968
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:25:11, startOfLog=32
+MergeSort: Xi=16, M=50, B=4096, IOs=968, tiempo=2025-05-10 05:26:22, endOfLog=33
+Usaron esta cantidad de IOs en MergeSort: 968
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:26:22, startOfLog=34
+MergeSort: Xi=16, M=50, B=4096, IOs=968, tiempo=2025-05-10 05:27:33, endOfLog=35
+Usaron esta cantidad de IOs en MergeSort: 968
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:27:33, startOfLog=36
+MergeSort: Xi=16, M=50, B=4096, IOs=968, tiempo=2025-05-10 05:28:43, endOfLog=37
+Usaron esta cantidad de IOs en MergeSort: 968
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:28:44, startOfLog=38
+MergeSort: Xi=16, M=50, B=4096, IOs=968, tiempo=2025-05-10 05:29:54, endOfLog=39
+Usaron esta cantidad de IOs en MergeSort: 968
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:29:55, startOfLog=40
+MergeSort: Xi=20, M=50, B=4096, IOs=1018, tiempo=2025-05-10 05:31:23, endOfLog=41
+Usaron esta cantidad de IOs en MergeSort: 1018
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:31:23, startOfLog=42
+MergeSort: Xi=20, M=50, B=4096, IOs=1018, tiempo=2025-05-10 05:32:51, endOfLog=43
+Usaron esta cantidad de IOs en MergeSort: 1018
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:32:52, startOfLog=44
+MergeSort: Xi=20, M=50, B=4096, IOs=1018, tiempo=2025-05-10 05:34:20, endOfLog=45
+Usaron esta cantidad de IOs en MergeSort: 1018
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:34:20, startOfLog=46
+MergeSort: Xi=20, M=50, B=4096, IOs=1018, tiempo=2025-05-10 05:35:49, endOfLog=47
+Usaron esta cantidad de IOs en MergeSort: 1018
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:35:50, startOfLog=48
+MergeSort: Xi=20, M=50, B=4096, IOs=1018, tiempo=2025-05-10 05:37:18, endOfLog=49
+Usaron esta cantidad de IOs en MergeSort: 1018
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:37:19, startOfLog=50
+MergeSort: Xi=24, M=50, B=4096, IOs=1068, tiempo=2025-05-10 05:39:04, endOfLog=51
+Usaron esta cantidad de IOs en MergeSort: 1068
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:39:05, startOfLog=52
+MergeSort: Xi=24, M=50, B=4096, IOs=1068, tiempo=2025-05-10 05:40:51, endOfLog=53
+Usaron esta cantidad de IOs en MergeSort: 1068
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:40:51, startOfLog=54
+MergeSort: Xi=24, M=50, B=4096, IOs=1068, tiempo=2025-05-10 05:42:37, endOfLog=55
+Usaron esta cantidad de IOs en MergeSort: 1068
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:42:37, startOfLog=56
+MergeSort: Xi=24, M=50, B=4096, IOs=1068, tiempo=2025-05-10 05:44:24, endOfLog=57
+Usaron esta cantidad de IOs en MergeSort: 1068
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:44:24, startOfLog=58
+MergeSort: Xi=24, M=50, B=4096, IOs=1068, tiempo=2025-05-10 05:46:10, endOfLog=59
+Usaron esta cantidad de IOs en MergeSort: 1068
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:46:11, startOfLog=60
+MergeSort: Xi=28, M=50, B=4096, IOs=1118, tiempo=2025-05-10 05:48:14, endOfLog=61
+Usaron esta cantidad de IOs en MergeSort: 1118
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:48:15, startOfLog=62
+MergeSort: Xi=28, M=50, B=4096, IOs=1118, tiempo=2025-05-10 05:50:18, endOfLog=63
+Usaron esta cantidad de IOs en MergeSort: 1118
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:50:19, startOfLog=64
+MergeSort: Xi=28, M=50, B=4096, IOs=1118, tiempo=2025-05-10 05:52:23, endOfLog=65
+Usaron esta cantidad de IOs en MergeSort: 1118
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:52:24, startOfLog=66
+MergeSort: Xi=28, M=50, B=4096, IOs=1118, tiempo=2025-05-10 05:54:27, endOfLog=67
+Usaron esta cantidad de IOs en MergeSort: 1118
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:54:28, startOfLog=68
+MergeSort: Xi=28, M=50, B=4096, IOs=1118, tiempo=2025-05-10 05:56:31, endOfLog=69
+Usaron esta cantidad de IOs en MergeSort: 1118
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:56:32, startOfLog=70
+MergeSort: Xi=32, M=50, B=4096, IOs=1936, tiempo=2025-05-10 05:58:54, endOfLog=71
+Usaron esta cantidad de IOs en MergeSort: 1936
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:58:55, startOfLog=72
+MergeSort: Xi=32, M=50, B=4096, IOs=1936, tiempo=2025-05-10 06:01:17, endOfLog=73
+Usaron esta cantidad de IOs en MergeSort: 1936
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:01:17, startOfLog=74
+MergeSort: Xi=32, M=50, B=4096, IOs=1936, tiempo=2025-05-10 06:03:39, endOfLog=75
+Usaron esta cantidad de IOs en MergeSort: 1936
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:03:40, startOfLog=76
+MergeSort: Xi=32, M=50, B=4096, IOs=1936, tiempo=2025-05-10 06:06:05, endOfLog=77
+Usaron esta cantidad de IOs en MergeSort: 1936
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:06:06, startOfLog=78
+MergeSort: Xi=32, M=50, B=4096, IOs=1936, tiempo=2025-05-10 06:08:29, endOfLog=79
+Usaron esta cantidad de IOs en MergeSort: 1936
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:08:30, startOfLog=80
+MergeSort: Xi=36, M=50, B=4096, IOs=1986, tiempo=2025-05-10 06:11:12, endOfLog=81
+Usaron esta cantidad de IOs en MergeSort: 1986
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:11:13, startOfLog=82
+MergeSort: Xi=36, M=50, B=4096, IOs=1986, tiempo=2025-05-10 06:13:55, endOfLog=83
+Usaron esta cantidad de IOs en MergeSort: 1986
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:13:55, startOfLog=84
+MergeSort: Xi=36, M=50, B=4096, IOs=1986, tiempo=2025-05-10 06:16:39, endOfLog=85
+Usaron esta cantidad de IOs en MergeSort: 1986
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:16:40, startOfLog=86
+MergeSort: Xi=36, M=50, B=4096, IOs=1986, tiempo=2025-05-10 06:19:23, endOfLog=87
+Usaron esta cantidad de IOs en MergeSort: 1986
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:19:24, startOfLog=88
+MergeSort: Xi=36, M=50, B=4096, IOs=1986, tiempo=2025-05-10 06:22:07, endOfLog=89
+Usaron esta cantidad de IOs en MergeSort: 1986
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:22:08, startOfLog=90
+MergeSort: Xi=40, M=50, B=4096, IOs=2036, tiempo=2025-05-10 06:25:10, endOfLog=91
+Usaron esta cantidad de IOs en MergeSort: 2036
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:25:11, startOfLog=92
+MergeSort: Xi=40, M=50, B=4096, IOs=2036, tiempo=2025-05-10 06:28:15, endOfLog=93
+Usaron esta cantidad de IOs en MergeSort: 2036
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:28:16, startOfLog=94
+MergeSort: Xi=40, M=50, B=4096, IOs=2036, tiempo=2025-05-10 06:31:19, endOfLog=95
+Usaron esta cantidad de IOs en MergeSort: 2036
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:31:20, startOfLog=96
+MergeSort: Xi=40, M=50, B=4096, IOs=2036, tiempo=2025-05-10 06:34:22, endOfLog=97
+Usaron esta cantidad de IOs en MergeSort: 2036
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:34:23, startOfLog=98
+MergeSort: Xi=40, M=50, B=4096, IOs=2036, tiempo=2025-05-10 06:37:27, endOfLog=99
+Usaron esta cantidad de IOs en MergeSort: 2036
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:37:28, startOfLog=100
+MergeSort: Xi=44, M=50, B=4096, IOs=2086, tiempo=2025-05-10 06:40:50, endOfLog=101
+Usaron esta cantidad de IOs en MergeSort: 2086
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:40:51, startOfLog=102
+MergeSort: Xi=44, M=50, B=4096, IOs=2086, tiempo=2025-05-10 06:44:13, endOfLog=103
+Usaron esta cantidad de IOs en MergeSort: 2086
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:44:14, startOfLog=104
+MergeSort: Xi=44, M=50, B=4096, IOs=2086, tiempo=2025-05-10 06:47:37, endOfLog=105
+Usaron esta cantidad de IOs en MergeSort: 2086
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:47:38, startOfLog=106
+MergeSort: Xi=44, M=50, B=4096, IOs=2086, tiempo=2025-05-10 06:50:59, endOfLog=107
+Usaron esta cantidad de IOs en MergeSort: 2086
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:51:00, startOfLog=108
+MergeSort: Xi=44, M=50, B=4096, IOs=2086, tiempo=2025-05-10 06:54:23, endOfLog=109
+Usaron esta cantidad de IOs en MergeSort: 2086
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:54:24, startOfLog=110
+MergeSort: Xi=48, M=50, B=4096, IOs=2520, tiempo=2025-05-10 06:58:06, endOfLog=111
+Usaron esta cantidad de IOs en MergeSort: 2520
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 06:58:09, startOfLog=112
+MergeSort: Xi=48, M=50, B=4096, IOs=2520, tiempo=2025-05-10 07:01:49, endOfLog=113
+Usaron esta cantidad de IOs en MergeSort: 2520
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:01:51, startOfLog=114
+MergeSort: Xi=48, M=50, B=4096, IOs=2520, tiempo=2025-05-10 07:05:32, endOfLog=115
+Usaron esta cantidad de IOs en MergeSort: 2520
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:05:34, startOfLog=116
+MergeSort: Xi=48, M=50, B=4096, IOs=2520, tiempo=2025-05-10 07:09:15, endOfLog=117
+Usaron esta cantidad de IOs en MergeSort: 2520
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:09:17, startOfLog=118
+MergeSort: Xi=48, M=50, B=4096, IOs=2520, tiempo=2025-05-10 07:12:57, endOfLog=119
+Usaron esta cantidad de IOs en MergeSort: 2520
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:12:59, startOfLog=120
+MergeSort: Xi=52, M=50, B=4096, IOs=2570, tiempo=2025-05-10 07:17:00, endOfLog=121
+Usaron esta cantidad de IOs en MergeSort: 2570
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:17:01, startOfLog=122
+MergeSort: Xi=52, M=50, B=4096, IOs=2570, tiempo=2025-05-10 07:21:02, endOfLog=123
+Usaron esta cantidad de IOs en MergeSort: 2570
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:21:05, startOfLog=124
+MergeSort: Xi=52, M=50, B=4096, IOs=2570, tiempo=2025-05-10 07:25:08, endOfLog=125
+Usaron esta cantidad de IOs en MergeSort: 2570
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:25:10, startOfLog=126
+MergeSort: Xi=52, M=50, B=4096, IOs=2570, tiempo=2025-05-10 07:29:10, endOfLog=127
+Usaron esta cantidad de IOs en MergeSort: 2570
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:29:12, startOfLog=128
+MergeSort: Xi=52, M=50, B=4096, IOs=2570, tiempo=2025-05-10 07:33:12, endOfLog=129
+Usaron esta cantidad de IOs en MergeSort: 2570
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:33:16, startOfLog=130
+MergeSort: Xi=56, M=50, B=4096, IOs=2620, tiempo=2025-05-10 07:37:39, endOfLog=131
+Usaron esta cantidad de IOs en MergeSort: 2620
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:37:41, startOfLog=132
+MergeSort: Xi=56, M=50, B=4096, IOs=2620, tiempo=2025-05-10 07:42:03, endOfLog=133
+Usaron esta cantidad de IOs en MergeSort: 2620
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:42:04, startOfLog=134
+MergeSort: Xi=56, M=50, B=4096, IOs=2620, tiempo=2025-05-10 07:46:26, endOfLog=135
+Usaron esta cantidad de IOs en MergeSort: 2620
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:46:31, startOfLog=136
+MergeSort: Xi=56, M=50, B=4096, IOs=2620, tiempo=2025-05-10 07:50:54, endOfLog=137
+Usaron esta cantidad de IOs en MergeSort: 2620
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:50:56, startOfLog=138
+MergeSort: Xi=56, M=50, B=4096, IOs=2620, tiempo=2025-05-10 07:55:18, endOfLog=139
+Usaron esta cantidad de IOs en MergeSort: 2620
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 07:55:24, startOfLog=140
+MergeSort: Xi=60, M=50, B=4096, IOs=2670, tiempo=2025-05-10 08:00:05, endOfLog=141
+Usaron esta cantidad de IOs en MergeSort: 2670
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:00:09, startOfLog=142
+MergeSort: Xi=60, M=50, B=4096, IOs=2670, tiempo=2025-05-10 08:04:49, endOfLog=143
+Usaron esta cantidad de IOs en MergeSort: 2670
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:04:57, startOfLog=144
+MergeSort: Xi=60, M=50, B=4096, IOs=2670, tiempo=2025-05-10 08:09:40, endOfLog=145
+Usaron esta cantidad de IOs en MergeSort: 2670
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:09:42, startOfLog=146
+MergeSort: Xi=60, M=50, B=4096, IOs=2670, tiempo=2025-05-10 08:14:24, endOfLog=147
+Usaron esta cantidad de IOs en MergeSort: 2670
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+MergeSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:14:26, startOfLog=148
+MergeSort: Xi=60, M=50, B=4096, IOs=2670, tiempo=2025-05-10 08:19:10, endOfLog=149
+Usaron esta cantidad de IOs en MergeSort: 2670
+Ejecutando QuickSort...
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:19:10, endOfLog=150
+QuickSort: Xi=4, M=50, B=4096, IOs=1209, tiempo=2025-05-10 08:19:26, endOfLog=152
+Usaron esta cantidad de IOs en QuickSort: 1209
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:19:26, endOfLog=153
+QuickSort: Xi=4, M=50, B=4096, IOs=1215, tiempo=2025-05-10 08:19:41, endOfLog=155
+Usaron esta cantidad de IOs en QuickSort: 1215
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:19:41, endOfLog=156
+QuickSort: Xi=4, M=50, B=4096, IOs=1209, tiempo=2025-05-10 08:19:56, endOfLog=158
+Usaron esta cantidad de IOs en QuickSort: 1209
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:19:56, endOfLog=159
+QuickSort: Xi=4, M=50, B=4096, IOs=1211, tiempo=2025-05-10 08:20:11, endOfLog=161
+Usaron esta cantidad de IOs en QuickSort: 1211
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:20:11, endOfLog=162
+QuickSort: Xi=4, M=50, B=4096, IOs=1218, tiempo=2025-05-10 08:20:26, endOfLog=164
+Usaron esta cantidad de IOs en QuickSort: 1218
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:20:27, endOfLog=165
+QuickSort: Xi=8, M=50, B=4096, IOs=1356, tiempo=2025-05-10 08:20:58, endOfLog=167
+Usaron esta cantidad de IOs en QuickSort: 1356
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:20:58, endOfLog=168
+QuickSort: Xi=8, M=50, B=4096, IOs=1342, tiempo=2025-05-10 08:21:28, endOfLog=170
+Usaron esta cantidad de IOs en QuickSort: 1342
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:21:28, endOfLog=171
+QuickSort: Xi=8, M=50, B=4096, IOs=1331, tiempo=2025-05-10 08:21:59, endOfLog=173
+Usaron esta cantidad de IOs en QuickSort: 1331
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:21:59, endOfLog=174
+QuickSort: Xi=8, M=50, B=4096, IOs=1359, tiempo=2025-05-10 08:22:30, endOfLog=176
+Usaron esta cantidad de IOs en QuickSort: 1359
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:22:30, endOfLog=177
+QuickSort: Xi=8, M=50, B=4096, IOs=1345, tiempo=2025-05-10 08:23:01, endOfLog=179
+Usaron esta cantidad de IOs en QuickSort: 1345
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:23:01, endOfLog=180
+QuickSort: Xi=12, M=50, B=4096, IOs=1535, tiempo=2025-05-10 08:23:47, endOfLog=182
+Usaron esta cantidad de IOs en QuickSort: 1535
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:23:47, endOfLog=183
+QuickSort: Xi=12, M=50, B=4096, IOs=1537, tiempo=2025-05-10 08:24:32, endOfLog=185
+Usaron esta cantidad de IOs en QuickSort: 1537
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:24:32, endOfLog=186
+QuickSort: Xi=12, M=50, B=4096, IOs=1562, tiempo=2025-05-10 08:25:17, endOfLog=188
+Usaron esta cantidad de IOs en QuickSort: 1562
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:25:17, endOfLog=189
+QuickSort: Xi=12, M=50, B=4096, IOs=1550, tiempo=2025-05-10 08:26:02, endOfLog=191
+Usaron esta cantidad de IOs en QuickSort: 1550
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:26:03, endOfLog=192
+QuickSort: Xi=12, M=50, B=4096, IOs=1563, tiempo=2025-05-10 08:26:49, endOfLog=194
+Usaron esta cantidad de IOs en QuickSort: 1563
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:26:50, endOfLog=195
+QuickSort: Xi=16, M=50, B=4096, IOs=1815, tiempo=2025-05-10 08:27:51, endOfLog=197
+Usaron esta cantidad de IOs en QuickSort: 1815
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:27:51, endOfLog=198
+QuickSort: Xi=16, M=50, B=4096, IOs=1757, tiempo=2025-05-10 08:28:53, endOfLog=200
+Usaron esta cantidad de IOs en QuickSort: 1757
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:28:53, endOfLog=201
+QuickSort: Xi=16, M=50, B=4096, IOs=1767, tiempo=2025-05-10 08:29:55, endOfLog=203
+Usaron esta cantidad de IOs en QuickSort: 1767
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:29:56, endOfLog=204
+QuickSort: Xi=16, M=50, B=4096, IOs=1796, tiempo=2025-05-10 08:30:55, endOfLog=206
+Usaron esta cantidad de IOs en QuickSort: 1796
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:30:55, endOfLog=207
+QuickSort: Xi=16, M=50, B=4096, IOs=1798, tiempo=2025-05-10 08:31:56, endOfLog=209
+Usaron esta cantidad de IOs en QuickSort: 1798
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:31:57, endOfLog=210
+QuickSort: Xi=20, M=50, B=4096, IOs=2084, tiempo=2025-05-10 08:33:14, endOfLog=212
+Usaron esta cantidad de IOs en QuickSort: 2084
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:33:14, endOfLog=213
+QuickSort: Xi=20, M=50, B=4096, IOs=2085, tiempo=2025-05-10 08:34:33, endOfLog=215
+Usaron esta cantidad de IOs en QuickSort: 2085
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:34:33, endOfLog=216
+QuickSort: Xi=20, M=50, B=4096, IOs=2065, tiempo=2025-05-10 08:35:49, endOfLog=218
+Usaron esta cantidad de IOs en QuickSort: 2065
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:35:49, endOfLog=219
+QuickSort: Xi=20, M=50, B=4096, IOs=2056, tiempo=2025-05-10 08:37:06, endOfLog=221
+Usaron esta cantidad de IOs en QuickSort: 2056
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=20, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:37:06, endOfLog=222
+QuickSort: Xi=20, M=50, B=4096, IOs=2044, tiempo=2025-05-10 08:38:23, endOfLog=224
+Usaron esta cantidad de IOs en QuickSort: 2044
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:38:23, endOfLog=225
+QuickSort: Xi=24, M=50, B=4096, IOs=2333, tiempo=2025-05-10 08:39:58, endOfLog=227
+Usaron esta cantidad de IOs en QuickSort: 2333
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:39:59, endOfLog=228
+QuickSort: Xi=24, M=50, B=4096, IOs=2324, tiempo=2025-05-10 08:41:34, endOfLog=230
+Usaron esta cantidad de IOs en QuickSort: 2324
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:41:35, endOfLog=231
+QuickSort: Xi=24, M=50, B=4096, IOs=2336, tiempo=2025-05-10 08:43:04, endOfLog=233
+Usaron esta cantidad de IOs en QuickSort: 2336
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:43:05, endOfLog=234
+QuickSort: Xi=24, M=50, B=4096, IOs=2294, tiempo=2025-05-10 08:44:38, endOfLog=236
+Usaron esta cantidad de IOs en QuickSort: 2294
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=24, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:44:39, endOfLog=237
+QuickSort: Xi=24, M=50, B=4096, IOs=2325, tiempo=2025-05-10 08:46:13, endOfLog=239
+Usaron esta cantidad de IOs en QuickSort: 2325
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:46:13, endOfLog=240
+QuickSort: Xi=28, M=50, B=4096, IOs=2604, tiempo=2025-05-10 08:48:04, endOfLog=242
+Usaron esta cantidad de IOs en QuickSort: 2604
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:48:04, endOfLog=243
+QuickSort: Xi=28, M=50, B=4096, IOs=2559, tiempo=2025-05-10 08:49:55, endOfLog=245
+Usaron esta cantidad de IOs en QuickSort: 2559
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:49:55, endOfLog=246
+QuickSort: Xi=28, M=50, B=4096, IOs=2583, tiempo=2025-05-10 08:51:48, endOfLog=248
+Usaron esta cantidad de IOs en QuickSort: 2583
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:51:49, endOfLog=249
+QuickSort: Xi=28, M=50, B=4096, IOs=2595, tiempo=2025-05-10 08:53:34, endOfLog=251
+Usaron esta cantidad de IOs en QuickSort: 2595
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=28, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:53:35, endOfLog=252
+QuickSort: Xi=28, M=50, B=4096, IOs=2608, tiempo=2025-05-10 08:55:29, endOfLog=254
+Usaron esta cantidad de IOs en QuickSort: 2608
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:55:31, endOfLog=255
+QuickSort: Xi=32, M=50, B=4096, IOs=2872, tiempo=2025-05-10 08:57:38, endOfLog=257
+Usaron esta cantidad de IOs en QuickSort: 2872
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:57:39, endOfLog=258
+QuickSort: Xi=32, M=50, B=4096, IOs=2904, tiempo=2025-05-10 08:59:42, endOfLog=260
+Usaron esta cantidad de IOs en QuickSort: 2904
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 08:59:44, endOfLog=261
+QuickSort: Xi=32, M=50, B=4096, IOs=2892, tiempo=2025-05-10 09:01:48, endOfLog=263
+Usaron esta cantidad de IOs en QuickSort: 2892
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:01:49, endOfLog=264
+QuickSort: Xi=32, M=50, B=4096, IOs=2903, tiempo=2025-05-10 09:03:54, endOfLog=266
+Usaron esta cantidad de IOs en QuickSort: 2903
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=32, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:03:55, endOfLog=267
+QuickSort: Xi=32, M=50, B=4096, IOs=2871, tiempo=2025-05-10 09:05:59, endOfLog=269
+Usaron esta cantidad de IOs en QuickSort: 2871
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:06:00, endOfLog=270
+QuickSort: Xi=36, M=50, B=4096, IOs=3196, tiempo=2025-05-10 09:08:21, endOfLog=272
+Usaron esta cantidad de IOs en QuickSort: 3196
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:08:22, endOfLog=273
+QuickSort: Xi=36, M=50, B=4096, IOs=3177, tiempo=2025-05-10 09:10:44, endOfLog=275
+Usaron esta cantidad de IOs en QuickSort: 3177
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:10:45, endOfLog=276
+QuickSort: Xi=36, M=50, B=4096, IOs=3165, tiempo=2025-05-10 09:13:09, endOfLog=278
+Usaron esta cantidad de IOs en QuickSort: 3165
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:13:10, endOfLog=279
+QuickSort: Xi=36, M=50, B=4096, IOs=3181, tiempo=2025-05-10 09:15:31, endOfLog=281
+Usaron esta cantidad de IOs en QuickSort: 3181
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=36, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:15:32, endOfLog=282
+QuickSort: Xi=36, M=50, B=4096, IOs=3193, tiempo=2025-05-10 09:17:51, endOfLog=284
+Usaron esta cantidad de IOs en QuickSort: 3193
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:17:53, endOfLog=285
+QuickSort: Xi=40, M=50, B=4096, IOs=3458, tiempo=2025-05-10 09:20:31, endOfLog=287
+Usaron esta cantidad de IOs en QuickSort: 3458
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:20:32, endOfLog=288
+QuickSort: Xi=40, M=50, B=4096, IOs=3441, tiempo=2025-05-10 09:23:03, endOfLog=290
+Usaron esta cantidad de IOs en QuickSort: 3441
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:23:04, endOfLog=291
+QuickSort: Xi=40, M=50, B=4096, IOs=3481, tiempo=2025-05-10 09:25:35, endOfLog=293
+Usaron esta cantidad de IOs en QuickSort: 3481
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:25:36, endOfLog=294
+QuickSort: Xi=40, M=50, B=4096, IOs=3455, tiempo=2025-05-10 09:28:14, endOfLog=296
+Usaron esta cantidad de IOs en QuickSort: 3455
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=40, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:28:15, endOfLog=297
+QuickSort: Xi=40, M=50, B=4096, IOs=3468, tiempo=2025-05-10 09:30:52, endOfLog=299
+Usaron esta cantidad de IOs en QuickSort: 3468
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:30:54, endOfLog=300
+QuickSort: Xi=44, M=50, B=4096, IOs=3792, tiempo=2025-05-10 09:33:46, endOfLog=302
+Usaron esta cantidad de IOs en QuickSort: 3792
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:33:47, endOfLog=303
+QuickSort: Xi=44, M=50, B=4096, IOs=3741, tiempo=2025-05-10 09:36:40, endOfLog=305
+Usaron esta cantidad de IOs en QuickSort: 3741
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:36:43, endOfLog=306
+QuickSort: Xi=44, M=50, B=4096, IOs=3776, tiempo=2025-05-10 09:39:33, endOfLog=308
+Usaron esta cantidad de IOs en QuickSort: 3776
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:39:34, endOfLog=309
+QuickSort: Xi=44, M=50, B=4096, IOs=3787, tiempo=2025-05-10 09:42:24, endOfLog=311
+Usaron esta cantidad de IOs en QuickSort: 3787
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=44, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:42:25, endOfLog=312
+QuickSort: Xi=44, M=50, B=4096, IOs=4923, tiempo=2025-05-10 09:45:20, endOfLog=314
+Usaron esta cantidad de IOs en QuickSort: 4923
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:45:21, endOfLog=315
+QuickSort: Xi=48, M=50, B=4096, IOs=4058, tiempo=2025-05-10 09:48:39, endOfLog=317
+Usaron esta cantidad de IOs en QuickSort: 4058
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:48:40, endOfLog=318
+QuickSort: Xi=48, M=50, B=4096, IOs=4052, tiempo=2025-05-10 09:51:55, endOfLog=320
+Usaron esta cantidad de IOs en QuickSort: 4052
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:51:56, endOfLog=321
+QuickSort: Xi=48, M=50, B=4096, IOs=4086, tiempo=2025-05-10 09:55:09, endOfLog=323
+Usaron esta cantidad de IOs en QuickSort: 4086
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:55:12, endOfLog=324
+QuickSort: Xi=48, M=50, B=4096, IOs=4069, tiempo=2025-05-10 09:58:26, endOfLog=326
+Usaron esta cantidad de IOs en QuickSort: 4069
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=48, M=50, B=4096, IOs=0, tiempo=2025-05-10 09:58:28, endOfLog=327
+QuickSort: Xi=48, M=50, B=4096, IOs=4078, tiempo=2025-05-10 10:01:39, endOfLog=329
+Usaron esta cantidad de IOs en QuickSort: 4078
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:01:40, endOfLog=330
+QuickSort: Xi=52, M=50, B=4096, IOs=4348, tiempo=2025-05-10 10:05:15, endOfLog=332
+Usaron esta cantidad de IOs en QuickSort: 4348
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:05:16, endOfLog=333
+QuickSort: Xi=52, M=50, B=4096, IOs=4355, tiempo=2025-05-10 10:08:42, endOfLog=335
+Usaron esta cantidad de IOs en QuickSort: 4355
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:08:43, endOfLog=336
+QuickSort: Xi=52, M=50, B=4096, IOs=4327, tiempo=2025-05-10 10:12:12, endOfLog=338
+Usaron esta cantidad de IOs en QuickSort: 4327
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:12:14, endOfLog=339
+QuickSort: Xi=52, M=50, B=4096, IOs=4325, tiempo=2025-05-10 10:15:47, endOfLog=341
+Usaron esta cantidad de IOs en QuickSort: 4325
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=52, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:15:48, endOfLog=342
+QuickSort: Xi=52, M=50, B=4096, IOs=6619, tiempo=2025-05-10 10:19:21, endOfLog=344
+Usaron esta cantidad de IOs en QuickSort: 6619
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:19:23, endOfLog=345
+QuickSort: Xi=56, M=50, B=4096, IOs=4630, tiempo=2025-05-10 10:23:01, endOfLog=347
+Usaron esta cantidad de IOs en QuickSort: 4630
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:23:03, endOfLog=348
+QuickSort: Xi=56, M=50, B=4096, IOs=4642, tiempo=2025-05-10 10:26:47, endOfLog=350
+Usaron esta cantidad de IOs en QuickSort: 4642
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:26:49, endOfLog=351
+QuickSort: Xi=56, M=50, B=4096, IOs=4674, tiempo=2025-05-10 10:30:26, endOfLog=353
+Usaron esta cantidad de IOs en QuickSort: 4674
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:30:28, endOfLog=354
+QuickSort: Xi=56, M=50, B=4096, IOs=4616, tiempo=2025-05-10 10:34:20, endOfLog=356
+Usaron esta cantidad de IOs en QuickSort: 4616
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=56, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:34:26, endOfLog=357
+QuickSort: Xi=56, M=50, B=4096, IOs=4642, tiempo=2025-05-10 10:38:11, endOfLog=359
+Usaron esta cantidad de IOs en QuickSort: 4642
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:38:15, endOfLog=360
+QuickSort: Xi=60, M=50, B=4096, IOs=6074, tiempo=2025-05-10 10:42:24, endOfLog=362
+Usaron esta cantidad de IOs en QuickSort: 6074
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:42:25, endOfLog=363
+QuickSort: Xi=60, M=50, B=4096, IOs=6095, tiempo=2025-05-10 10:46:22, endOfLog=365
+Usaron esta cantidad de IOs en QuickSort: 6095
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:46:26, endOfLog=366
+QuickSort: Xi=60, M=50, B=4096, IOs=4977, tiempo=2025-05-10 10:50:35, endOfLog=368
+Usaron esta cantidad de IOs en QuickSort: 4977
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:50:37, endOfLog=369
+QuickSort: Xi=60, M=50, B=4096, IOs=4936, tiempo=2025-05-10 10:54:46, endOfLog=371
+Usaron esta cantidad de IOs en QuickSort: 4936
+No se pudo eliminar el archivo (puede que no exista): arreglo.bin
+QuickSort: Xi=60, M=50, B=4096, IOs=0, tiempo=2025-05-10 10:54:52, endOfLog=372
+QuickSort: Xi=60, M=50, B=4096, IOs=4925, tiempo=2025-05-10 10:58:57, endOfLog=374
+Usaron esta cantidad de IOs en QuickSort: 4925
