@@ -82,6 +82,7 @@
         "list": "cpp",
         "queue": "cpp",
         "stop_token": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "complex": "cpp"
     }
 }

@@ -116,7 +116,7 @@ int QuickSort::qsHijos(int M, size_t B, std::ifstream& src) const
     /* 0 · Constants and RAM layout --------------------------------------- */
     const size_t WORDS_PER_BLK = (B * 1024) / sizeof(Word);
     const size_t WORDS_RAM     = size_t(M) * 1024 * 1024 / sizeof(Word);
-    const size_t WORDS_PER_WIN = std::max(WORDS_PER_BLK, WORDS_RAM / (alfa + 1));
+    const size_t WORDS_PER_WIN = WORDS_RAM / (alfa + 1);
 
     auto physBlocks = [&](size_t n) {
         return (n + WORDS_PER_BLK - 1) / WORDS_PER_BLK;

@@ -15,10 +15,10 @@
 #define M       50  //50mb
 #define B       4096 //4096kb
 #define Xtest   60 //Tamaño de arreglo para cálculo de aridad
-#define Default 384 //Aridad óptima en caso de no correr código con find alpha
+#define Default 50 //Aridad óptima en caso de no correr código con find alpha
 
 #define RunAlpha 1 // 0: no, 1: sí
-#define RunMerge 1 // 0: no, 1: sí
+#define RunMerge 0 // 0: no, 1: sí
 #define RunQuick 1 // 0: no, 1: sí
 #define RunAll 0 // 0: no, 1: sí
 
@@ -67,7 +67,7 @@ int main() {
                 << ", startOfLog=" << nlogs
                 << std::endl;
 
-        alfa = findOptimalArity(512,
+        alfa = findOptimalArity(128,
                                 "arreglos_aridad.bin",
                                 M,
                                 Xtest,     // X (array size factor)

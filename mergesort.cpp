@@ -98,18 +98,16 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
 {
     using Word = uint64_t;
     
-     std::cout << "Unión de hijos" << std::endl;
     
     /*─────────── 0 · Constantes de bloque y RAM disponible ─────────*/
     const size_t WORDS_PER_BLK = (B * 1024) / sizeof(Word);      // 4 KiB→512 W
     const size_t WORDS_RAM     = (size_t)M * 1024 * 1024 / sizeof(Word);
     size_t WORDS_PER_WIN = WORDS_RAM / (alfa + 1);         // [FIX‑RAM]
-    WORDS_PER_WIN = std::max(WORDS_PER_WIN, WORDS_PER_BLK);   // ← FIX
+    //WORDS_PER_WIN = std::max(WORDS_PER_WIN, WORDS_PER_BLK);   // ← FIX
 
     auto blocks = [&](size_t n) {                // [FIX‑IO] helper
         return (n + WORDS_PER_BLK - 1) / WORDS_PER_BLK;
     };
-
     /********** 1 · Estructura “ventana” *****************************/
     struct Win {
         std::vector<Word> buf;      // capacidad fija = WORDS_PER_WIN
@@ -118,7 +116,6 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
     };
     std::vector<Win> win(alfa);
     for (auto& w : win) w.buf.resize(WORDS_PER_WIN);             // [FIX‑RAM]
-
     /********** 2 · Carga de bloques (puede leer >1 bloque) **********/
     auto load = [&](int id) -> int {          // devuelve # IOs
         Win& w = win[id];
@@ -147,10 +144,9 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
     for (int i=0;i<alfa;++i) {
         win[i].next = hijos[i].getInicio();
         win[i].end  = win[i].next + hijos[i].getLargo()/sizeof(Word);
-        IOs += load(i);                                     // [FIX‑IO]
+        IOs += load(i);                                    // [FIX‑IO]
         if (win[i].len) heap.emplace(win[i].buf[0], i);
     }
-
     /********** 4 · Buffer de salida del mismo tamaño que una ventana*/
     std::vector<Word> out;
     out.reserve(WORDS_PER_WIN);                              // [FIX‑RAM]
@@ -171,7 +167,6 @@ int MergeSort::unionHijos(int M, size_t B, std::ifstream& in) const
         pos_merge_ += out.size();
         out.clear();
     };
-
     /********** 5 · Merge k‑way **************************************/
     while (!heap.empty()) {
         auto [v,id] = heap.top(); heap.pop();  //Obtengo el mínimo de los hijos

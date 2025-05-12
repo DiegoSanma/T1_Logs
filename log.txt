@@ -4,64 +4,64 @@ Optimal arity: 384
 Ejecutando MergeSort...
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:15:06, startOfLog=0
-MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:15:24, endOfLog=1
-Usaron esta cantidad de IOs en MergeSort: 434
+MergeSort: Xi=4, M=50, B=4096, IOs=655, tiempo=2025-05-10 05:15:24, endOfLog=1
+Usaron esta cantidad de IOs en MergeSort: 655
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:15:24, startOfLog=2
-MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:15:42, endOfLog=3
-Usaron esta cantidad de IOs en MergeSort: 434
+MergeSort: Xi=4, M=50, B=4096, IOs=655, tiempo=2025-05-10 05:15:42, endOfLog=3
+Usaron esta cantidad de IOs en MergeSort: 655
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:15:42, startOfLog=4
-MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:16:00, endOfLog=5
-Usaron esta cantidad de IOs en MergeSort: 434
+MergeSort: Xi=4, M=50, B=4096, IOs=655, tiempo=2025-05-10 05:16:00, endOfLog=5
+Usaron esta cantidad de IOs en MergeSort: 655
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:16:00, startOfLog=6
-MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:16:18, endOfLog=7
-Usaron esta cantidad de IOs en MergeSort: 434
+MergeSort: Xi=4, M=50, B=4096, IOs=655, tiempo=2025-05-10 05:16:18, endOfLog=7
+Usaron esta cantidad de IOs en MergeSort: 655
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=4, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:16:18, startOfLog=8
-MergeSort: Xi=4, M=50, B=4096, IOs=434, tiempo=2025-05-10 05:16:36, endOfLog=9
-Usaron esta cantidad de IOs en MergeSort: 434
+MergeSort: Xi=4, M=50, B=4096, IOs=655, tiempo=2025-05-10 05:16:36, endOfLog=9
+Usaron esta cantidad de IOs en MergeSort: 655
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:16:36, startOfLog=10
-MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:17:12, endOfLog=11
-Usaron esta cantidad de IOs en MergeSort: 484
+MergeSort: Xi=8, M=50, B=4096, IOs=1259, tiempo=2025-05-10 05:17:12, endOfLog=11
+Usaron esta cantidad de IOs en MergeSort: 1259
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:17:12, startOfLog=12
-MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:17:47, endOfLog=13
-Usaron esta cantidad de IOs en MergeSort: 484
+MergeSort: Xi=8, M=50, B=4096, IOs=1259, tiempo=2025-05-10 05:17:47, endOfLog=13
+Usaron esta cantidad de IOs en MergeSort: 1259
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:17:47, startOfLog=14
-MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:18:23, endOfLog=15
-Usaron esta cantidad de IOs en MergeSort: 484
+MergeSort: Xi=8, M=50, B=4096, IOs=1259, tiempo=2025-05-10 05:18:23, endOfLog=15
+Usaron esta cantidad de IOs en MergeSort: 1259
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:18:23, startOfLog=16
-MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:18:58, endOfLog=17
-Usaron esta cantidad de IOs en MergeSort: 484
+MergeSort: Xi=8, M=50, B=4096, IOs=1259, tiempo=2025-05-10 05:18:58, endOfLog=17
+Usaron esta cantidad de IOs en MergeSort: 1259
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=8, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:18:58, startOfLog=18
-MergeSort: Xi=8, M=50, B=4096, IOs=484, tiempo=2025-05-10 05:19:34, endOfLog=19
-Usaron esta cantidad de IOs en MergeSort: 484
+MergeSort: Xi=8, M=50, B=4096, IOs=1259, tiempo=2025-05-10 05:19:34, endOfLog=19
+Usaron esta cantidad de IOs en MergeSort: 1259
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:19:34, startOfLog=20
-MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:20:27, endOfLog=21
-Usaron esta cantidad de IOs en MergeSort: 534
+MergeSort: Xi=12, M=50, B=4096, IOs=1863, tiempo=2025-05-10 05:20:27, endOfLog=21
+Usaron esta cantidad de IOs en MergeSort: 1863
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:20:27, startOfLog=22
-MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:21:20, endOfLog=23
-Usaron esta cantidad de IOs en MergeSort: 534
+MergeSort: Xi=12, M=50, B=4096, IOs=1863, tiempo=2025-05-10 05:21:20, endOfLog=23
+Usaron esta cantidad de IOs en MergeSort: 1863
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:21:20, startOfLog=24
-MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:22:14, endOfLog=25
-Usaron esta cantidad de IOs en MergeSort: 534
+MergeSort: Xi=12, M=50, B=4096, IOs=1863, tiempo=2025-05-10 05:22:14, endOfLog=25
+Usaron esta cantidad de IOs en MergeSort: 1863
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:22:14, startOfLog=26
-MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:23:07, endOfLog=27
-Usaron esta cantidad de IOs en MergeSort: 534
+MergeSort: Xi=12, M=50, B=4096, IOs=1863, tiempo=2025-05-10 05:23:07, endOfLog=27
+Usaron esta cantidad de IOs en MergeSort: 1863
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=12, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:23:07, startOfLog=28
-MergeSort: Xi=12, M=50, B=4096, IOs=534, tiempo=2025-05-10 05:24:00, endOfLog=29
-Usaron esta cantidad de IOs en MergeSort: 534
+MergeSort: Xi=12, M=50, B=4096, IOs=1863, tiempo=2025-05-10 05:24:00, endOfLog=29
+Usaron esta cantidad de IOs en MergeSort: 1863
 No se pudo eliminar el archivo (puede que no exista): arreglo.bin
 MergeSort: Xi=16, M=50, B=4096, IOs=0, tiempo=2025-05-10 05:24:00, startOfLog=30
 MergeSort: Xi=16, M=50, B=4096, IOs=968, tiempo=2025-05-10 05:25:11, endOfLog=31

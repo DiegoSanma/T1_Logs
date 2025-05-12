@@ -77,7 +77,7 @@ def colapse_data_in_mean(log_data):
     for data in new_log_data:
         sum = 0
         for i in range(len(data)):
-            sum += int(data[i]["IOs"])
+            sum += int(data[i]["IOs"]) + 100
         mean = sum / len(data)
         mean_data.append({
             "Xi" : data[0]["Xi"],
@@ -100,8 +100,8 @@ def plot_data(log_data, sort_type):
     plt.scatter(x, y, label=sort_type)
     plt.grid()
     plt.xlabel("Tamaño del arreglo")
-    plt.ylabel("Número de IOs")
-    plt.title("Número de IOs por tamaño de arreglo")
+    plt.ylabel("Tiempo de Ejecución")
+    plt.title("Tiempo de ejecución Promedio por tamaño de arreglo")
     plt.legend()
     plt.show()
 
